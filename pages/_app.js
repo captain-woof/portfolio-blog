@@ -1,9 +1,11 @@
-import '../styles/globals.css'
 import { ContextProvider } from '../providers/ContextProvider'
-import ThemeProvider from '../providers/ThemeProvider'
+import GlobalThemeProvider from '../providers/ThemeProvider'
 import { pageview } from '../lib/ga'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import Fonts from '../components/Fonts'
+import Navbar from '../components/Navbar'
+import { GlobalStyle } from '../styles/globalStyle'
 
 function MyApp({ Component, pageProps }) {
   // For Google Analytics - Page Navigation
@@ -23,9 +25,12 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <ContextProvider>
-      <ThemeProvider>
+      <GlobalThemeProvider>
+        <GlobalStyle />
+        <Fonts />
+        <Navbar />
         <Component {...pageProps} />
-      </ThemeProvider>
+      </GlobalThemeProvider>
     </ContextProvider>
   )
 }
