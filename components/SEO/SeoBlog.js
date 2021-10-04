@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useGlobalContext } from '../providers/ContextProvider'
+import { useGlobalContext } from '../../providers/ContextProvider'
 
 export default function SeoBlog() {
     const { globalState } = useGlobalContext()

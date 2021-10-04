@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import Fonts from '../components/Fonts'
 import Navbar from '../components/Navbar'
 import { GlobalStyle } from '../styles/globalStyle'
+import AdjustForNavbarContainer from '../components/Containers/AdjustForNavbarContainer'
 
 function MyApp({ Component, pageProps }) {
   // For Google Analytics - Page Navigation
@@ -29,7 +30,9 @@ function MyApp({ Component, pageProps }) {
         <GlobalStyle />
         <Fonts />
         <Navbar />
-        <Component {...pageProps} />
+        <AdjustForNavbarContainer>
+          <Component {...pageProps} />
+        </AdjustForNavbarContainer>
       </GlobalThemeProvider>
     </ContextProvider>
   )
