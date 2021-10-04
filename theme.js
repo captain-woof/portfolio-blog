@@ -7,6 +7,7 @@ const colors = {
     yellow: "#F4B860",
     white: "#FFFFFC",
     black: "#182825",
+    blackTransclucent: "#18282555",
     grey: "#3A4745"
 }
 
@@ -14,12 +15,14 @@ export const themeLight = {
     colors,
     backgroundColor: colors.white,
     textColorEmphasis: colors.black,
-    textColorSubtitle: colors.grey
+    textColorSubtitle: colors.grey,
+    shadow: colors.blackTransclucent
 }
 
 export const themeDark = {
     colors,
     backgroundColor: colors.black,
     textColorEmphasis: colors.white,
-    textColorSubtitle: colors.white
+    textColorSubtitle: colors.white,
+    shadow: colors.blackTransclucent
 }

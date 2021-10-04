@@ -1,13 +1,12 @@
-import { useContext } from 'react'
-import { ThemeProvider as StyledCompThemeProvider } from 'styled-components'
-import { GlobalContext } from './ContextProvider'
+import { ThemeProvider } from 'styled-components'
+import { useGlobalContext } from './ContextProvider'
 
-export default function ThemeProvider({ children }) {
-    const { globalState } = useContext(GlobalContext)
+export default function GlobalThemeProvider({ children }) {
+    const { globalState } = useGlobalContext()
 
     return (
-        <StyledCompThemeProvider theme={globalState.theme}>
+        <ThemeProvider theme={globalState.theme}>
             {children}
-        </StyledCompThemeProvider>
+        </ThemeProvider>
     )
 }
