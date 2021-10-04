@@ -6,8 +6,8 @@ const colors = {
     green: "#66C184",
     yellow: "#F4B860",
     white: "#FFFFFC",
-    whiteTransclucent: "#FFFFFC55",
     black: "#182825",
+    blackDarkest: "#000000",
     blackTransclucent: "#18282555",
     grey: "#3A4745"
 }
@@ -25,5 +25,5 @@ export const themeDark = {
     backgroundColor: colors.black,
     textColorEmphasis: colors.white,
     textColorSubtitle: colors.white,
-    shadow: colors.whiteTransclucent
+    shadow: colors.blackDarkest
 }
