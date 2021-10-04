@@ -10,9 +10,6 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 16px;
       width: 100vw;
       overflow-x: hidden;
-      transition: all 0.8s ease-in-out 0.2s;
-      background-color: ${({ theme }) => (theme.backgroundColor)};
-      color: ${({ theme }) => (theme.textColorEmphasis)};
     }
 
     a {
