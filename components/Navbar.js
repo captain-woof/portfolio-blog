@@ -75,11 +75,8 @@ const switchThemeButtonVariants = {
         transition: transition
     },
     onClick: {
-        rotateZ: '360deg',
-        transition: {
-            ...transition,
-            repeat: 2
-        }
+        rotateZ: '720deg',
+        transition: transition
     }
 }
 
