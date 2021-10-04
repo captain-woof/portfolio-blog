@@ -5,8 +5,10 @@ const reducer = (state, action) => {
     switch (action.type) {
         case "SWITCH_THEME": // For switching between theme
             if (state.themeName === "LIGHT_THEME") {
+                window.localStorage.setItem('THEME_NAME', 'DARK_THEME')
                 return ({ ...state, themeName: "DARK_THEME", theme: themeDark })
             } else {
+                window.localStorage.setItem('THEME_NAME', 'LIGHT_THEME')
                 return ({ ...state, themeName: "LIGHT_THEME", theme: themeLight })
             }
         case "SET_INITIAL_THEME": // Sets initial them after first render
