@@ -2,8 +2,9 @@ import { useGlobalContext } from "../providers/ContextProvider"
 import styled from 'styled-components'
 import Link from 'next/link'
 import { useCallback } from "react"
-import { useThemeChangeAnim } from "../lib/motion"
+import { easeInOutCubicBezier, useThemeChangeAnim } from "../lib/motion"
 import { motion, useAnimation } from "framer-motion"
+import { useEffect } from "react/cjs/react.development"
 
 const NavbarOuterContainer = styled(motion.div)`    
     height: ${({ isPhone }) => (isPhone ? "3.5rem" : "2.5rem")};
@@ -80,6 +81,23 @@ const switchThemeButtonVariants = {
     }
 }
 
+const navbarVariantsShowHide = {
+    show: {
+        y: '0rem',
+        transition: {
+            duration: 0.8,
+            ease: easeInOutCubicBezier
+        }
+    },
+    hide: {
+        y: '-4rem',
+        transition: {
+            duration: 0.8,
+            ease: easeInOutCubicBezier
+        }
+    }
+}
+
 export default function Navbar() {
     const { globalState, globalDispatch } = useGlobalContext()
     const { isPhone } = globalState
@@ -98,16 +116,28 @@ export default function Navbar() {
     }, [])
 
     // Changes colors according to the theme
-    const { textAndBgColorVariants, textAndBgColorAnimation } = useThemeChangeAnim()
+    const { textAndBgColorVariants, textAndBgColorAnimation: navbarAnimation } = useThemeChangeAnim()
+
+    // Animation for show/hide triggered on scroll type change
+    useEffect(() => {
+        switch (globalState.scrollDirection) {
+            case 'up':
+                navbarAnimation.start('show')
+                break
+            case 'down':
+                navbarAnimation.start('hide')
+                break
+        }
+    }, [globalState.scrollDirection])
 
     return (
-        <NavbarOuterContainer className="navbar-outer-container" isPhone={isPhone} variants={textAndBgColorVariants} animate={textAndBgColorAnimation} initial="initial">
+        <NavbarOuterContainer className="navbar-outer-container" isPhone={isPhone} variants={{ ...textAndBgColorVariants, ...navbarVariantsShowHide }} animate={navbarAnimation} initial="initial">
             <NavbarInnerContainer className="navbar-inner-container" isPhone={isPhone}>
                 <TitleContainer className="navbar-title-container" isPhone={isPhone}>
                     <Link href={globalState.baseUrl}><a>Sohail Saha</a></Link>
                 </TitleContainer>
                 <ButtonsContainer className="navbar-buttons-container" isPhone={isPhone}>
-                    <ThemeSwitcherIcon isPhone={isPhone} src={globalState.themeName === "DARK_THEME" ? moonIconPath : sunIconPath} onClick={handleThemeSwtichClick} animate={switchThemeAnim} variants={switchThemeButtonVariants} initial="initial" onHoverStart={() => {switchThemeAnim.start("onHoverStart")}} onHoverEnd={() => {switchThemeAnim.start("onHoverEnd")}}/>
+                    <ThemeSwitcherIcon isPhone={isPhone} src={globalState.themeName === "DARK_THEME" ? moonIconPath : sunIconPath} onClick={handleThemeSwtichClick} animate={switchThemeAnim} variants={switchThemeButtonVariants} initial="initial" onHoverStart={() => { switchThemeAnim.start("onHoverStart") }} onHoverEnd={() => { switchThemeAnim.start("onHoverEnd") }} />
                     <Button><Link href={`${globalState.baseUrl}/blog`}><a>Blog</a></Link></Button>
                     <Button><Link href="https://drive.google.com/file/d/1se1QKQBUf4yjxSTzRHSfc4OBpB-W4dK2/view?usp=sharing"><a>Resume</a></Link></Button>
                     <Button><Link href={`${globalState.baseUrl}/#contact`}><a>Contact</a></Link></Button>

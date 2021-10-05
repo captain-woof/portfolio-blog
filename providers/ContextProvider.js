@@ -1,5 +1,6 @@
-import { createContext, useContext, useEffect, useReducer } from "react"
+import { createContext, useContext, useEffect, useReducer, useState } from "react"
 import { themeLight, themeDark } from '../theme'
+import { useViewportScroll } from 'framer-motion'
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -26,6 +27,11 @@ const reducer = (state, action) => {
                 ...state,
                 isPhone: (document.documentElement.clientWidth <= 480)
             })
+        case "SCROLL_EVENT":
+            return ({
+                ...state,
+                scrollDirection: action.payload.scrollDirection,
+            })
     }
 }
 
@@ -37,7 +43,8 @@ const initialState = {
     themeName: "LIGHT_THEME",
     theme: themeLight,
     baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-    isPhone: false
+    isPhone: false,
+    scrollDirection: 'up'
 }
 
 export const ContextProvider = ({ children }) => {
@@ -59,6 +66,27 @@ export const ContextProvider = ({ children }) => {
         }
         window.addEventListener('resize', handleResize)
         return () => { window.removeEventListener('resize', handleResize) }
+    }, [])
+
+    // To get the last scroll direction ('up' or 'down')
+    const { scrollY } = useViewportScroll()
+    useEffect(() => {
+        const unsubscribe = scrollY.onChange(() => {
+            if (scrollY.get() > scrollY.getPrevious()) { // Scroll down
+                globalDispatch({
+                    type: "SCROLL_EVENT", payload: {
+                        scrollDirection: 'down'
+                    }
+                })
+            } else if (scrollY.get() < scrollY.getPrevious()) { // Scroll up
+                globalDispatch({
+                    type: "SCROLL_EVENT", payload: {
+                        scrollDirection: 'up'
+                    }
+                })
+            }
+        })
+        return unsubscribe
     }, [])
 
     // Returning the provider
