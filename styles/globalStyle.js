@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 16px;
       width: 100vw;
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     a {

@@ -114,7 +114,7 @@ const textTransition = {
     when: 'beforeChildren'
 }
 
-export default function FirstSection() {
+export default function SectionOne() {
     const { globalState } = useGlobalContext()
     const { isPhone } = globalState
 

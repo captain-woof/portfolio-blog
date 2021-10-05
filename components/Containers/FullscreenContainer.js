@@ -6,6 +6,7 @@ const Container = styled.div`
     width: 100vw;
     position: relative;
     left: 0;
+    overflow: hidden;
 `
 
 export default function FullscreenContainer({children, adjustHeightForNavbar = false, style = {}}){
