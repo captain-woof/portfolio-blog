@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import { easeInOutCustomBezier, useThemeChangeAnim } from '../../../lib/motion'
+import { easeInOutCustomBezier, easeOutQuintBezier, useThemeChangeAnim } from '../../../lib/motion'
 import { useGlobalContext } from '../../../providers/ContextProvider'
 import FullscreenContainer from '../FullscreenContainer'
-import { motion } from 'framer-motion'
-import { useMemo } from 'react'
+import { motion, useAnimation } from 'framer-motion'
+import { useEffect } from 'react'
 
 const FirstSectionContainer = styled.div`
     display: flex;
@@ -23,17 +23,21 @@ const TextContainer = styled.div`
   user-select: none;
 `
 
-const Name = styled(motion.div)`
+const NameContainer = styled(motion.div)`
   font-size: 2.8rem;
   font-family: 'Montserrat Alternates';
   align-self: ${({ isPhone }) => (isPhone ? "center" : "flex-start")};
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
 `
 
-const Subtitle = styled(motion.div)`
+const SubtitleContainer = styled.div`
   font-size: 1.2rem;
   font-family: 'Alata';
   color: ${({ theme }) => (theme.textColorSubtitle)};
   align-self: flex-end;
+  overflow: hidden;
 `
 
 const BoxContainer = styled.div`
@@ -69,58 +73,126 @@ const RedRightBox = styled(motion.div)`
 `
 
 const boxTransition = {
-    duration: 2,
-    ease: easeInOutCustomBezier,
-    delay: 1.5
+    duration: 3,
+    ease: easeOutQuintBezier,
+    delay: 0.7
+}
+
+const blueBoxVariants = {
+    initial: {
+        y: "55vh"
+    },
+    initialPhone: {
+        y: "35vh"
+    },
+    animate: {
+        y: "0vh",
+        transition: boxTransition
+    }
+}
+
+const redBoxVariants = {
+    initial: {
+        y: "-50vh",
+        x: "0vw"
+    },
+    initialPhone: {
+        y: "0vh",
+        x: "40vw"
+    },
+    animate: {
+        y: "0vh",
+        x: "0vw",
+        transition: boxTransition
+    }
+}
+
+const textTransition = {
+    duration: 0.9,
+    ease: easeOutQuintBezier,
+    staggerChildren: 0.12,
+    when: 'beforeChildren'
 }
 
 export default function FirstSection() {
     const { globalState } = useGlobalContext()
     const { isPhone } = globalState
 
-    const { textEmphasisAnimation: nameAnimation, textSubtitlesAnimation: subtitleAnimation, textEmphasisVariants: nameVariants, textSubtitlesVariants: subtitlesVariants } = useThemeChangeAnim()
-
-    const blueBoxVariants = useMemo(() => ({
-        initial: {
-            y: (isPhone ? "35vh" : "55vh")
+    const { textEmphasisAnimation: nameAnimation, textSubtitlesAnimation: subtitleAnimation, textEmphasisVariants: nameVariants, textSubtitlesVariants: subtitlesVariants } = useThemeChangeAnim({
+        textEmphasisVariants: {
+            initial: {
+                opacity: 0,
+                y: 100
+            },
+            animate: {
+                opacity: 1,
+                y: 0,
+                transition: textTransition
+            }
         },
-        animate: {
-            y: "0vh",
-            transition: boxTransition
+        textSubtitlesVariants: {
+            initial: {
+                x: -100,
+                opacity: 0
+            },
+            animate: {
+                x: 0,
+                opacity: 1,
+                transition: { ...textTransition, duration: 2 }
+            }
         }
-    }), [isPhone])
+    })
 
-    const redBoxVariants = useMemo(() => ({
-        initial: {
-            y: (isPhone ? "0vh" : "-50vh"),
-            x: (isPhone ? "40vw" : "0vw")
-        },
-        animate: {
-            y: "0vh",
-            x: "0vw",
-            transition: boxTransition
-        }
-    }), [isPhone])
+    // Handles animation sequence
+    // First text, then box
+    const boxAnimation = useAnimation()
+    useEffect(() => {
+        (async () => {
+            boxAnimation.stop()
+
+            nameAnimation.set('initial')
+            subtitleAnimation.set('initial')
+            boxAnimation.set(isPhone ? "initialPhone" : "initial")
+
+            await nameAnimation.start('animate')
+            subtitleAnimation.start('animate')
+            boxAnimation.start("animate")
+        })()
+
+    }, [isPhone])
 
     return (
         <FullscreenContainer>
             <FirstSectionContainer>
                 <BoxContainer isPhone={isPhone}>
-                    <RedRightBox variants={redBoxVariants} animate="animate" initial="initial" isPhone={isPhone} />
-                    <BlueLeftBox variants={blueBoxVariants} animate="animate" initial="initial" isPhone={isPhone} />
+                    <RedRightBox variants={redBoxVariants} animate={boxAnimation} isPhone={isPhone} />
+                    <BlueLeftBox variants={blueBoxVariants} animate={boxAnimation} isPhone={isPhone} />
                 </BoxContainer>
                 <TextContainer isPhone={isPhone}>
-                    <Subtitle isPhone={isPhone} animate={subtitleAnimation} variants={subtitlesVariants} initial='initial'>
-                        {isPhone ? "Front-end developer" : "Front-end developer."}
-                    </Subtitle>
-                    <Name isPhone={isPhone} animate={nameAnimation} variants={nameVariants} initial='initial'>
-                        {isPhone
-                            ? <span>Sohail Saha</span>
-                            : <span>sohail<br />saha</span>
-                        }
-                    </Name>
+                    <SubtitleContainer isPhone={isPhone}>
+                        <motion.div animate={subtitleAnimation} variants={subtitlesVariants} initial='initial'>
+                            {isPhone ? "Front-end developer" : "Front-end developer."}
+                        </motion.div>
+                    </SubtitleContainer>
+                    <NameContainer isPhone={isPhone} animate={nameAnimation} variants={{ ...nameVariants, initial: { y: 0 } }} initial='initial'>
+                        {(isPhone ? "Sohail Saha" : "sohail").split("").map((letter, index) => (
+                            (letter === ' '
+                                ? (isPhone
+                                    ? <motion.div key={index} variants={nameVariants}>&nbsp;</motion.div>
+                                    : null
+                                )
+                                : <motion.div key={index} variants={nameVariants} > {letter}</motion.div>)
+                        ))}
+                    </NameContainer>
+                    {!isPhone &&
+                        <NameContainer isPhone={isPhone} animate={nameAnimation} variants={{ ...nameVariants, initial: { y: 0 } }} initial='initial'>
+                            {"saha".split("").map((letter, index) => (
+                                <motion.div key={index} variants={nameVariants}>{letter}</motion.div>
+                            ))}
+                        </NameContainer>
+                    }
                 </TextContainer>
             </FirstSectionContainer>
-        </FullscreenContainer>
+        </FullscreenContainer >
     )
 }
