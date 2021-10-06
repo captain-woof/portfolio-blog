@@ -4,10 +4,12 @@ const colors = {
     red: "#FF5A5F",
     redDark: "#E42B30",
     green: "#66C184",
+    greenDark: "#3c8153",
     yellow: "#F4B860",
+    yellowDark: "#B57d2b",
     white: "#FFFFFC",
     black: "#182825",
-    blackDarkest: "#000000",
+    blackDark: "#000000",
     blackTransclucent: "#18282555",
     grey: "#3A4745"
 }

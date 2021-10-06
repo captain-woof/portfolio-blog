@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { easeInOutCustomBezier, easeOutQuintBezier, useThemeChangeAnim } from '../../../lib/motion'
+import { easeOutQuintBezier, useThemeChangeAnim } from '../../../lib/motion'
 import { useGlobalContext } from '../../../providers/ContextProvider'
 import FullscreenContainer from '../FullscreenContainer'
 import { motion, useAnimation } from 'framer-motion'
@@ -16,15 +16,16 @@ const FirstSectionContainer = styled.div`
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;  
-  width: ${({ isPhone }) => (isPhone ? "75%" : '390px')};
+  width: ${({ isPhone }) => (isPhone ? "75%" : '64%')};
   margin-top: ${({ isPhone }) => (isPhone ? "35vh" : '15vh')};
   z-index: 3;
   position: absolute;
   user-select: none;
+  max-width: 600px;
 `
 
 const NameContainer = styled(motion.div)`
-  font-size: 2.8rem;
+  font-size: ${({isPhone}) => (isPhone ? "2.8rem" : "4.8rem")};
   font-family: 'Montserrat Alternates';
   align-self: ${({ isPhone }) => (isPhone ? "center" : "flex-start")};
   overflow: hidden;
@@ -33,7 +34,7 @@ const NameContainer = styled(motion.div)`
 `
 
 const SubtitleContainer = styled.div`
-  font-size: 1.2rem;
+  font-size: ${({isPhone}) => (isPhone ? "1.2rem" : "1.8rem")};
   font-family: 'Alata';
   color: ${({ theme }) => (theme.textColorSubtitle)};
   align-self: flex-end;
@@ -43,22 +44,22 @@ const SubtitleContainer = styled.div`
 const BoxContainer = styled.div`
   display: flex;
   flex-direction: column;  
-  width: ${({ isPhone }) => (isPhone ? "100%" : "60%")};
+  width: ${({ isPhone }) => (isPhone ? "100%" : "50%")};
   z-index: 2;
   position: absolute;
   top: 0;
-  max-width: ${({ isPhone }) => (isPhone ? "100%" : "250px")};
   height: 100%;
+  max-width: 500px;
 `
 
 const BlueLeftBox = styled(motion.div)`
     position: absolute;
     height: ${({ isPhone }) => (isPhone ? "35vh" : "55vh")};
     width: ${({ isPhone }) => (isPhone ? "25vw" : "30vw")};
-    max-width: 150px;
     background-color: ${({ theme }) => (theme.colors.blue)};
     bottom: 0;
     left: ${({ isPhone }) => (isPhone ? "12.5vw" : "0")};
+    max-width: 305px;
 `
 
 const RedRightBox = styled(motion.div)`
@@ -66,10 +67,10 @@ const RedRightBox = styled(motion.div)`
     width: ${({ isPhone }) => (isPhone ? "40vw" : "25vw")};
     top: ${({ isPhone }) => (isPhone ? "56vh" : "0")};
     right: 0;
-    max-width: 125px;
     position: absolute;
     background-color: ${({ theme }) => (theme.colors.red)};
     z-index: 1;
+    max-width: 256px;
 `
 
 const boxTransition = {

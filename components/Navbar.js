@@ -1,13 +1,13 @@
 import { useGlobalContext } from "../providers/ContextProvider"
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import Link from 'next/link'
-import { useCallback } from "react"
-import { easeInOutCubicBezier, useThemeChangeAnim } from "../lib/motion"
+import { useCallback, useState } from "react"
+import { easeInOutCubicBezier, easeInOutCustomBezier, useThemeChangeAnim } from "../lib/motion"
 import { motion, useAnimation } from "framer-motion"
 import { useEffect } from "react/cjs/react.development"
 
 const NavbarOuterContainer = styled(motion.div)`    
-    height: ${({ isPhone }) => (isPhone ? "3.5rem" : "2.5rem")};
+    height: ${({ isPhone }) => (isPhone ? "3.5rem" : "4rem")};
     width: 100vw;
     position: fixed;
     top: 0;
@@ -23,30 +23,30 @@ const NavbarInnerContainer = styled.div`
     align-items: center;
     height: 100%;
     justify-content: space-between;
-    margin: ${({ isPhone }) => (isPhone ? "0 0.8rem" : "0 1rem")};
+    margin: ${({ isPhone }) => (isPhone ? "0 0.8rem" : "0 2rem")};
 `
 
 const TitleContainer = styled.div`
-    font-size: ${({ isPhone }) => (isPhone ? "1.2rem" : "0.75rem")};
+    font-size: ${({ isPhone }) => (isPhone ? "1.1rem" : "1.5rem")};
 `
 
 const ButtonsContainer = styled.div`
-    font-size: ${({ isPhone }) => (isPhone ? "0.9rem" : "0.62rem")};
+    font-size: ${({ isPhone }) => (isPhone ? "0.9rem" : "1rem")};
     display: flex;
     flex-direction: row;
-    gap: ${({ isPhone }) => (isPhone ? "0rem 0.4rem" : "0rem 1rem")};
     height: 100%;
     align-items: center;
     cursor: pointer;
 `
 
 const ThemeSwitcherIcon = styled(motion.img)`
-    height:  ${({ isPhone }) => (isPhone ? "1.2rem" : "1rem")};
-    width: ${({ isPhone }) => (isPhone ? "1.2rem" : "1rem")};
+    height:  ${({ isPhone }) => (isPhone ? "1.2rem" : "1.5rem")};
+    width: ${({ isPhone }) => (isPhone ? "1.2rem" : "1.5rem")};
+    margin-right: 1rem;
 `
 
-const Button = styled.div`
-    padding: 0rem 0.2rem;
+const Button = styled(motion.div)`
+    padding: ${({isPhone}) => (isPhone ? "0rem 0.8rem" : "0rem 1.5rem")};
     height: 100%;
     a {
         height: 100%;
@@ -57,8 +57,18 @@ const Button = styled.div`
     }
 `
 
+const getButtonWhileHoverVariants = (backgroundColorOnHover) => ({
+    whileHover: {
+        backgroundColor: backgroundColorOnHover,
+        transition: {
+            ease: easeInOutCustomBezier,
+            duration: 0.9
+        },
+    }
+})
+
 // Variants for theme switch button
-const transition = {
+const switchThemeButtonTransition = {
     type: 'spring',
     stiffness: 50,
 }
@@ -69,15 +79,15 @@ const switchThemeButtonVariants = {
     },
     onHoverStart: {
         rotateZ: '180deg',
-        transition: transition
+        transition: switchThemeButtonTransition
     },
     onHoverEnd: {
         rotateZ: '0deg',
-        transition: transition
+        transition: switchThemeButtonTransition
     },
     onClick: {
         rotateZ: '720deg',
-        transition: transition
+        transition: switchThemeButtonTransition
     }
 }
 
@@ -120,6 +130,7 @@ export default function Navbar() {
 
     // Animation for show/hide triggered on scroll type change
     useEffect(() => {
+        navbarAnimation.stop()
         switch (globalState.scrollDirection) {
             case 'up':
                 navbarAnimation.start('show')
@@ -130,17 +141,54 @@ export default function Navbar() {
         }
     }, [globalState.scrollDirection])
 
+    // Theme from styled components
+    const theme = useTheme()
+
+    // Text anim and variants for menu button texts
+    const { textEmphasisAnimation, textEmphasisVariants } = useThemeChangeAnim()
+
     return (
-        <NavbarOuterContainer className="navbar-outer-container" isPhone={isPhone} variants={{ ...textAndBgColorVariants, ...navbarVariantsShowHide }} animate={navbarAnimation} initial="initial">
+        <NavbarOuterContainer onHover={() => {navbarAnimation.start('show')}} className="navbar-outer-container" isPhone={isPhone} variants={{ ...textAndBgColorVariants, ...navbarVariantsShowHide }} animate={navbarAnimation} initial="initial">
             <NavbarInnerContainer className="navbar-inner-container" isPhone={isPhone}>
                 <TitleContainer className="navbar-title-container" isPhone={isPhone}>
                     <Link href={globalState.baseUrl}><a>Sohail Saha</a></Link>
                 </TitleContainer>
                 <ButtonsContainer className="navbar-buttons-container" isPhone={isPhone}>
                     <ThemeSwitcherIcon isPhone={isPhone} src={globalState.themeName === "DARK_THEME" ? moonIconPath : sunIconPath} onClick={handleThemeSwtichClick} animate={switchThemeAnim} variants={switchThemeButtonVariants} initial="initial" onHoverStart={() => { switchThemeAnim.start("onHoverStart") }} onHoverEnd={() => { switchThemeAnim.start("onHoverEnd") }} />
-                    <Button><Link href={`${globalState.baseUrl}/blog`}><a>Blog</a></Link></Button>
-                    <Button><Link href="https://drive.google.com/file/d/1se1QKQBUf4yjxSTzRHSfc4OBpB-W4dK2/view?usp=sharing"><a>Resume</a></Link></Button>
-                    <Button><Link href={`${globalState.baseUrl}/#contact`}><a>Contact</a></Link></Button>
+                    {[
+                        {
+                            link: `${globalState.baseUrl}/blog`,
+                            text: 'Blog',
+                            variants: {
+                                ...textEmphasisVariants,
+                                ...getButtonWhileHoverVariants(theme.colors.red)
+                            }
+                        },
+                        {
+                            link: "https://drive.google.com/file/d/1se1QKQBUf4yjxSTzRHSfc4OBpB-W4dK2/view?usp=sharing",
+                            text: 'Resume',
+                            variants: {
+                                ...textEmphasisVariants,
+                                ...getButtonWhileHoverVariants(theme.colors.yellow)
+                            }
+                        },
+                        {
+                            link: `${globalState.baseUrl}/#contact`,
+                            text: 'Contact',
+                            variants: {
+                                ...textEmphasisVariants,
+                                ...getButtonWhileHoverVariants(theme.colors.green)
+                            }
+                        }
+                    ].map((buttonData, index) => (
+                        <Button isPhone={isPhone} animate={textEmphasisAnimation} key={index} variants={buttonData.variants} whileHover='whileHover' initial='initial'>
+                            <Link href={buttonData.link}>
+                                <a >
+                                    {buttonData.text}
+                                </a>
+                            </Link>
+                        </Button>
+                    ))}
                 </ButtonsContainer>
             </NavbarInnerContainer >
         </NavbarOuterContainer >

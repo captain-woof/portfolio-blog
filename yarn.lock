@@ -2740,10 +2740,10 @@ react-dom@17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react-intersection-revealer@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/react-intersection-revealer/-/react-intersection-revealer-1.1.1.tgz#4ede186d4836febb1cdd4594b5831bd67fb3de83"
-  integrity sha512-s0czGFs0ytkFQcFP+Rc+5YjQ6iAzLtxoiBVg3ln5a7lUUaMmum6Q9KtKQ2U59mNLx85sGrij93rgqBayzeJutw==
+react-intersection-revealer@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-intersection-revealer/-/react-intersection-revealer-1.2.0.tgz#433b51399858295c636127b3dd8f5891ac207271"
+  integrity sha512-VjJR05VDswoTACqxhOBBKdiVTIBdN4HnbJIW+7JLZt43AKlBkkHO2Pxo0Vfvu6A9UlVettQOHdGtZ0JDD9Kr1g==
 
 react-is@17.0.2:
   version "17.0.2"
