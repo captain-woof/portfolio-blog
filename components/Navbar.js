@@ -148,7 +148,7 @@ export default function Navbar() {
     const { textEmphasisAnimation, textEmphasisVariants } = useThemeChangeAnim()
 
     return (
-        <NavbarOuterContainer onHover={() => {navbarAnimation.start('show')}} className="navbar-outer-container" isPhone={isPhone} variants={{ ...textAndBgColorVariants, ...navbarVariantsShowHide }} animate={navbarAnimation} initial="initial">
+        <NavbarOuterContainer className="navbar-outer-container" isPhone={isPhone} variants={{ ...textAndBgColorVariants, ...navbarVariantsShowHide }} animate={navbarAnimation} initial="initial">
             <NavbarInnerContainer className="navbar-inner-container" isPhone={isPhone}>
                 <TitleContainer className="navbar-title-container" isPhone={isPhone}>
                     <Link href={globalState.baseUrl}><a>Sohail Saha</a></Link>
