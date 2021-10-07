@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="386.92" height="386.92" version="1.1" viewBox="0 0 362.73 362.73" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(-193.63 -276.36)">
+  <g transform="matrix(.88116 0 0 .88116 44.565 -55.819)">
+   <polygon transform="translate(119 276.36)" points="404.32 470.82 255.78 512 107.64 470.88 74.633 100.62 437.37 100.62" fill="#264de4"/>
+   <polygon transform="translate(119 276.36)" points="256 130.89 256 480.52 376.03 447.25 404.27 130.89" fill="#2965f1"/>
+   <g fill="#ebebeb">
+    <polygon transform="translate(119 276.36)" points="256 313.63 256 268.22 150.31 268.22 154.38 313.63"/>
+    <polygon transform="translate(119 276.36)" points="255.84 176.3 142.13 176.3 146.26 221.72 256 221.72 256 176.3"/>
+    <polygon transform="translate(119 276.36)" points="255.79 433.46 256 433.4 256 386.15 255.8 386.21 205.23 372.55 201.99 336.33 177.42 336.33 156.41 336.33 162.77 407.63"/>
+   </g>
+   <polygon transform="translate(119 276.36)" points="319.83 221.72 315.7 268.22 255.84 268.22 255.84 313.63 311.76 313.63 306.49 372.52 255.84 386.19 255.84 433.44 348.94 407.63 349.62 399.96 360.29 280.41 361.4 268.22 369.6 176.3 255.84 176.3 255.84 221.72" fill="#ffffff"/>
+  </g>
+ </g>
+</svg>

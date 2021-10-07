@@ -1,11 +1,12 @@
 import FullscreenContainer from "../FullscreenContainer";
 import styled from 'styled-components'
 import { useGlobalContext } from "../../../providers/ContextProvider";
-import { AnimatePresence, motion, useAnimation } from "framer-motion";
-import { useCallback, useRef } from "react"
+import { motion, useAnimation } from "framer-motion";
+import { useCallback, useRef, useState } from "react"
 import { useIntersectionRevealer } from 'react-intersection-revealer'
 import { useEffect } from "react";
 import { easeInOutCubicBezier, easeInOutCustomBezier, useThemeChangeAnim } from "../../../lib/motion";
+import Skills from "../Skills";
 
 const GreenBoxLeft = styled(motion.div)`
     position: absolute;
@@ -14,6 +15,16 @@ const GreenBoxLeft = styled(motion.div)`
     height: ${({ isPhone }) => (isPhone ? "12.5vh" : "28vh")};
     width: ${({ isPhone }) => (isPhone ? "41.67vw" : "20vw")};
     background-color: ${({ theme }) => (theme.colors.green)};
+`
+
+const GreenBoxLeftSkills = styled(motion.div)`
+    position: absolute;
+    top: ${({ isPhone }) => (isPhone ? "85.5vh" : "65vh")};
+    left: ${({ isPhone }) => (isPhone ? "0" : "4vw")};
+    height: ${({ isPhone }) => (isPhone ? "12.5vh" : "28vh")};
+    width: ${({ isPhone }) => (isPhone ? "41.67vw" : "20vw")};
+    background-color: ${({ theme }) => (theme.colors.green)};
+    z-index: 53;
 `
 
 const RedBoxRight = styled(motion.div)`
@@ -40,6 +51,18 @@ const Title = styled(motion.div)`
     flex-direction: column;
     left: ${({ isPhone }) => (isPhone ? "14vw" : "12.5vw")};
     bottom: ${({ isPhone }) => (isPhone ? "10vh" : "11.5vh")};
+`
+
+const TitleSkills = styled(motion.div)`
+    font-family: 'Montserrat Alternates';
+    font-size: ${({ isPhone }) => (isPhone ? "3rem" : "4.2rem")};
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: ${({ isPhone }) => (isPhone ? "14vw" : "9vw")};
+    bottom: ${({ isPhone }) => (isPhone ? "5vh" : "15vh")};
+    color: ${({theme}) => theme.colors.white};
+    z-index: 55;
 `
 
 const AboutTextContainer = styled(motion.div)`
@@ -85,6 +108,16 @@ const leftToRightVariants = {
         x: -150,
         opacity: 0,
         transition: transition
+    },
+    trigger: {
+        x: 0,
+        opacity: 1,
+        transition: { ...transition, delay: 1.8 }
+    },
+    retract: {
+        x: -150,
+        opacity: 0,
+        transition: transition
     }
 }
 
@@ -121,6 +154,9 @@ const zoomOutTransition = {
 }
 
 const zoomOutDeskImageVariants = {
+    initial: {
+        scale: 10
+    },
     trigger: {
         scale: 1,
         transition: zoomOutTransition
@@ -131,36 +167,19 @@ const zoomOutDeskImageVariants = {
     }
 }
 
-const getZoomOutDeskContainerVariants = (outerContainerNumOfPages) => ({
+const zoomOutPageVariants = {
     initial: {
-        top: '0vh',
-    },
-    trigger: {
-        top: `${(outerContainerNumOfPages - 1) * 100}vh`,
-        transition: zoomOutTransition
-    },
-    retract: {
-        top: '0vh',
-        transition: zoomOutTransition
-    }
-})
-
-const getZoomOutPageVariants = (outerContainerNumOfPages) => ({
-    initial: {
-        top: '0vh',
         scale: 1
     },
     trigger: {
-        top: `${(outerContainerNumOfPages - 1) * 100}vh`,
         scale: 0.1,
         transition: zoomOutTransition
     },
     retract: {
-        top: '0vh',
         scale: 1,
         transition: zoomOutTransition
     }
-})
+}
 
 export default function SectionTwo() {
     const { globalState } = useGlobalContext()
@@ -199,33 +218,35 @@ export default function SectionTwo() {
     const { textEmphasisAnimation, textEmphasisVariants } = useThemeChangeAnim()
 
     // For zoom out effect
-    const refOuterContainer = useRef()
-    const outerContainerNumOfPages = 1.1
-    const outerContainerTriggerZoomoutBreakpoint = 0.05
-    const { scrollYProgress } = useIntersectionRevealer(refOuterContainer)
     const zoomOutAnim = useAnimation()
-
-    const isBreakpointTriggered = useCallback(() => {
-        return (scrollYProgress >= outerContainerTriggerZoomoutBreakpoint && scrollYProgress !== 1)
-    }, [scrollYProgress])
-
-    // Tracking when outer container scroll reaches breakpoint to trigger zoom out effect
-    useEffect(() => {
-        if (isBreakpointTriggered()) { // Trigger effect
-            zoomOutAnim.start('trigger')
-        } else { // Retract effect
+    // State to maintain whether to show skills and backdrop
+    const [showSkills, setShowSkills] = useState(false)
+    // Handles pan
+    const handlePan = useCallback(async (event, info) => {
+        console.log(info)
+        if (info.delta.x < -3) { // Left side pan (trigger)
+            await zoomOutAnim.start('trigger')
+            setShowSkills(true)
+        } else if (info.delta.x > 3) { // Right side pan (retract)
             zoomOutAnim.start('retract')
+            setShowSkills(false)
         }
-    }, [scrollYProgress])
+    }, [zoomOutAnim])
 
     return (
-        <FullscreenContainer ref={refOuterContainer} numberOfPages={outerContainerNumOfPages} >
-            {/* This parent container is 4 viewports long, for the zoom out effect */}
-            <FullscreenContainer style={{ position: 'absolute' }} initial='initial' variants={getZoomOutDeskContainerVariants(outerContainerNumOfPages)} animate={zoomOutAnim}>
-                <DeskImage src={globalState.themeName === 'LIGHT_THEME' ? "/images/desk.svg" : "/images/desk-night.svg"} alt="Desk image" initial={{ scale: (isBreakpointTriggered() ? 1 : 10) }} variants={zoomOutDeskImageVariants} animate={zoomOutAnim} />
+        <FullscreenContainer onPanStart={handlePan} style={{ cursor: 'grab' }} whileTap={{ cursor: 'grabbing' }}>
+            {/* BELOW CONTAINER - DESK IMAGE AND SKILLS*/}
+            <FullscreenContainer style={{ position: 'absolute' }}>
+                <DeskImage src={globalState.themeName === 'LIGHT_THEME' ? "/images/desk.svg" : "/images/desk-night.svg"} alt="Desk image" initial='initial' variants={zoomOutDeskImageVariants} animate={zoomOutAnim} />
+                <Skills show={showSkills} />
+                <GreenBoxLeftSkills initial='initial' isPhone={isPhone} variants={leftToRightVariants} animate={zoomOutAnim} />
+                <TitleSkills isPhone={isPhone} variants={leftToRightVariants} initial='initial' animate={zoomOutAnim}>
+                    My skills
+                </TitleSkills>
             </FullscreenContainer>
-            <FullscreenContainer style={{ position: 'absolute' }} initial='initial' variants={getZoomOutPageVariants(outerContainerNumOfPages)} animate={zoomOutAnim}>
-                {/* This is the inner container that holds the page, 1 viewport long */}
+
+            {/* BELOW CONTAINER - ABOUT PAGE */}
+            <FullscreenContainer style={{ position: 'absolute' }} initial='initial' variants={zoomOutPageVariants} animate={zoomOutAnim}>
                 <GreenBoxLeft variants={leftToRightVariants} animate={greenBoxAnimation} ref={greenBoxRef} isPhone={isPhone} />
                 <RedBoxRight variants={rightToLeftVariants} animate={redBoxAnimation} ref={redBoxRef} isPhone={isPhone}>
                     <MeStanding isPhone={isPhone} src="/images/me-standing.svg" />
