@@ -11,6 +11,7 @@ export const GlobalStyle = createGlobalStyle`
       width: 100vw;
       overflow-x: hidden;
       scroll-behavior: smooth;
+      background-color: ${({ theme }) => theme.backgroundColor};
     }
 
     a {
