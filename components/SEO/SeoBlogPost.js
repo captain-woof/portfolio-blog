@@ -1,6 +1,8 @@
 import Head from 'next/head'
+import { useTheme } from 'styled-components'
 
 export default function SeoBlogPost({ image, title, description, slug, label, imageAlt }) {
+    const theme = useTheme()
     return (
         <Head>
             <title>{title}</title>
@@ -21,6 +23,7 @@ export default function SeoBlogPost({ image, title, description, slug, label, im
             <meta name="twitter:image:alt" content={imageAlt} />
             <meta name="twitter:site" content="@realCaptainWoof" />
             <meta name="twitter:creator" content="@realCaptainWoof" />
+            <meta name="theme-color" content={theme.backgroundColor} />
         </Head>
     )
 }

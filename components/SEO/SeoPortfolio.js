@@ -1,8 +1,10 @@
 import Head from 'next/head'
 import { useGlobalContext } from '../../providers/ContextProvider'
+import { useTheme } from 'styled-components'
 
 export default function SeoPortfolio() {
     const { globalState } = useGlobalContext()
+    const theme = useTheme()
 
     return (
         <Head>
@@ -24,6 +26,7 @@ export default function SeoPortfolio() {
             <meta name="twitter:image:alt" content="Sohail Saha - sohail.saha.666@gmail.com" />
             <meta name="twitter:site" content="@realCaptainWoof" />
             <meta name="twitter:creator" content="@realCaptainWoof" />
+            <meta name="theme-color" content={theme.backgroundColor} />
         </Head>
     )
 }
