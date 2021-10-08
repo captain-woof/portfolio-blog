@@ -223,7 +223,6 @@ export default function SectionTwo() {
     const [showSkills, setShowSkills] = useState(false)
     // Handles pan
     const handlePan = useCallback(async (event, info) => {
-        console.log(info)
         if (info.delta.x < -3) { // Left side pan (trigger)
             await zoomOutAnim.start('trigger')
             setShowSkills(true)
