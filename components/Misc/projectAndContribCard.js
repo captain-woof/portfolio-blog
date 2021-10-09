@@ -92,6 +92,7 @@ const DescriptionBox = styled(motion.div)`
     flex-direction: column;
     gap: 0.2rem 0;
     overflow-y: auto;
+    top: 0;
 `
 
 const DescriptionTitle = styled.div`
