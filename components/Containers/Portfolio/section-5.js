@@ -142,7 +142,7 @@ const EmailLogo = styled(motion.img)`
     height: 4.5rem;
     width: 4.5rem;
     top: 25%;
-    left: 25%;
+    left: 24%;
     transform: translate(-50%, -50%);
 
     ${({ isPhone }) => (isPhone && css`
