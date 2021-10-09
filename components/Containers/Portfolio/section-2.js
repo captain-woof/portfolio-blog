@@ -233,9 +233,9 @@ export default function SectionTwo() {
     }, [zoomOutAnim])
 
     return (
-        <FullscreenContainer onPanStart={handlePan} style={{ cursor: 'grab' }} whileTap={{ cursor: 'grabbing' }}>
+        <FullscreenContainer id='about' onPanStart={handlePan} style={{ cursor: 'grab' }} whileTap={{ cursor: 'grabbing' }}>
             {/* BELOW CONTAINER - DESK IMAGE AND SKILLS*/}
-            <FullscreenContainer style={{ position: 'absolute' }}>
+            <FullscreenContainer id='skills' style={{ position: 'absolute' }}>
                 <DeskImage src={globalState.themeName === 'LIGHT_THEME' ? "/images/desk.svg" : "/images/desk-night.svg"} alt="Desk image" initial='initial' variants={zoomOutDeskImageVariants} animate={zoomOutAnim} />
                 <Skills show={showSkills} />
                 <GreenBoxLeftSkills initial='initial' isPhone={isPhone} variants={leftToRightVariants} animate={zoomOutAnim} />

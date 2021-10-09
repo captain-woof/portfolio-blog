@@ -117,7 +117,7 @@ export default function SectionThree({ projectData }) {
     const theme = useTheme()
 
     return (
-        <MinFullscreenContainer ref={ref}>
+        <MinFullscreenContainer ref={ref} id='projects'>
             <YellowBox isPhone={isPhone} animate={animate} exit='exit' initial='initial' variants={yellowBoxVariants} />
             <Title animate={animate} initial='initial' exit='exit' variants={titleVariants} isPhone={isPhone}>Projects</Title>
             <ProjectsGridWrapper className='projects-grid-wrapper'>

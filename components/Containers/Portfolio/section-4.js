@@ -117,7 +117,7 @@ export default function SectionFour({ openSourceContribData }) {
     const theme = useTheme()
 
     return (
-        <MinFullscreenContainer ref={ref}>
+        <MinFullscreenContainer ref={ref} id='open-source-contributions'>
             <BlueBox isPhone={isPhone} animate={animate} exit='exit' initial='initial' variants={blueBoxVariants} />
             <Title animate={animate} initial='initial' exit='exit' variants={titleVariants} isPhone={isPhone}>Open Source</Title>
             <OpenSourceContribsGridWrapper className='openSourceContribs-grid-wrapper'>

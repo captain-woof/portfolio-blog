@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import SectionOne from '../components/Containers/Portfolio/section-1'
 import SectionTwo from '../components/Containers/Portfolio/section-2'
 import SectionThree from '../components/Containers/Portfolio/section-3'
@@ -5,6 +6,7 @@ import SectionFour from '../components/Containers/Portfolio/section-4'
 import SectionFive from '../components/Containers/Portfolio/section-5'
 import SeoPortfolio from '../components/SEO/SeoPortfolio'
 import { getContenfulClient } from '../lib/contentful'
+import { useGlobalContext } from '../providers/ContextProvider'
 
 // Get static props at build time
 export const getStaticProps = async () => {
@@ -54,6 +56,22 @@ export const getStaticProps = async () => {
 }
 
 export default function Index({ projectData, openSourceContribData }) {
+  // Setting page markers
+  const { globalDispatch } = useGlobalContext()
+  useEffect(() => {
+    globalDispatch({
+      type: "SET_MARKERS", payload: {
+        markers: [
+          { name: "About", link: "#about" },
+          { name: "Skills", link: "#skills" },
+          { name: "Projects", link: "#projects" },
+          { name: "Open Source Contributions", link: "#open-source-contributions" },
+          { name: "Contact", link: "#contact" }
+        ]
+      }
+    })
+  }, [])
+
   return (
     <>
       <SeoPortfolio />
