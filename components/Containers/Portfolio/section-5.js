@@ -228,7 +228,7 @@ export default function SectionFive() {
     }, [inView])
 
     return (
-        <FullscreenContainer>
+        <FullscreenContainer id="contact">
             <ContactWrapper>
                 <WannaTalkText isPhone={isPhone} animate={textSubtitlesAnimation} variants={textSubtitlesVariants}>Wanna talk?</WannaTalkText>
                 <Email ref={emailRef} />
