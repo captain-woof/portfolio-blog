@@ -7,7 +7,6 @@ const Container = styled(motion.div)`
     height: ${({ isPhone, adjustHeightForNavbar, numberOfPages }) => (adjustHeightForNavbar ? (isPhone ? `calc(${numberOfPages * 100}vh - 3.5rem)` : `calc(${numberOfPages * 100}vh - 2.5rem)"`) : `${numberOfPages * 100}vh`)};
     width: 100vw;
     position: relative;
-    left: 0;
     overflow: hidden;
 `
 
