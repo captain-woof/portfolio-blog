@@ -2,6 +2,7 @@ import SectionOne from '../components/Containers/Portfolio/section-1'
 import SectionTwo from '../components/Containers/Portfolio/section-2'
 import SectionThree from '../components/Containers/Portfolio/section-3'
 import SectionFour from '../components/Containers/Portfolio/section-4'
+import SectionFive from '../components/Containers/Portfolio/section-5'
 import SeoPortfolio from '../components/SEO/SeoPortfolio'
 import { getContenfulClient } from '../lib/contentful'
 
@@ -60,6 +61,7 @@ export default function Index({ projectData, openSourceContribData }) {
       <SectionTwo />
       <SectionThree projectData={projectData} />
       <SectionFour openSourceContribData={openSourceContribData} />
+      <SectionFive />
     </>
   )
 }
