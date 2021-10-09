@@ -10,12 +10,12 @@ const Container = styled(motion.div)`
     overflow: hidden;
 `
 
-const FullscreenContainer = forwardRef(({ children, adjustHeightForNavbar = false, style = {}, numberOfPages = 1, variants, animate, initial, exit, onPanStart, whileTap }, ref) => {
+const FullscreenContainer = forwardRef(({ children, adjustHeightForNavbar = false, style = {}, numberOfPages = 1, variants, animate, initial, exit, onPanStart, whileTap, id }, ref) => {
     const { globalState } = useGlobalContext()
     const { isPhone } = globalState
 
     return (
-        <Container onPanStart={onPanStart} ref={ref} numberOfPages={numberOfPages} style={style} isPhone={isPhone} adjustHeightForNavbar={adjustHeightForNavbar} className="fullscreen-container" variants={variants} animate={animate} initial={initial} exit={exit} whileTap={whileTap}>
+        <Container id={id} onPanStart={onPanStart} ref={ref} numberOfPages={numberOfPages} style={style} isPhone={isPhone} adjustHeightForNavbar={adjustHeightForNavbar} className="fullscreen-container" variants={variants} animate={animate} initial={initial} exit={exit} whileTap={whileTap}>
             {children}
         </Container>
     )

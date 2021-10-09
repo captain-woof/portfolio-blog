@@ -9,12 +9,12 @@ const Container = styled(motion.div)`
     position: relative;
 `
 
-const MinFullscreenContainer = forwardRef(({ children, adjustHeightForNavbar = false, style = {}, variants, animate, initial, exit, onPanStart, whileTap }, ref) => {
+const MinFullscreenContainer = forwardRef(({ children, adjustHeightForNavbar = false, style = {}, variants, animate, initial, exit, onPanStart, whileTap, id }, ref) => {
     const { globalState } = useGlobalContext()
     const { isPhone } = globalState
 
     return (
-        <Container onPanStart={onPanStart} ref={ref} style={style} isPhone={isPhone} adjustHeightForNavbar={adjustHeightForNavbar} className="fullscreen-container" variants={variants} animate={animate} initial={initial} exit={exit} whileTap={whileTap}>
+        <Container id={id} onPanStart={onPanStart} ref={ref} style={style} isPhone={isPhone} adjustHeightForNavbar={adjustHeightForNavbar} className="fullscreen-container" variants={variants} animate={animate} initial={initial} exit={exit} whileTap={whileTap}>
             {children}
         </Container>
     )
