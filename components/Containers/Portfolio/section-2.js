@@ -6,7 +6,7 @@ import { useCallback, useRef, useState } from "react"
 import { useIntersectionRevealer } from 'react-intersection-revealer'
 import { useEffect } from "react";
 import { easeInOutCubicBezier, easeInOutCustomBezier, useThemeChangeAnim } from "../../../lib/motion";
-import Skills from "../Skills";
+import Skills from "./Skills";
 
 const GreenBoxLeft = styled(motion.div)`
     position: absolute;
