@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
-import { useGlobalContext } from '../../providers/ContextProvider'
-import { easeInOutCustomBezier, useThemeChangeAnim } from '../../lib/motion'
-import Backdrop from '../Misc/backdrop'
+import { useGlobalContext } from '../../../providers/ContextProvider'
+import { easeInOutCustomBezier, useThemeChangeAnim } from '../../../lib/motion'
+import Backdrop from '../../Misc/backdrop'
 import { useEffect } from 'react/cjs/react.development'
 
 const SkillsContainer = styled(motion.div)`
