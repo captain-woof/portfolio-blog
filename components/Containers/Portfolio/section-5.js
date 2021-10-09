@@ -4,7 +4,7 @@ import FullscreenContainer from '../FullscreenContainer'
 import { useGlobalContext } from '../../../providers/ContextProvider'
 import { easeInOutCubicBezier, easeInOutCustomBezier, useThemeChangeAnim } from '../../../lib/motion'
 import { useIntersectionRevealer } from 'react-intersection-revealer'
-import { useEffect, useRef } from 'react/cjs/react.development'
+import { useEffect, useRef } from 'react'
 import { forwardRef } from 'react'
 
 //// FOR EMAIL, USED ONLY IN THIS PAGE

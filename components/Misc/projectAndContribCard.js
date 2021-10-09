@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import Image from 'next/image'
 import { easeInOutCustomBezier } from '../../lib/motion'
-import { useCallback } from 'react/cjs/react.development'
+import { useCallback } from 'react'
 import { useGlobalContext } from '../../providers/ContextProvider'
 
 const ProjectCardContainer = styled(motion.div)`

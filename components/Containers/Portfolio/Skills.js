@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useGlobalContext } from '../../../providers/ContextProvider'
 import { easeInOutCustomBezier, useThemeChangeAnim } from '../../../lib/motion'
 import Backdrop from '../../Misc/backdrop'
-import { useEffect } from 'react/cjs/react.development'
+import { useEffect } from 'react'
 
 const SkillsContainer = styled(motion.div)`
     border-radius: 12px;

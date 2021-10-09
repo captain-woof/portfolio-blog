@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useCallback, useState } from "react"
 import { easeInOutCubicBezier, easeInOutCustomBezier, useThemeChangeAnim } from "../lib/motion"
 import { motion, useAnimation } from "framer-motion"
-import { useEffect } from "react/cjs/react.development"
+import { useEffect } from "react"
 
 const NavbarOuterContainer = styled(motion.div)`    
     height: ${({ isPhone }) => (isPhone ? "3.5rem" : "4rem")};
