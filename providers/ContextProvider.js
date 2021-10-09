@@ -32,6 +32,11 @@ const reducer = (state, action) => {
                 ...state,
                 scrollDirection: action.payload.scrollDirection,
             })
+        case "SET_MARKERS":
+            return ({
+                ...state,
+                markers: action.payload.markers
+            })
     }
 }
 
@@ -44,7 +49,8 @@ const initialState = {
     theme: themeLight,
     baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
     isPhone: false,
-    scrollDirection: 'up'
+    scrollDirection: 'up',
+    markers: []
 }
 
 export const ContextProvider = ({ children }) => {
