@@ -65,8 +65,7 @@ const CardFaceTagsContainer = styled.div`
     flex-wrap: wrap;
 
     ${({ isPhone }) => (isPhone && css`
-        gap: 0 0.5rem;
-        height: 1.8rem;
+        gap: 0.4rem 0.5rem;
     `)}
 `
 
