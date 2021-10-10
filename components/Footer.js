@@ -106,8 +106,7 @@ export default function Footer() {
             { name: 'Twitter', link: 'https://twitter.com/realCaptainWoof' },
             { name: 'LinkedIn', link: 'https://www.linkedin.com/in/sohail-saha/' },
             { name: 'Github', link: 'https://github.com/captain-woof' },
-            { name: 'Instagram', link: 'https://www.instagram.com/sohail_saha_/' },
-            { name: 'Email', link: '/#contact' }
+            { name: 'Instagram', link: 'https://www.instagram.com/sohail_saha_/' }
         ]
     }
 
