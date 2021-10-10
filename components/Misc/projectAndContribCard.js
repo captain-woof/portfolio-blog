@@ -186,7 +186,7 @@ const descriptionButtonVariants = {
     }
 }
 
-export const ProjectAndContribCard = ({ color, keyVal, backgroundImage, tags, description, title, liveLink, sourceLink }) => {
+export const ProjectAndContribCard = ({ color, keyVal, backgroundImage, backgroundImageBlur, tags, description, title, liveLink, sourceLink }) => {
     const descriptionBoxAnimate = useAnimation()
     const [isOpen, setisOpen] = useState(false)
     const { globalState } = useGlobalContext()
@@ -217,8 +217,8 @@ export const ProjectAndContribCard = ({ color, keyVal, backgroundImage, tags, de
 
     return (
         <ProjectCardContainer isPhone={isPhone} className="project-card-container" key={keyVal} onClick={() => { setisOpen(prev => !prev) }} variants={projectCardContainerVariants} onHoverStart={() => { handlePeek('in') }} onHoverEnd={() => { handlePeek('out') }}>
-            <CardFace backgroundImage={backgroundImage} className="project-card-face">
-                <Image src={backgroundImage.path} layout='fill' objectFit='cover' quality={100} alt={backgroundImage.alt} />
+            <CardFace className="project-card-face">
+                <Image src={backgroundImage.path} layout='fill' objectFit='cover' quality={100} alt={backgroundImage.alt} placeholder='blur' blurDataURL={backgroundImageBlur}/>
                 <CardFaceOverlay />
                 <CardFaceContent>
                     <CardFaceTitle>{title}</CardFaceTitle>

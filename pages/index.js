@@ -32,6 +32,12 @@ export const getStaticProps = async () => {
       width: data.fields.backgroundImage.fields.file.details.image.width,
       path: `https:${data.fields.backgroundImage.fields.file.url}`,
       alt: data.fields.backgroundImage.fields.title
+    },
+    backgroundImageBlur: {
+      height: data.fields.backgroundImage.fields.file.details.image.height,
+      width: data.fields.backgroundImage.fields.file.details.image.width,
+      path: `https:${data.fields.backgroundImage.fields.file.url}`,
+      alt: data.fields.backgroundImage.fields.title
     }
   }))
 
@@ -42,6 +48,12 @@ export const getStaticProps = async () => {
     liveLink: data.fields.liveLink,
     sourceLink: data.fields.sourceLink,
     backgroundImage: {
+      height: data.fields.backgroundImage.fields.file.details.image.height,
+      width: data.fields.backgroundImage.fields.file.details.image.width,
+      path: `https:${data.fields.backgroundImage.fields.file.url}`,
+      alt: data.fields.backgroundImage.fields.title
+    },
+    backgroundImageBlur: {
       height: data.fields.backgroundImage.fields.file.details.image.height,
       width: data.fields.backgroundImage.fields.file.details.image.width,
       path: `https:${data.fields.backgroundImage.fields.file.url}`,
