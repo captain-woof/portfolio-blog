@@ -7,6 +7,7 @@ import { useIntersectionRevealer } from 'react-intersection-revealer'
 import { useEffect } from "react";
 import { easeInOutCubicBezier, easeInOutCustomBezier, useThemeChangeAnim } from "../../../lib/motion";
 import Skills from "./Skills";
+import { useRouter } from 'next/router'
 
 const GreenBoxLeft = styled(motion.div)`
     position: absolute;
@@ -61,7 +62,7 @@ const TitleSkills = styled(motion.div)`
     flex-direction: column;
     left: ${({ isPhone }) => (isPhone ? "14vw" : "9vw")};
     bottom: ${({ isPhone }) => (isPhone ? "5vh" : "15vh")};
-    color: ${({theme}) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.white};
     z-index: 55;
 `
 
@@ -231,6 +232,17 @@ export default function SectionTwo() {
             setShowSkills(false)
         }
     }, [zoomOutAnim])
+
+    // Causes auto trigger anim for #skills
+    const router = useRouter()
+    useEffect(() => {
+        (async () => {
+            if (router.asPath === "/#skills") {
+                await zoomOutAnim.start('trigger')
+                setShowSkills(true)
+            }
+        })()
+    }, [router.asPath])
 
     return (
         <FullscreenContainer id='about' onPanStart={handlePan} style={{ cursor: 'grab' }} whileTap={{ cursor: 'grabbing' }}>
