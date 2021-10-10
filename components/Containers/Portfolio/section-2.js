@@ -1,5 +1,5 @@
 import FullscreenContainer from "../FullscreenContainer";
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useGlobalContext } from "../../../providers/ContextProvider";
 import { motion, useAnimation } from "framer-motion";
 import { useCallback, useRef, useState } from "react"
@@ -9,6 +9,53 @@ import { easeInOutCubicBezier, easeInOutCustomBezier, useThemeChangeAnim } from 
 import Skills from "./Skills";
 import { useRouter } from 'next/router'
 
+// BELOW STUFF FOR GRABBING HAND
+const GrabbingHandImage = styled(motion.img)`
+    height: 2rem;
+    position: absolute;
+    bottom: 10vh;
+    right: 10vw;
+    z-index: 99;
+
+    ${({isPhone}) => (isPhone && css`
+        bottom: 28vh;
+        right: 25vw;
+    `)}
+`
+const grabbingHandVariants = {
+    initial: {
+        x: 0,
+        opacity: 0
+    },
+    animate: {
+        x: -100,
+        opacity: 1,
+        transition: {
+            ease: easeInOutCustomBezier,
+            duration: 1,
+            repeat: Infinity,
+            repeatType: 'mirror'
+        }
+    }
+}
+
+const GrabbingHand = ({ show }) => {
+    const { globalState } = useGlobalContext()
+    const { themeName, isPhone } = globalState
+
+    if (show) {
+        return (
+            <GrabbingHandImage className="grabbing-hand" isPhone={isPhone} animate='animate' initial='initial' variants={grabbingHandVariants} src={themeName === 'LIGHT_THEME'
+                ? "/icons/grab.svg"
+                : "/icons/grab-night.svg"
+            } />
+        )
+    } else {
+        return <></>
+    }
+}
+
+// BELOW STUFF FOR CONTAINER
 const GreenBoxLeft = styled(motion.div)`
     position: absolute;
     top: ${({ isPhone }) => (isPhone ? "80vh" : "62vh")};
@@ -222,30 +269,37 @@ export default function SectionTwo() {
     const zoomOutAnim = useAnimation()
     // State to maintain whether to show skills and backdrop
     const [showSkills, setShowSkills] = useState(false)
-    // Handles pan
-    const handlePan = useCallback(async (event, info) => {
-        if (info.delta.x < -3) { // Left side pan (trigger)
-            await zoomOutAnim.start('trigger')
-            setShowSkills(true)
-        } else if (info.delta.x > 3) { // Right side pan (retract)
-            zoomOutAnim.start('retract')
-            setShowSkills(false)
-        }
-    }, [zoomOutAnim])
 
     // Causes auto trigger anim for #skills
     const router = useRouter()
+    const [showGrabbingHand, setShowGrabbingHand] = useState(router?.asPath !== '/#skills' ? true : false)
     useEffect(() => {
         (async () => {
             if (router.asPath === "/#skills") {
                 await zoomOutAnim.start('trigger')
                 setShowSkills(true)
+                setShowGrabbingHand(false)
             }
         })()
     }, [router.asPath])
 
+    // Handles pan
+    const handlePan = useCallback(async (event, info) => {
+        if (info.delta.x < -3) { // Left side pan (trigger)
+            setShowGrabbingHand(false)
+            await zoomOutAnim.start('trigger')
+            setShowSkills(true)
+        } else if (info.delta.x > 3) { // Right side pan (retract)
+            zoomOutAnim.start('retract')
+            setShowSkills(false)
+            setShowGrabbingHand(true)
+        }
+    }, [zoomOutAnim])
+
     return (
         <FullscreenContainer id='about' onPanStart={handlePan} style={{ cursor: 'grab' }} whileTap={{ cursor: 'grabbing' }}>
+            <GrabbingHand show={showGrabbingHand} />
+
             {/* BELOW CONTAINER - DESK IMAGE AND SKILLS*/}
             <FullscreenContainer id='skills' style={{ position: 'absolute' }}>
                 <DeskImage src={globalState.themeName === 'LIGHT_THEME' ? "/images/desk.svg" : "/images/desk-night.svg"} alt="Desk image" initial='initial' variants={zoomOutDeskImageVariants} animate={zoomOutAnim} />
