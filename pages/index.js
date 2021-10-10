@@ -13,10 +13,12 @@ export const getStaticProps = async () => {
   // Fetch data from Contentful
   const contentfulClient = getContenfulClient()
   const projectDataPromise = contentfulClient.getEntries({
-    content_type: 'project'
+    content_type: 'project',
+    order: '-sys.createdAt'
   })
   const openSourceContribDataPromise = contentfulClient.getEntries({
-    content_type: 'openSourceContributions'
+    content_type: 'openSourceContributions',
+    order: '-sys.createdAt'
   })
   const [projectDataContentful, openSourceContribDataContentful] = await Promise.all([projectDataPromise, openSourceContribDataPromise])
 
