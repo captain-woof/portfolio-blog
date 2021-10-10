@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar'
 import { GlobalStyle } from '../styles/globalStyle'
 import AdjustForNavbarContainer from '../components/Containers/AdjustForNavbarContainer'
 import { ScrollbarAnimated } from '../styles/scrollbar'
+import Footer from '../components/Footer'
 
 function MyApp({ Component, pageProps }) {
   // For Google Analytics - Page Navigation
@@ -34,6 +35,7 @@ function MyApp({ Component, pageProps }) {
         <Navbar />
         <AdjustForNavbarContainer>
           <Component {...pageProps} />
+          <Footer />
         </AdjustForNavbarContainer>
       </GlobalThemeProvider>
     </ContextProvider>
