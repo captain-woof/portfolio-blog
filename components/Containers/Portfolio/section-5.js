@@ -182,7 +182,7 @@ const emailLogoVariants = {
 
 export default function SectionFive() {
     const { globalState } = useGlobalContext()
-    const { isPhone } = globalState
+    const { isPhone, themeName } = globalState
 
     // For theme animations
     const { textSubtitlesAnimation, textSubtitlesVariants } = useThemeChangeAnim()
@@ -233,7 +233,7 @@ export default function SectionFive() {
             <ContactWrapper>
                 <WannaTalkText isPhone={isPhone} animate={textSubtitlesAnimation} variants={textSubtitlesVariants}>Wanna talk?</WannaTalkText>
                 <Email ref={emailRef} />
-                <EmailLogo alt='email logo' src='/icons/email.svg' isPhone={isPhone} variants={emailLogoVariants} animate={emailLogoAnim} initial='initial' exit='exit'/>
+                <EmailLogo alt='email logo' src={themeName === "LIGHT_THEME" ? '/icons/email.svg' : '/icons/email-night.svg'} isPhone={isPhone} variants={emailLogoVariants} animate={emailLogoAnim} initial='initial' exit='exit'/>
                 <SocialButtonsContainer isPhone={isPhone}>
                     {socialAccs.map((socialData, index) => (
                         <SocialButton {...socialData} key={index} />
