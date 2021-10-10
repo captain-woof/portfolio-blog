@@ -61,6 +61,7 @@ const SocialButtonsContainer = styled.div`
 
     ${({ isPhone }) => (isPhone && css`
         height: 2rem;
+        margin-top: 1rem;
     `)}
 `
 
