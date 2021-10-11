@@ -11,8 +11,7 @@ const Container = styled(motion.div)`
 `
 
 const FullscreenContainer = forwardRef(({ children, adjustHeightForNavbar = false, style = {}, numberOfPages = 1, variants, animate, initial, exit, onPanStart, whileTap, id }, ref) => {
-    const { globalState } = useGlobalContext()
-    const { isPhone } = globalState
+    const { globalState: {isPhone} } = useGlobalContext()
 
     return (
         <Container id={id} onPanStart={onPanStart} ref={ref} numberOfPages={numberOfPages} style={style} isPhone={isPhone} adjustHeightForNavbar={adjustHeightForNavbar} className="fullscreen-container" variants={variants} animate={animate} initial={initial} exit={exit} whileTap={whileTap}>

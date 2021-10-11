@@ -88,8 +88,7 @@ const projectsGridVariants = {
 }
 
 export default function SectionThree({ projectData }) {
-    const { globalState } = useGlobalContext()
-    const { isPhone } = globalState
+    const { globalState: {isPhone} } = useGlobalContext()
     const { textEmphasisAnimation: animate, textEmphasisVariants: titleVariants } = useThemeChangeAnim()
 
     // To start animation when in view

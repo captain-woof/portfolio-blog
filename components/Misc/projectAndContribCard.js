@@ -189,8 +189,7 @@ const descriptionButtonVariants = {
 export const ProjectAndContribCard = ({ color, keyVal, backgroundImage, backgroundImageBlur, tags, description, title, liveLink, sourceLink }) => {
     const descriptionBoxAnimate = useAnimation()
     const [isOpen, setisOpen] = useState(false)
-    const { globalState } = useGlobalContext()
-    const { isPhone } = globalState
+    const { globalState: {isPhone} } = useGlobalContext()
 
     // Handles description box open/close
     useEffect(() => {

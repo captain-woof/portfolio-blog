@@ -13,8 +13,7 @@ const ChildrenContainer = styled.div`
 `
 
 export default function AdjustForNavbarContainer({ children, adjustPositionForNavbar = false }) {
-    const { globalState } = useGlobalContext()
-    const { isPhone } = globalState
+    const { globalState: {isPhone} } = useGlobalContext()
 
     // For background color animation on theme change
     const { backgroundColorVariants, backgroundColorAnimation } = useThemeChangeAnim()

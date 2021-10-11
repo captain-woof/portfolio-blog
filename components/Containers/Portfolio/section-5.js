@@ -36,8 +36,7 @@ const EmailDomain = styled(motion.div)`
 `
 
 const Email = forwardRef((props, ref) => {
-    const { globalState } = useGlobalContext()
-    const { isPhone } = globalState
+    const { globalState: {isPhone} } = useGlobalContext()
     const { textEmphasisAnimation, textSubtitlesAnimation, textSubtitlesVariants, textEmphasisVariants } = useThemeChangeAnim()
 
     return (
@@ -105,8 +104,7 @@ const socialButtonVariants = {
 }
 
 const SocialButton = ({ logo, username, color, url }) => {
-    const { globalState } = useGlobalContext()
-    const { isPhone } = globalState
+    const { globalState: {isPhone} } = useGlobalContext()
     return (
         <ButtonContainer color={color} href={url} variants={socialButtonVariants} whileHover='whileHover' target="_blank" isPhone={isPhone}>
             <SocialLogoWrapper>
