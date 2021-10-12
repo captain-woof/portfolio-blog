@@ -12,9 +12,10 @@ const colors = {
     yellowLight: "#Fbc67d",
     yellowDark: "#B57d2b",
     white: "#FFFFFC",
-    whiteLight: "#F1f1ef",
+    whiteLight: "#ffffff",
+    whiteDark: "#F1f1ef",
     black: "#182825",
-    blackLight: "#2d413e",
+    blackLight: "#2f2f2f",
     blackDark: "#000000",
     blackTransclucent: "#18282555",
     grey: "#3A4745"
@@ -34,6 +35,6 @@ export const themeDark = {
     backgroundColor: colors.black,
     backgroundColorElevated: colors.blackLight,
     textColorEmphasis: colors.white,
-    textColorSubtitle: colors.whiteLight,
+    textColorSubtitle: colors.whiteDark,
     shadow: colors.blackDark
 }
