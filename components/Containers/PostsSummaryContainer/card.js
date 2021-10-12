@@ -80,12 +80,12 @@ const CardDescription = styled(motion.div)`
     `)}
 `
 
-export default function PostSummaryCard({ title, slug, tags, keywords, description, postedOn, updatedOn, heroImage, heroImageBlur }) {
-    const { backgroundColorAnimation, backgroundColorVariants, textEmphasisAnimation, textEmphasisVariants, textSubtitlesAnimation, textSubtitlesVariants } = useThemeChangeAnim()
+export default function PostSummaryCard({ title, slug, tags, description, postedOn, updatedOn, heroImage, heroImageBlur }) {
+    const { textEmphasisAnimation, textEmphasisVariants, textSubtitlesAnimation, textSubtitlesVariants, backgroundElevatedColorAnimation, backgroundElevatedColorVariants } = useThemeChangeAnim()
     const { globalState: { isPhone, themeName } } = useGlobalContext()
 
     return (
-        <CardContainer animate={backgroundColorAnimation} variants={backgroundColorVariants} isPhone={isPhone}>
+        <CardContainer animate={backgroundElevatedColorAnimation} variants={backgroundElevatedColorVariants} isPhone={isPhone}>
             <CardContentsWrapper>
                 <CardHeroImageWrapper>
                     <Image placeholder='blur' blurDataURL={heroImageBlur.src} alt={heroImage.alt} src={heroImage.src} layout='responsive' objectFit='cover' quality={80} width={heroImage.width} height={heroImage.height} />
