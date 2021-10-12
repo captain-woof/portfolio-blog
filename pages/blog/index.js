@@ -3,6 +3,10 @@ import MinFullscreenContainer from '../..//components/Containers/MinFullscreenCo
 import HomepagePosts from '../../components/Containers/Blog/homepagePosts'
 import { fetchAllTags, fetchPostsSummary } from '../../lib/contentful'
 import { useGlobalContext } from '../../providers/ContextProvider'
+import SeoBlog from '../../components/SEO/SeoBlog'
+import { TwoColumns, FirstColumn, SecondColumn } from '../../components/Containers/Blog/twoColumns'
+import MarginWrapper from '../../components/Containers/MarginWrapper'
+import HomepageRightColumn from '../../components/Containers/Blog/homepageRightColumn'
 
 export const getStaticProps = async () => {
     const firstPostsSummaryPromise = fetchPostsSummary(0)
@@ -16,7 +20,6 @@ export const getStaticProps = async () => {
         }
     }
 }
-
 
 export default function Index({ firstPostsSummary, tags }) {
     // Setting page markers
@@ -34,7 +37,17 @@ export default function Index({ firstPostsSummary, tags }) {
 
     return (
         <MinFullscreenContainer>
-            <HomepagePosts firstPostsSummary={firstPostsSummary} tags={tags} />
+            <SeoBlog />
+            <MarginWrapper>
+                <TwoColumns>
+                    <FirstColumn>
+                        <HomepagePosts firstPostsSummary={firstPostsSummary} tags={tags} />
+                    </FirstColumn>
+                    <SecondColumn>
+                        <HomepageRightColumn tags={tags}/>
+                    </SecondColumn>
+                </TwoColumns>
+            </MarginWrapper>
         </MinFullscreenContainer>
     )
 }

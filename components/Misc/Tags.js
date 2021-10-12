@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import Link from 'next/link'
-import { useGlobalContext } from '../../../../providers/ContextProvider'
-import { easeInOutCustomBezier, useThemeChangeAnim } from '../../../../lib/motion'
+import { useGlobalContext } from '../../providers/ContextProvider'
+import { easeInOutCustomBezier, useThemeChangeAnim } from '../../lib/motion'
 import { AnimateSharedLayout, motion } from 'framer-motion'
 
 const TagsContainer = styled(motion.div)`
@@ -12,11 +12,6 @@ const TagsContainer = styled(motion.div)`
     gap: 0.5rem 0.5rem;
     font-family: 'Poppins';
     color: ${({ theme }) => theme.colors.white};
-    font-size: 0.85rem;
-
-    ${({ isPhone }) => (isPhone && css`
-    
-    `)}
 `
 
 const Tag = styled(motion.div)`
@@ -24,9 +19,11 @@ const Tag = styled(motion.div)`
     border-radius: 2rem;
     background-color: ${({ color }) => color};
     text-align: center;
+    font-size: 0.85rem;
 
     ${({ isPhone }) => (isPhone && css`
-        padding: 0.1rem 1rem;
+        padding: 0.1rem 1.2rem;
+        font-size: 0.9rem;
     `)}
 `
 
@@ -50,7 +47,7 @@ const tagVariants = {
 }
 
 export default function Tags({ tags, id }) {
-    const { globalState: {isPhone} } = useGlobalContext()
+    const { globalState: { isPhone } } = useGlobalContext()
     const { textSubtitlesAnimation, textSubtitlesVariants } = useThemeChangeAnim()
 
     return (
@@ -59,7 +56,7 @@ export default function Tags({ tags, id }) {
                 Categories
             </Heading>
             <AnimateSharedLayout type='crossfade'>
-                <TagsContainer isPhone={isPhone} className='blog-homepage-tags-container'>
+                <TagsContainer className='blog-homepage-tags-container'>
 
                     {tags.map((tagData, index) => (
                         <Link href={`/blog/categories/${tagData.slug}`} key={index}><a>

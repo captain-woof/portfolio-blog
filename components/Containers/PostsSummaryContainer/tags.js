@@ -13,22 +13,27 @@ const TagsContainer = styled(motion.div)`
     font-family: 'Poppins';
     font-weight: 600;
     color: ${({ theme }) => theme.colors.white};
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     margin-top: 0.5rem;
 
     ${({ isPhone }) => (isPhone && css`
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     `)}
 `
 
+const TagIcon = styled.img`
+    height: 1rem;
+    align-self: center;
+`
+
 const Tag = styled(motion.div)`
-    padding: 0.04rem 1rem;
+    padding: 0.1rem 1rem;
     border-radius: 2rem;
     background-color: ${({ color }) => color};
     text-align: center;
 
     ${({ isPhone }) => (isPhone && css`
-        padding: 0.18rem 0.8rem;
+        padding: 0.2rem 1rem;
     `)}
 `
 
@@ -43,12 +48,14 @@ const tagVariants = {
 }
 
 export default function Tags({ tags, id }) {
-    const { globalState: { isPhone } } = useGlobalContext()
+    const { globalState: { isPhone, themeName } } = useGlobalContext()
 
     return (
         <AnimateSharedLayout type='crossfade'>
-            <TagsContainer isPhone={isPhone} className='blog-homepage-tags-container'>
-
+            <TagsContainer className='blog-homepage-tags-container' isPhone={isPhone} id={id}>
+                {!isPhone &&
+                    <TagIcon src={themeName === 'LIGHT_THEME' ? "/icons/tag.svg" : "/icons/tag-night.svg"} alt='tag icon' />
+                }
                 {tags.map((tagData, index) => (
                     <Link href={`/blog/categories/${tagData.slug}`} key={index}><a>
                         <Tag color={tagData.color} isPhone={isPhone} className='blog-homepage-tag'

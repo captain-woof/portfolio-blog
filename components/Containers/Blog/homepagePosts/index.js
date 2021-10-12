@@ -1,12 +1,10 @@
-import Tags from "./Tags";
 import MarginWrapper from '../../MarginWrapper'
-import LatestPosts from "./latestPosts";
+import LatestPosts from "./latestPosts"
 
-export default function HomepagePosts({ tags, firstPostsSummary }) {
+export default function HomepagePosts({ firstPostsSummary }) {
     return (
         <MarginWrapper>
-            <Tags tags={tags} id='categories'/>            
-            <LatestPosts firstPostsSummary={firstPostsSummary} id='latest-posts'/>
+            <LatestPosts firstPostsSummary={firstPostsSummary} id='latest-posts' />
         </MarginWrapper>
     )
 }

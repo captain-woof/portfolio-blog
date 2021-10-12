@@ -3,12 +3,10 @@ import { useIntersectionRevealer } from 'react-intersection-revealer'
 import { useState } from 'react'
 import { useInfinitePostSummaries } from '../../../lib/swr'
 import PostSummaryCard from './card'
-import { useGlobalContext } from '../../../providers/ContextProvider'
-import { WaterfallGrid } from 'react-waterfall-grid'
+import Grid from './grid'
 
 export default function PostsSummaryContainer({ firstPostsSummary, tag }) {
     const { postSummaries, loadOneMorePage, noMoreData } = useInfinitePostSummaries(firstPostsSummary, tag)
-    const { globalState: { isPhone } } = useGlobalContext()
 
     // For auto fetching more posts
     const watcherRef = useRef()
@@ -30,14 +28,11 @@ export default function PostsSummaryContainer({ firstPostsSummary, tag }) {
 
     return (
         <>
-            <WaterfallGrid childWidth={isPhone ? 325 : 400} styleGridContainer={{
-                gap: (isPhone ? '2rem 0' : '1.5rem 1.5rem'),
-                justifyContent: 'center'
-            }}>
+            <Grid>
                 {postSummaries?.blogPosts?.map((postSummaryData, index) => (
                     <PostSummaryCard {...postSummaryData} key={index} />
                 ))}
-            </WaterfallGrid>
+            </Grid>
             <div className='watcher' ref={watcherRef} />
         </>
     )
