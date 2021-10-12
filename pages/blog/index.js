@@ -1,33 +1,37 @@
 import { useEffect } from 'react'
 import MinFullscreenContainer from '../..//components/Containers/MinFullscreenContainer'
 import HomepagePosts from '../../components/Containers/Blog/homepagePosts'
-import { fetchAllTags, fetchPostsSummary } from '../../lib/contentful'
+import { fetchAllTags, fetchFeaturedPosts, fetchPostsSummary } from '../../lib/contentful'
 import { useGlobalContext } from '../../providers/ContextProvider'
 import SeoBlog from '../../components/SEO/SeoBlog'
 import { TwoColumns, FirstColumn, SecondColumn } from '../../components/Containers/Blog/twoColumns'
 import MarginWrapper from '../../components/Containers/MarginWrapper'
 import HomepageRightColumn from '../../components/Containers/Blog/homepageRightColumn'
+import FeaturedPosts from '../../components/Containers/Blog/featuredPosts'
 
 export const getStaticProps = async () => {
     const firstPostsSummaryPromise = fetchPostsSummary(0)
     const tagsPromise = fetchAllTags()
-    const [firstPostsSummary, tags] = await Promise.all([firstPostsSummaryPromise, tagsPromise])
+    const featuredPostsPromise = fetchFeaturedPosts()
+    const [firstPostsSummary, tags, featuredPosts] = await Promise.all([firstPostsSummaryPromise, tagsPromise, featuredPostsPromise])
 
     return {
         props: {
             firstPostsSummary,
-            tags
+            tags,
+            featuredPosts
         }
     }
 }
 
-export default function Index({ firstPostsSummary, tags }) {
+export default function Index({ firstPostsSummary, tags, featuredPosts }) {
     // Setting page markers
     const { globalDispatch } = useGlobalContext()
     useEffect(() => {
         globalDispatch({
             type: "SET_MARKERS", payload: {
                 markers: [
+                    { name: "Featured Posts", link: "#featured-posts" },
                     { name: "Categories", link: "#categories" },
                     { name: "Latest Posts", link: "#latest-posts" }
                 ]
@@ -38,6 +42,7 @@ export default function Index({ firstPostsSummary, tags }) {
     return (
         <MinFullscreenContainer>
             <SeoBlog />
+            <FeaturedPosts featuredPosts={featuredPosts}/>
             <MarginWrapper>
                 <TwoColumns>
                     <FirstColumn>
