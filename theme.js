@@ -15,7 +15,7 @@ const colors = {
     whiteLight: "#ffffff",
     whiteDark: "#F1f1ef",
     black: "#182825",
-    blackLight: "#2f2f2f",
+    blackLight: "#1f3330",
     blackDark: "#000000",
     blackTransclucent: "#18282555",
     grey: "#3A4745"
