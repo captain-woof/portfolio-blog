@@ -88,7 +88,8 @@ const openSourceContribsGridVariants = {
 }
 
 export default function SectionFour({ openSourceContribData }) {
-    const { globalState: {isPhone} } = useGlobalContext()
+    const { globalState } = useGlobalContext()
+const { isPhone } = globalState
     const { textEmphasisAnimation: animate, textEmphasisVariants: titleVariants } = useThemeChangeAnim()
 
     // To start animation when in view

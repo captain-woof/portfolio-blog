@@ -116,7 +116,8 @@ const textTransition = {
 }
 
 export default function SectionOne() {
-    const { globalState: {isPhone} } = useGlobalContext()
+    const { globalState } = useGlobalContext()
+const { isPhone } = globalState
 
     const { textEmphasisAnimation: nameAnimation, textSubtitlesAnimation: subtitleAnimation, textEmphasisVariants: nameVariants, textSubtitlesVariants: subtitlesVariants } = useThemeChangeAnim({
         textEmphasisVariants: {

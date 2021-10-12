@@ -230,7 +230,8 @@ const zoomOutPageVariants = {
 }
 
 export default function SectionTwo() {
-    const { globalState: {isPhone} } = useGlobalContext()
+    const { globalState } = useGlobalContext()
+const { isPhone } = globalState
 
     // Anims for components
     const redBoxAnimation = useAnimation()

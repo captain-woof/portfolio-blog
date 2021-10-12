@@ -68,7 +68,8 @@ const logoVariants = {
 }
 
 export default function Skills({ show }) {
-    const { globalState: {isPhone} } = useGlobalContext()
+    const { globalState } = useGlobalContext()
+const { isPhone } = globalState
 
     const { backgroundColorVariants: skillsVariants, backgroundColorAnimation: skillsAnim } = useThemeChangeAnim({
         backgroundColorVariants: {
