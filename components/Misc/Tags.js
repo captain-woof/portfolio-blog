@@ -31,8 +31,6 @@ const Heading = styled(motion.div)`
     font-size: 1.4rem;
     margin-bottom: 0.6rem;
     font-weight: 600;
-
-    margin-top: 5rem;
 `
 
 const tagVariants = {
