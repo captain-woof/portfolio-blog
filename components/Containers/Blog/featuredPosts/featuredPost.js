@@ -4,7 +4,6 @@ import { easeOutQuintBezier } from '../../../../lib/motion'
 import moment from 'moment'
 import Link from 'next/link'
 import { useGlobalContext } from '../../../../providers/ContextProvider'
-import { getFirstWords, getWordCount } from '../../../../utils/wordfu'
 
 const FeaturedPostContainer = styled(motion.div)`
     height: 100%;
@@ -14,6 +13,7 @@ const FeaturedPostContainer = styled(motion.div)`
     top: 0;
     font-family: 'Poppins';
     color: ${({ theme }) => theme.colors.white};
+    overflow: hidden;
 `
 
 const FeaturedPostContentPadding = styled.div`
@@ -84,19 +84,19 @@ const PostDescription = styled.div`
 
 const transition = {
     ease: easeOutQuintBezier,
-    duration: 1.2
+    duration: 4
 }
 
 const variants = {
     initial: {
-        x: '100%'
+        opacity: 0
     },
     animate: {
-        x: '0%',
+        opacity: 1,
         transition
     },
     exit: {
-        x: '-100%',
+        opacity: 0,
         transition
     }
 }
@@ -121,9 +121,11 @@ export default function FeaturedPost({ featuredPost }) {
                         {`Last updated ${moment(featuredPost.updatedOn).fromNow()}`}
                     </PostTimestamp>
                     <Tag color={featuredPost.tags[0].color}>{featuredPost.tags[0].name}</Tag>
-                    <PostDescription>
-                        {isPhone ? (getWordCount(featuredPost.title) > 14 ? null : getFirstWords(featuredPost.description, 25)) : featuredPost.description}
-                    </PostDescription>
+                    {!isPhone &&
+                        <PostDescription>
+                            {featuredPost.description}
+                        </PostDescription>
+                    }
                 </FeaturedPostContentContainer>
             </FeaturedPostContentPadding>
         </FeaturedPostContainer>
