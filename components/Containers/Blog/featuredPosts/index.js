@@ -10,7 +10,7 @@ const FeaturedPostsContainer = styled.div`
 
 export default function FeaturedPosts() {
     return (
-        <FeaturedPostsContainer>
+        <FeaturedPostsContainer id='featured-posts'>
             <Slideshow />
             <Buttons />
         </FeaturedPostsContainer>
