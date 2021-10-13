@@ -7,8 +7,6 @@ const reducer = (state, action) => {
             return { ...state, selected: action.payload.selected }
         case "SET_POSTS":
             return { ...state, featuredPosts: action.payload.featuredPosts }
-        case "SET_TIMEOUT":
-            return { ...state, timeoutHandle: action.payload.timeoutHandle }
     }
 }
 

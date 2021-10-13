@@ -1,4 +1,5 @@
 import { motion, useAnimation } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { easeInOutCustomBezier } from '../../../../lib/motion'
 import { useSlideshow } from './context'
@@ -45,6 +46,15 @@ export default function Buttons() {
 
     const animate = useAnimation()
 
+    // Sets whether buttons are clickable
+    const [clickable, setClickable] = useState(true)
+    useEffect(() => {
+        setClickable(false)
+        setTimeout(() => {
+            setClickable(true)
+        }, 1200)
+    }, [selected])
+
     return (
         <ButtonContainer>
             {buttonArrayNum.map((val) => (
@@ -53,7 +63,9 @@ export default function Buttons() {
                         scale: (val === selected ? 1.2 : 1),
                         opacity: (val === selected ? 1 : 0.7)
                     }} key={val} onClick={() => {
-                        dispatch({ type: 'SET_SELECTED', payload: { selected: val } })
+                        if (clickable) {
+                            dispatch({ type: 'SET_SELECTED', payload: { selected: val } })
+                        }
                     }} />
             ))}
         </ButtonContainer>

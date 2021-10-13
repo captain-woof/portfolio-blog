@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { motion } from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
 import { easeOutQuintBezier } from '../../../../lib/motion'
 
 const FeaturedPostContainer = styled(motion.div)`
