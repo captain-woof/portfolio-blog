@@ -1,7 +1,6 @@
 import PostsSummaryContainer from "../../PostsSummaryContainer";
-import styled, {css} from 'styled-components'
+import styled, { css } from 'styled-components'
 import { motion } from "framer-motion";
-import { useGlobalContext } from "../../../../providers/ContextProvider";
 import { useThemeChangeAnim } from "../../../../lib/motion";
 
 const LatestPostsContainer = styled.div`
@@ -9,14 +8,17 @@ const LatestPostsContainer = styled.div`
 `
 
 const Heading = styled(motion.div)`
-    font-size: 2.2rem;
+    font-size: 3rem;
     margin-bottom: 0.8rem;
     font-weight: 600;
+
+    ${({ theme: { isPhone } }) => (isPhone && css`
+        font-size: 2.2rem;
+    `)}
 `
 
 export default function LatestPosts({ firstPostsSummary, id }) {
-    const { globalState: {isPhone} } = useGlobalContext()
-    const {textSubtitlesAnimation, textSubtitlesVariants} = useThemeChangeAnim()
+    const { textSubtitlesAnimation, textSubtitlesVariants } = useThemeChangeAnim()
 
     return (
         <LatestPostsContainer>

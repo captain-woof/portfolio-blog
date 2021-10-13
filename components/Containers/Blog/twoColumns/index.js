@@ -4,24 +4,27 @@ import { useGlobalContext } from '../../../../providers/ContextProvider'
 const TwoColumnsWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 80%;
     gap: 0 0.5rem;
+    justify-content: center;
 
     ${({ isPhone }) => (isPhone && css`
+        width: 100%;
         flex-direction: column-reverse;
+        justify-content: none;
         gap: 0;
     `)}
 `
 
 const FirstColumnWrapper = styled.div`
-    width: 70%;
+    width: 65%;
     ${({ isPhone }) => (isPhone && css`
         width: 100%;
     `)}
 `
 
 const SecondColumnWrapper = styled.div`
-    width: 30%;
+    width: 35%;
     ${({ isPhone }) => (isPhone && css`
         width: 100%;
     `)}

@@ -6,6 +6,7 @@ import { useGlobalContext } from '../../../providers/ContextProvider'
 import moment from 'moment'
 import Tags from './tags'
 import { getFirstWords } from '../../../utils/wordfu'
+import Link from 'next/link'
 
 const CardContainer = styled(motion.div)`
     width: 100%;
@@ -43,7 +44,7 @@ const CardTitle = styled(motion.div)`
     font-weight: 600;
     margin-bottom: 0.5rem;
 
-    ${({isPhone}) => (isPhone && css`
+    ${({ isPhone }) => (isPhone && css`
         font-size: 1.5rem;
         margin-bottom: 1rem;
     `)}
@@ -72,7 +73,7 @@ const CardDescription = styled(motion.div)`
     font-size: 1.1rem;
     font-family: 'Alata';
 
-    ${({isPhone}) => (isPhone && css`
+    ${({ isPhone }) => (isPhone && css`
         font-family: 'Poppins';
         font-size: 1.2rem;
         margin-top: 0.2rem;
@@ -85,32 +86,34 @@ export default function PostSummaryCard({ title, slug, tags, description, posted
     const { globalState: { isPhone, themeName } } = useGlobalContext()
 
     return (
-        <CardContainer animate={backgroundElevatedColorAnimation} variants={backgroundElevatedColorVariants} isPhone={isPhone}>
-            <CardContentsWrapper>
-                <CardHeroImageWrapper>
-                    <Image placeholder='blur' blurDataURL={heroImageBlur.src} alt={heroImage.alt} src={heroImage.src} layout='responsive' objectFit='cover' quality={80} width={heroImage.width} height={heroImage.height} />
-                </CardHeroImageWrapper>
-                <CardTextualContent>
-                    <CardTitle variants={textEmphasisVariants} animate={textEmphasisAnimation} isPhone={isPhone}>
-                        {title}
-                    </CardTitle>
-                    <Date isPhone={isPhone} variants={textSubtitlesVariants} animate={textSubtitlesAnimation}>
-                        <DateIcon isPhone={isPhone} alt='' src={themeName === "LIGHT_THEME" ? '/icons/calendar.svg' : '/icons/calendar-night.svg'} />
-                        {`${moment(postedOn).format('Do MMM, YYYY')}`}
-                    </Date>
-                    <Date isPhone={isPhone} variants={textSubtitlesVariants} animate={textSubtitlesAnimation}>
-                        <DateIcon isPhone={isPhone} alt='' src={themeName === "LIGHT_THEME" ? '/icons/update.svg' : '/icons/update-night.svg'} />
-                        {`Last updated ${moment(updatedOn).fromNow()}`}
-                    </Date>
-                    {isPhone &&
-                        <CardDescription animate={textEmphasisAnimation} variants={textEmphasisVariants} isPhone={isPhone}>{`${getFirstWords(description, 15)}...`}</CardDescription>
-                    }
-                    <Tags tags={tags} />
-                    {!isPhone &&
-                        <CardDescription animate={textEmphasisAnimation} variants={textEmphasisVariants} isPhone={isPhone}>{description}</CardDescription>
-                    }
-                </CardTextualContent>
-            </CardContentsWrapper>
-        </CardContainer>
+        <Link href={`/blog/posts/${slug}`}><a>
+            <CardContainer animate={backgroundElevatedColorAnimation} variants={backgroundElevatedColorVariants} isPhone={isPhone}>
+                <CardContentsWrapper>
+                    <CardHeroImageWrapper>
+                        <Image placeholder='blur' blurDataURL={heroImageBlur.src} alt={heroImage.alt} src={heroImage.src} layout='responsive' objectFit='cover' quality={80} width={heroImage.width} height={heroImage.height} />
+                    </CardHeroImageWrapper>
+                    <CardTextualContent>
+                        <CardTitle variants={textEmphasisVariants} animate={textEmphasisAnimation} isPhone={isPhone}>
+                            {title}
+                        </CardTitle>
+                        <Date isPhone={isPhone} variants={textSubtitlesVariants} animate={textSubtitlesAnimation}>
+                            <DateIcon isPhone={isPhone} alt='' src={themeName === "LIGHT_THEME" ? '/icons/calendar.svg' : '/icons/calendar-night.svg'} />
+                            {`${moment(postedOn).format('Do MMM, YYYY')}`}
+                        </Date>
+                        <Date isPhone={isPhone} variants={textSubtitlesVariants} animate={textSubtitlesAnimation}>
+                            <DateIcon isPhone={isPhone} alt='' src={themeName === "LIGHT_THEME" ? '/icons/update.svg' : '/icons/update-night.svg'} />
+                            {`Last updated ${moment(updatedOn).fromNow()}`}
+                        </Date>
+                        {isPhone &&
+                            <CardDescription animate={textEmphasisAnimation} variants={textEmphasisVariants} isPhone={isPhone}>{`${getFirstWords(description, 15)}...`}</CardDescription>
+                        }
+                        <Tags tags={tags} />
+                        {!isPhone &&
+                            <CardDescription animate={textEmphasisAnimation} variants={textEmphasisVariants} isPhone={isPhone}>{description}</CardDescription>
+                        }
+                    </CardTextualContent>
+                </CardContentsWrapper>
+            </CardContainer>
+        </a></Link>
     )
 }

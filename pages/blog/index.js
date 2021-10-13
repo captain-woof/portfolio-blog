@@ -28,7 +28,7 @@ export const getStaticProps = async () => {
 
 export default function Index({ firstPostsSummary, tags, featuredPosts }) {
     // Setting page markers
-    const { globalDispatch } = useGlobalContext()
+    const { globalDispatch, globalState: { isPhone } } = useGlobalContext()
     useEffect(() => {
         globalDispatch({
             type: "SET_MARKERS", payload: {
@@ -47,7 +47,10 @@ export default function Index({ firstPostsSummary, tags, featuredPosts }) {
             <SlideshowProvider featuredPosts={featuredPosts}>
                 <FeaturedPosts />
             </SlideshowProvider>
-            <MarginWrapper>
+            <MarginWrapper style={{
+                justifyContent: (isPhone ? null : 'center'),
+                display: (isPhone ? null : 'flex')
+            }}>
                 <TwoColumns>
                     <FirstColumn>
                         <HomepagePosts firstPostsSummary={firstPostsSummary} tags={tags} />

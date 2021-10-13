@@ -10,7 +10,7 @@ const FeaturedPostContainer = styled(motion.div)`
     height: 100%;
     width: 100%;
     position: absolute;
-    background-color: ${({ color }) => color};
+    background-image: ${({ color, theme }) => `linear-gradient(to bottom, ${color} 60%, ${theme.backgroundColor})`};
     top: 0;
     font-family: 'Poppins';
     color: ${({ theme }) => theme.colors.white};
