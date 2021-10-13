@@ -8,6 +8,7 @@ import { TwoColumns, FirstColumn, SecondColumn } from '../../components/Containe
 import MarginWrapper from '../../components/Containers/MarginWrapper'
 import HomepageRightColumn from '../../components/Containers/Blog/homepageRightColumn'
 import FeaturedPosts from '../../components/Containers/Blog/featuredPosts'
+import { SlideshowProvider } from '../../components/Containers/Blog/featuredPosts/context'
 
 export const getStaticProps = async () => {
     const firstPostsSummaryPromise = fetchPostsSummary(0)
@@ -42,14 +43,16 @@ export default function Index({ firstPostsSummary, tags, featuredPosts }) {
     return (
         <MinFullscreenContainer>
             <SeoBlog />
-            <FeaturedPosts featuredPosts={featuredPosts}/>
+            <SlideshowProvider featuredPosts={featuredPosts}>
+                <FeaturedPosts />
+            </SlideshowProvider>
             <MarginWrapper>
                 <TwoColumns>
                     <FirstColumn>
                         <HomepagePosts firstPostsSummary={firstPostsSummary} tags={tags} />
                     </FirstColumn>
                     <SecondColumn>
-                        <HomepageRightColumn tags={tags}/>
+                        <HomepageRightColumn tags={tags} />
                     </SecondColumn>
                 </TwoColumns>
             </MarginWrapper>
