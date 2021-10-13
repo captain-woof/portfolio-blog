@@ -21,7 +21,8 @@ export const getStaticProps = async () => {
             firstPostsSummary,
             tags,
             featuredPosts
-        }
+        },
+        revalidate: 60, // 1 minute
     }
 }
 
