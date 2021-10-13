@@ -18,13 +18,15 @@ const FooterLinksContainer = styled.div`
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 0 20rem;
     padding: 2rem;
 
     ${({ isPhone }) => (isPhone && css`
         flex-direction: column;
         gap: 1rem 0;
         padding: 1.5rem;
+        justify-content: space-between;
     `)}
 `
 
