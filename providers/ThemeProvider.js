@@ -2,10 +2,10 @@ import { ThemeProvider } from 'styled-components'
 import { useGlobalContext } from './ContextProvider'
 
 export default function GlobalThemeProvider({ children }) {
-    const { globalState } = useGlobalContext()
+    const { globalState: { isPhone, theme } } = useGlobalContext()
 
     return (
-        <ThemeProvider theme={globalState.theme}>
+        <ThemeProvider theme={{...theme, isPhone}}>
             {children}
         </ThemeProvider>
     )
