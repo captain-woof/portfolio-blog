@@ -1,8 +1,5 @@
-import styled, { css, useTheme } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useGlobalContext } from '../providers/ContextProvider'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { easeInOutCustomBezier } from '../lib/motion'
 import MarginWrapper from './Containers/MarginWrapper'
 import Socials from './socials'
 
@@ -16,9 +13,10 @@ const FooterContainer = styled.div`
 const CreditsContainer = styled.div`
     position: relative;
     display: flex;
-    flex-grow: 1;
     flex-basis: 0;
+    flex-grow: 6;
     flex-direction: column;
+    align-items: center;
     ${({ theme: { isPhone } }) => (isPhone && css`
        
     `)}
@@ -47,24 +45,17 @@ const CreditsLineTwo = styled.div`
     `)}
 `
 
-const VerticalDivider = styled.div`
-    background-color: ${({ theme }) => theme.colors.white};
-    width: 0.1rem;
-    position: relative;
-`
-
 const SocialsContainer = styled.div`
     position: relative;
     display: flex;
-    flex-grow: 1;
     flex-basis: 0;
     flex-direction: column;
+    flex-grow: 4;
 `
 
 const SocialsHeading = styled.div`
     font-size: 1.8rem;
     font-weight: 200;
-    text-align: end;
     ${({ theme: { isPhone } }) => (isPhone && css`
         text-align: center;
         font-size: 1.2rem;
@@ -80,19 +71,19 @@ export default function Footer() {
                 width: '100%',
                 display: 'flex',
                 flexDirection: (isPhone ? 'column' : 'row'),
-                flexWrap: 'wrap'
+                flexWrap: 'wrap',
+                justifyContent: (isPhone ? null : 'space-around'),
+                alignItems: (isPhone ? null : 'center')
             }}>
                 <CreditsContainer>
                     <CreditsLineOne>designed & developed by</CreditsLineOne>
                     <CreditsLineTwo>Sohail Saha</CreditsLineTwo>
                 </CreditsContainer>
 
-                {!isPhone && <VerticalDivider />}
-
                 <SocialsContainer>
                     {!isPhone && <SocialsHeading>say hello</SocialsHeading>}
                     <Socials style={{
-                        justifyContent: (isPhone ? 'center' : 'flex-end'),
+                        justifyContent: (isPhone ? 'center' : null),
                         paddingBottom: (isPhone ? '0.5rem' : '0')
                     }} />
                 </SocialsContainer>
