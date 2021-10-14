@@ -10,3 +10,5 @@ export const getFirstWords = (string, n) => {
 }
 
 export const getWordCount = (string) => (string.split(' ').length)
+
+export const slugify = (string) => (string.replace(/[^\w\s]/g,'').toLowerCase().split(' ').join('-'))
