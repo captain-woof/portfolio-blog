@@ -83,10 +83,10 @@ const CardDescription = styled(motion.div)`
 
 export default function PostSummaryCard({ title, slug, tags, description, postedOn, updatedOn, heroImage, heroImageBlur }) {
     const { textEmphasisAnimation, textEmphasisVariants, textSubtitlesAnimation, textSubtitlesVariants, backgroundElevatedColorAnimation, backgroundElevatedColorVariants } = useThemeChangeAnim()
-    const { globalState: { isPhone, themeName } } = useGlobalContext()
+    const { globalState: { isPhone, themeName, origin } } = useGlobalContext()
 
     return (
-        <Link href={`/blog/posts/${slug}`}><a>
+        <Link href={`${origin}/blog/posts/${slug}`} passHref><a>
             <CardContainer animate={backgroundElevatedColorAnimation} variants={backgroundElevatedColorVariants} isPhone={isPhone}>
                 <CardContentsWrapper>
                     <CardHeroImageWrapper>
