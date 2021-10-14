@@ -1,4 +1,4 @@
-import { fetchBlogPost, fetchBlogPostsSlugs } from "../../../lib/contentful"
+import { fetchBlogPost, fetchBlogPostsSlugs, fetchPostsSummary } from "../../../lib/contentful"
 import BlogPost from '../../../components/BlogPost'
 import SeoBlogPost from '../../../components/SEO/SeoBlogPost'
 import { useGlobalContext } from "../../../providers/ContextProvider"
@@ -17,13 +17,14 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params: { slug } }) => {
     const blogPostData = await fetchBlogPost(slug)
+    const suggestedPosts = await fetchPostsSummary(0, blogPostData.tags[0].slug, 4, slug)
     return {
-        props: blogPostData,
+        props: {blogPostData, suggestedPosts},
         revalidate: 10
     }
 }
 
-export default function BlogPostPage(blogPostData) {
+export default function BlogPostPage({blogPostData, suggestedPosts}) {
     const { title, description, heroImage, keywords, slug, postRichText } = blogPostData
 
     // Fallback
@@ -50,7 +51,7 @@ export default function BlogPostPage(blogPostData) {
     return (
         <>
             <SeoBlogPost title={title} description={description} image={heroImage.src} imageAlt={heroImage.alt} keywords={keywords.join(', ')} slug={slug} />
-            <BlogPost blogPostData={blogPostData} />
+            <BlogPost blogPostData={blogPostData} suggestedPosts={suggestedPosts}/>
         </>
     )
 }

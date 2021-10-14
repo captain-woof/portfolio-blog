@@ -4,8 +4,9 @@ import { FirstColumn, SecondColumn, TwoColumns } from '../Containers/Blog/twoCol
 import PostContent from './postContent'
 import PostHeader from './postHeader'
 import { useGlobalContext } from '../../providers/ContextProvider'
+import Suggestion from './suggestion'
 
-export default function BlogPost({ blogPostData }) {
+export default function BlogPost({ blogPostData, suggestedPosts }) {
     const { globalState: { isPhone } } = useGlobalContext()
 
     return (
@@ -18,12 +19,12 @@ export default function BlogPost({ blogPostData }) {
                 padding: (isPhone ? '1.5rem 2rem' : '1.5rem 1.5rem')
             }}>
                 <PostHeader blogPostData={blogPostData} />
-                <TwoColumns>
+                <TwoColumns reversed={false}>
                     <FirstColumn>
                         <PostContent blogPostData={blogPostData} />
                     </FirstColumn>
                     <SecondColumn>
-                        EMPTY
+                        <Suggestion suggestedPosts={suggestedPosts}/>
                     </SecondColumn>
                 </TwoColumns>
             </MarginWrapper>

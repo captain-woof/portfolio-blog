@@ -8,11 +8,11 @@ const TwoColumnsWrapper = styled.div`
     gap: 0 0.5rem;
     justify-content: center;
 
-    ${({ isPhone }) => (isPhone && css`
+    ${({ isPhone, reversed }) => (isPhone && css`
         width: 100%;
-        flex-direction: column-reverse;
         justify-content: none;
         gap: 0;
+        ${reversed ? css`flex-direction: column-reverse;` : css`flex-direction: column;`}
     `)}
 `
 
@@ -44,11 +44,11 @@ export const SecondColumn = ({ children }) => {
     )
 }
 
-export const TwoColumns = ({ children }) => {
+export const TwoColumns = ({ children, reversed=true }) => {
     const { globalState: { isPhone } } = useGlobalContext()
 
     return (
-        <TwoColumnsWrapper isPhone={isPhone}>
+        <TwoColumnsWrapper isPhone={isPhone} reversed={reversed}>
             {children}
         </TwoColumnsWrapper>
     )
