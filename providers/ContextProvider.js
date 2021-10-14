@@ -47,10 +47,10 @@ const GlobalContext = createContext()
 const initialState = {
     themeName: "LIGHT_THEME",
     theme: themeLight,
-    baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
     isPhone: false,
     scrollDirection: 'up',
-    markers: []
+    markers: [],
+    origin: `${process.env.NEXT_PUBLIC_PROTOCOL || 'https'}://${process.env.NEXT_PUBLIC_VERCEL_URL}`
 }
 
 export const ContextProvider = ({ children }) => {

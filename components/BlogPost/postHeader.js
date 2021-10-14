@@ -56,7 +56,7 @@ const Tag = styled(motion.div)`
 `
 
 export default function PostHeader({ blogPostData: { title, tags, postedOn, updatedOn } }) {
-    const { globalState: { isPhone, themeName } } = useGlobalContext()
+    const { globalState: { themeName } } = useGlobalContext()
     const { textEmphasisAnimation, textEmphasisVariants, textSubtitlesVariants, textSubtitlesAnimation } = useThemeChangeAnim()
 
     return (
@@ -68,7 +68,7 @@ export default function PostHeader({ blogPostData: { title, tags, postedOn, upda
             </Timestamp>
             <Timestamp animate={textSubtitlesAnimation} variants={textSubtitlesVariants}>
                 <TimestampIcon src={themeName === 'LIGHT_THEME' ? "/icons/update.svg" : "/icons/update-night.svg"} />
-                {`Last updated ${moment(postedOn).fromNow()}`}
+                {`Last updated ${moment(updatedOn).fromNow()}`}
             </Timestamp>
             <TagsContainer>
                 {tags.map((tag, index) => (

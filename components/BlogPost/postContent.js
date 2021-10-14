@@ -80,7 +80,7 @@ const richTextRendererOptions = {
 export default function PostContent({ blogPostData: { postRichText, heroImage, heroImageBlur } }) {
     return (
         <TopMargin>
-            <Image src={heroImage.src} layout='responsive' height={heroImage.height} width={heroImage.width} placeholder='blur' blurDataURL={heroImageBlur.src} />
+            <Image src={heroImage.src} layout='responsive' height={heroImage.height} width={heroImage.width} placeholder='blur' blurDataURL={heroImageBlur.src} alt={heroImage.alt}/>
             {documentToReactComponents(postRichText, richTextRendererOptions)}
         </TopMargin>
     )

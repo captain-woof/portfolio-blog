@@ -151,19 +151,20 @@ export default function Navbar() {
 
     // Text anim and variants for menu button texts
     const { textEmphasisAnimation, textEmphasisVariants } = useThemeChangeAnim()
+    const { globalState: { origin } } = useGlobalContext()
 
     return (
-        <NavbarWrapper onMouseOver={() => {navbarAnimation.start('show')}} onMouseOut={() => {navbarAnimation.start('hide')}}>
+        <NavbarWrapper onMouseOver={() => { navbarAnimation.start('show') }} onMouseOut={() => { navbarAnimation.start('hide') }}>
             <NavbarOuterContainer className="navbar-outer-container" isPhone={isPhone} variants={{ ...textAndBgColorVariants, ...navbarVariantsShowHide }} animate={navbarAnimation} initial="initial">
                 <NavbarInnerContainer className="navbar-inner-container" isPhone={isPhone}>
                     <TitleContainer className="navbar-title-container" isPhone={isPhone}>
-                        <Link href={globalState.baseUrl}><a>Sohail Saha</a></Link>
+                        <Link href={origin}><a>Sohail Saha</a></Link>
                     </TitleContainer>
                     <ButtonsContainer className="navbar-buttons-container" isPhone={isPhone}>
                         <ThemeSwitcherIcon isPhone={isPhone} src={globalState.themeName === "DARK_THEME" ? moonIconPath : sunIconPath} onClick={handleThemeSwtichClick} animate={switchThemeAnim} variants={switchThemeButtonVariants} initial="initial" onHoverStart={() => { switchThemeAnim.start("onHoverStart") }} onHoverEnd={() => { switchThemeAnim.start("onHoverEnd") }} />
                         {[
                             {
-                                link: `${globalState.baseUrl}/blog`,
+                                link: `${origin}/blog`,
                                 text: 'Blog',
                                 variants: {
                                     ...textEmphasisVariants,
@@ -179,7 +180,7 @@ export default function Navbar() {
                                 }
                             },
                             {
-                                link: `${globalState.baseUrl}/#contact`,
+                                link: `${origin}/#contact`,
                                 text: 'Contact',
                                 variants: {
                                     ...textEmphasisVariants,

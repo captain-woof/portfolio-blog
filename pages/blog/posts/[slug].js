@@ -1,5 +1,6 @@
 import { fetchBlogPost, fetchBlogPostsSlugs } from "../../../lib/contentful"
 import BlogPost from '../../../components/BlogPost'
+import SeoBlogPost from '../../../components/SEO/SeoBlogPost'
 
 export const getStaticPaths = async () => {
     const blogPostsSlugs = await fetchBlogPostsSlugs()
@@ -18,9 +19,10 @@ export const getStaticProps = async ({ params: { slug } }) => {
 }
 
 export default function BlogPostPage(blogPostData) {
-
+    const { title, description, heroImage, keywords, slug } = blogPostData
     return (
         <>
+            <SeoBlogPost title={title} description={description} image={heroImage.src} imageAlt={heroImage.alt} keywords={keywords.join(', ')} slug={slug} />
             <BlogPost blogPostData={blogPostData} />
         </>
     )
