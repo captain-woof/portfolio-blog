@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import Link from 'next/link'
 import { useGlobalContext } from '../../providers/ContextProvider'
 import { easeInOutCustomBezier, useThemeChangeAnim } from '../../lib/motion'
-import { AnimateSharedLayout, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const TagsContainer = styled(motion.div)`
     width: 100%;
@@ -57,20 +57,17 @@ export default function Tags({ tags, id }) {
             <Heading animate={textSubtitlesAnimation} initial='initial' variants={textSubtitlesVariants} id={id}>
                 Categories
             </Heading>
-            <AnimateSharedLayout type='crossfade'>
-                <TagsContainer className='blog-homepage-tags-container'>
+            <TagsContainer className='blog-homepage-tags-container'>
+                {tags.map((tagData, index) => (
+                    <Link href={`/blog/categories/${tagData.slug}`} key={index}><a>
+                        <Tag color={tagData.color} isPhone={isPhone} className='blog-homepage-tag'
+                            variants={tagVariants} whileHover='whileHover' layout layoutId={index}>
+                            {tagData.name}
+                        </Tag>
+                    </a></Link>
+                ))}
 
-                    {tags.map((tagData, index) => (
-                        <Link href={`/blog/categories/${tagData.slug}`} key={index}><a>
-                            <Tag color={tagData.color} isPhone={isPhone} className='blog-homepage-tag'
-                                variants={tagVariants} whileHover='whileHover' layout layoutId={index}>
-                                {tagData.name}
-                            </Tag>
-                        </a></Link>
-                    ))}
-
-                </TagsContainer>
-            </AnimateSharedLayout>
+            </TagsContainer>
         </>
     )
 }
