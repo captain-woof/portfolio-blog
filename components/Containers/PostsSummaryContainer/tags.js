@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import Link from 'next/link'
 import { useGlobalContext } from '../../../providers/ContextProvider'
 import { easeInOutCustomBezier } from '../../../lib/motion'
-import { AnimateSharedLayout, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const TagsContainer = styled(motion.div)`
     width: 100%;
@@ -51,21 +51,18 @@ export default function Tags({ tags, id }) {
     const { globalState: { isPhone, themeName } } = useGlobalContext()
 
     return (
-        <AnimateSharedLayout type='crossfade'>
-            <TagsContainer className='blog-homepage-tags-container' isPhone={isPhone} id={id}>
-                {!isPhone &&
-                    <TagIcon src={themeName === 'LIGHT_THEME' ? "/icons/tag.svg" : "/icons/tag-night.svg"} alt='tag icon' />
-                }
-                {tags.map((tagData, index) => (
-                    <Link href={`/blog/categories/${tagData.slug}`} key={index}><a>
-                        <Tag color={tagData.color} isPhone={isPhone} className='blog-homepage-tag'
-                            variants={tagVariants} whileHover='whileHover' layout layoutId={index}>
-                            {tagData.name}
-                        </Tag>
-                    </a></Link>
-                ))}
-
-            </TagsContainer>
-        </AnimateSharedLayout>
+        <TagsContainer className='blog-homepage-tags-container' isPhone={isPhone} id={id}>
+            {!isPhone &&
+                <TagIcon src={themeName === 'LIGHT_THEME' ? "/icons/tag.svg" : "/icons/tag-night.svg"} alt='tag icon' />
+            }
+            {tags.map((tagData, index) => (
+                <Link href={`/blog/categories/${tagData.slug}`} key={index}><a>
+                    <Tag color={tagData.color} isPhone={isPhone} className='blog-homepage-tag'
+                        variants={tagVariants} whileHover='whileHover' layout layoutId={index}>
+                        {tagData.name}
+                    </Tag>
+                </a></Link>
+            ))}
+        </TagsContainer>
     )
 }
