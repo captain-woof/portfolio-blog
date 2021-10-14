@@ -3,135 +3,100 @@ import { useGlobalContext } from '../providers/ContextProvider'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { easeInOutCustomBezier } from '../lib/motion'
+import MarginWrapper from './Containers/MarginWrapper'
+import Socials from './socials'
 
 const FooterContainer = styled.div`
     background-color: ${({ theme }) => theme.colors.blackDark};
-    display: flex;
-    flex-direction: column;
     position: relative;
-    box-sizing: content-box;
-    font-family: 'Alata';
+    font-family: 'Poppins';
     color: ${({ theme }) => theme.colors.white};
 `
 
-const FooterLinksContainer = styled.div`
+const CreditsContainer = styled.div`
     position: relative;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 0 20rem;
-    padding: 2rem;
-
-    ${({ isPhone }) => (isPhone && css`
-        flex-direction: column;
-        gap: 1rem 0;
-        padding: 1.5rem;
-        justify-content: space-between;
-    `)}
-`
-
-const FooterLinks = styled.div`
-    position: relative;
-`
-
-const FooterTitle = styled.div`
-    font-size: 2rem;
-    position: relative;
-    user-select: none;
-
-    ${({ isPhone }) => (isPhone && css`
-        font-size: 1.8rem;
-    `)}
-`
-
-const FooterLinksList = styled.div`
-    display: flex;
+    flex-grow: 1;
+    flex-basis: 0;
     flex-direction: column;
-    flex-wrap: wrap;
+    ${({ theme: { isPhone } }) => (isPhone && css`
+       
+    `)}
+`
+
+const CreditsLineOne = styled.div`
+    font-size: 1.8rem;
+    font-weight: 200;
+
+    ${({ theme: { isPhone } }) => (isPhone && css`
+        text-align: center;
+        font-size: 1rem;
+    `)}
+`
+
+const CreditsLineTwo = styled.div`
+    font-size: 3.5rem;
+    font-weight: 400;
+    margin-top: -1.5rem;
+    margin-left: 3.5rem;
+
+    ${({ theme: { isPhone } }) => (isPhone && css`
+        text-align: center;
+        font-size: 1.2rem;
+        margin: 0;
+    `)}
+`
+
+const VerticalDivider = styled.div`
+    background-color: ${({ theme }) => theme.colors.white};
+    width: 0.1rem;
     position: relative;
 `
 
-const FooterLinksListItem = styled(motion.div)`
+const SocialsContainer = styled.div`
     position: relative;
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0;
+    flex-direction: column;
 `
 
-const FooterCreditsContainer = styled.div`
-    position: relative;
-    text-align: center;
-    font-size: 0.9rem;
-    font-weight: normal;
-    padding-bottom: 1rem;
+const SocialsHeading = styled.div`
+    font-size: 1.8rem;
+    font-weight: 200;
+    text-align: end;
+    ${({ theme: { isPhone } }) => (isPhone && css`
+        text-align: center;
+        font-size: 1.2rem;
+    `)}
 `
-
-const getFooterLinkItemVariants = (theme) => ({
-    whileHover: {
-        color: theme.colors.yellow,
-        x: 6,
-        transition: {
-            duration: 0.6,
-            ease: easeInOutCustomBezier
-        }
-    }
-})
 
 export default function Footer() {
-    const { globalState } = useGlobalContext()
-    const { isPhone, markers } = globalState
-    const theme = useTheme()
-
-    // For markers
-    const markerData = {
-        name: "In this page",
-        external: false,
-        data: markers
-    }
-
-    // For Explore section
-    const exploreData = {
-        name: "Explore",
-        external: false,
-        data: [
-            { name: 'Home', link: '/' },
-            { name: 'Blog', link: '/blog' },
-            { name: 'Portfolio', link: '/' },
-            { name: 'Resume', link: 'https://drive.google.com/file/d/1se1QKQBUf4yjxSTzRHSfc4OBpB-W4dK2/view?usp=sharing' },
-            { name: 'Donate', link: '/donate' },
-            { name: 'Contact', link: '/#contact' }
-        ]
-    }
-
-    // For social links
-    const socialData = {
-        name: "Follow me",
-        external: true,
-        data: [
-            { name: 'Twitter', link: 'https://twitter.com/realCaptainWoof' },
-            { name: 'LinkedIn', link: 'https://www.linkedin.com/in/sohail-saha/' },
-            { name: 'Github', link: 'https://github.com/captain-woof' },
-            { name: 'Instagram', link: 'https://www.instagram.com/sohail_saha_/' }
-        ]
-    }
+    const { globalState: { isPhone } } = useGlobalContext()
 
     return (
         <FooterContainer isPhone={isPhone}>
-            <FooterLinksContainer isPhone={isPhone}>
-                {[markerData, exploreData, socialData].map((footerLinksSection, index) => (
-                    <FooterLinks key={index}>
-                        <FooterTitle isPhone={isPhone}>{footerLinksSection.name}</FooterTitle>
-                        <FooterLinksList>
-                            {footerLinksSection.data.map(({ name, link }, index) => (
-                                <Link href={link} key={index}><a target={footerLinksSection.external ? '_blank' : null}>
-                                    <FooterLinksListItem whileHover='whileHover' variants={getFooterLinkItemVariants(theme)}>{name}</FooterLinksListItem>
-                                </a></Link>
-                            ))}
-                        </FooterLinksList>
-                    </FooterLinks>
-                ))}
-            </FooterLinksContainer>
+            <MarginWrapper style={{
+                width: '100%',
+                display: 'flex',
+                flexDirection: (isPhone ? 'column' : 'row'),
+                flexWrap: 'wrap'
+            }}>
+                <CreditsContainer>
+                    <CreditsLineOne>designed & developed by</CreditsLineOne>
+                    <CreditsLineTwo>Sohail Saha</CreditsLineTwo>
+                </CreditsContainer>
 
-            <FooterCreditsContainer>
-                This site is owned and run by <b>Sohail Saha</b>.
-            </FooterCreditsContainer>
+                {!isPhone && <VerticalDivider />}
+
+                <SocialsContainer>
+                    {!isPhone && <SocialsHeading>say hello</SocialsHeading>}
+                    <Socials style={{
+                        justifyContent: (isPhone ? 'center' : 'flex-end'),
+                        paddingBottom: (isPhone ? '0.5rem' : '0')
+                    }} />
+                </SocialsContainer>
+            </MarginWrapper>
         </FooterContainer>
     )
 }
