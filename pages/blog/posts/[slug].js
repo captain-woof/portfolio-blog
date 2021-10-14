@@ -1,6 +1,9 @@
 import { fetchBlogPost, fetchBlogPostsSlugs } from "../../../lib/contentful"
 import BlogPost from '../../../components/BlogPost'
 import SeoBlogPost from '../../../components/SEO/SeoBlogPost'
+import { useGlobalContext } from "../../../providers/ContextProvider"
+import { useEffect } from "react"
+import { findHeadings } from "../../../utils/wordfu"
 
 export const getStaticPaths = async () => {
     const blogPostsSlugs = await fetchBlogPostsSlugs()
@@ -19,7 +22,23 @@ export const getStaticProps = async ({ params: { slug } }) => {
 }
 
 export default function BlogPostPage(blogPostData) {
-    const { title, description, heroImage, keywords, slug } = blogPostData
+    const { title, description, heroImage, keywords, slug, postRichText } = blogPostData
+
+    // Setting page markers
+    const { globalDispatch } = useGlobalContext()
+    useEffect(() => {
+        (async () => {
+            let headingsData = await findHeadings(postRichText.content)
+            globalDispatch({
+                type: "SET_MARKERS", payload: {
+                    markers: headingsData.map((headingData) => ({
+                        name: headingData.text,
+                        link: `#${headingData.slug}`
+                    }))
+                }
+            })
+        })()
+    }, [])
     return (
         <>
             <SeoBlogPost title={title} description={description} image={heroImage.src} imageAlt={heroImage.alt} keywords={keywords.join(', ')} slug={slug} />
