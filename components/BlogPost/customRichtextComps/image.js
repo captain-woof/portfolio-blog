@@ -20,7 +20,7 @@ export default function Image({ src, caption, height, width }) {
 
     return (
         <ImageWrapper>
-            <Img src={src} height={height} width={width} layout='responsive' alt={caption} />
+            <Img src={src} height={height} width={width} layout='responsive' alt={caption} placeholder='blur' blurDataURL='/images/blur.jpg'/>
             <Caption animate={animate} variants={variants}>{caption}</Caption>
         </ImageWrapper>
     )
