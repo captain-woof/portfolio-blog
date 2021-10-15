@@ -5,13 +5,13 @@ const TwoColumnsWrapper = styled.div`
     display: flex;
     flex-direction: row;
     width: 80%;
-    gap: 0 0.5rem;
+    gap: 0 1rem;
     justify-content: center;
 
     ${({ isPhone, reversed }) => (isPhone && css`
         width: 100%;
         justify-content: none;
-        gap: 0;
+        gap: 1rem 0;
         ${reversed ? css`flex-direction: column-reverse;` : css`flex-direction: column;`}
     `)}
 `
