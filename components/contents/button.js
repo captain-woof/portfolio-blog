@@ -4,7 +4,7 @@ import { easeOutQuintBezier, useThemeChangeAnim } from '../../lib/motion'
 import { useGlobalContext } from '../../providers/ContextProvider'
 
 const ButtonContainer = styled(motion.div)`
-    position: absolute;
+    position: fixed;
     bottom: 2.4rem;
     right: 2.4rem;
     height: 4rem;
@@ -15,6 +15,7 @@ const ButtonContainer = styled(motion.div)`
     &:hover {
         cursor: pointer;
     }
+    z-index: 10;
 `
 
 const Icon = styled(motion.img)`

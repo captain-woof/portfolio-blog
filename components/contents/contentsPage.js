@@ -3,10 +3,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 import MarginWrapper from '../Containers/MarginWrapper'
 import { useGlobalContext } from '../../providers/ContextProvider'
 import Link from 'next/link'
-import { easeInOutCustomBezier } from '../../lib/motion'
 
 const ContentsPageContainer = styled(motion.div)`
-    position: absolute;
+    position: fixed;
     bottom: 7rem;
     right: 3rem;
     border-radius: 8px;
@@ -18,6 +17,7 @@ const ContentsPageContainer = styled(motion.div)`
     overflow-y: auto;
     background-color: ${({theme}) => theme.backgroundColorElevated};
     color: ${({theme}) => theme.textColorEmphasis};
+    z-index: 10;
 
     scrollbar-width: thin;
     ::-webkit-scrollbar {
