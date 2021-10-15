@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import MinFullscreenContainer from '../..//components/Containers/MinFullscreenContainer'
+import MinFullscreenContainer from '../../components/Containers/MinFullscreenContainer'
 import HomepagePosts from '../../components/Containers/Blog/homepagePosts'
 import { fetchAllTags, fetchFeaturedPosts, fetchPostsSummary } from '../../lib/contentful'
 import { useGlobalContext } from '../../providers/ContextProvider'
