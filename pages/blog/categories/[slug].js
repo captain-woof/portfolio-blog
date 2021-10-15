@@ -5,7 +5,7 @@ import { useGlobalContext } from '../../../providers/ContextProvider'
 import SeoBlog from '../../../components/SEO/SeoBlog'
 import { TwoColumns, FirstColumn, SecondColumn } from '../../../components/Containers/Blog/twoColumns'
 import MarginWrapper from '../../../components/Containers/MarginWrapper'
-import HomepageRightColumn from '../../../components/Containers/Blog/homepageRightColumn'
+import RightColumn from '../../../components/Containers/Blog/rightColumn'
 import CategoriesPosts from '../../../components/Containers/Blog/categoriesPosts'
 
 export const getStaticPaths = async () => {
@@ -22,10 +22,10 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params: { slug } }) => {
-    const firstPostsSummaryPromise = fetchPostsSummary(0, slug)
+    const firstPostsSummaryPromise = fetchPostsSummary({ pageNo: 0, tagSlug: slug })
     const tagsPromise = fetchAllTags()
     const [firstPostsSummary, tags] = await Promise.all([firstPostsSummaryPromise, tagsPromise])
-    const slugSearchedName = (tags.filter((tagData) => {return tagData.slug === slug}))[0].name
+    const slugSearchedName = (tags.filter((tagData) => { return tagData.slug === slug }))[0].name
 
     return {
         props: {
@@ -58,14 +58,14 @@ export default function Index({ firstPostsSummary, tags, slugSearched, slugSearc
             <MarginWrapper style={{
                 justifyContent: (isPhone ? null : 'center'),
                 display: (isPhone ? null : 'flex'),
-                marginTop: (isPhone ? '3rem': '2rem')
+                marginTop: (isPhone ? '3rem' : '2rem')
             }}>
                 <TwoColumns>
                     <FirstColumn>
-                        <CategoriesPosts firstPostsSummary={firstPostsSummary} slugSearched={slugSearched} slugSearchedName={slugSearchedName}/>
+                        <CategoriesPosts firstPostsSummary={firstPostsSummary} slugSearched={slugSearched} slugSearchedName={slugSearchedName} />
                     </FirstColumn>
                     <SecondColumn>
-                        <HomepageRightColumn tags={tags} />
+                        <RightColumn tags={tags} />
                     </SecondColumn>
                 </TwoColumns>
             </MarginWrapper>

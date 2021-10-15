@@ -6,7 +6,7 @@ import { useGlobalContext } from '../../providers/ContextProvider'
 import SeoBlog from '../../components/SEO/SeoBlog'
 import { TwoColumns, FirstColumn, SecondColumn } from '../../components/Containers/Blog/twoColumns'
 import MarginWrapper from '../../components/Containers/MarginWrapper'
-import HomepageRightColumn from '../../components/Containers/Blog/homepageRightColumn'
+import RightColumn from '../../components/Containers/Blog/rightColumn'
 import FeaturedPosts from '../../components/Containers/Blog/featuredPosts'
 import { SlideshowProvider } from '../../components/Containers/Blog/featuredPosts/context'
 
@@ -56,7 +56,7 @@ export default function Index({ firstPostsSummary, tags, featuredPosts }) {
                         <HomepagePosts firstPostsSummary={firstPostsSummary} tags={tags} />
                     </FirstColumn>
                     <SecondColumn>
-                        <HomepageRightColumn tags={tags} />
+                        <RightColumn tags={tags} />
                     </SecondColumn>
                 </TwoColumns>
             </MarginWrapper>
