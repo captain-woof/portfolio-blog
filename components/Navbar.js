@@ -31,8 +31,9 @@ const NavbarInnerContainer = styled.div`
     margin: ${({ isPhone }) => (isPhone ? "0 0.8rem" : "0 2rem")};
 `
 
-const TitleContainer = styled.div`
-    font-size: ${({ isPhone }) => (isPhone ? "1.1rem" : "1.5rem")};
+const SiteLogo = styled.img`
+    height: ${({ isPhone }) => (isPhone ? "2rem" : "2.4rem")};
+    margin-top: ${({isPhone}) => (isPhone ? '0.2rem' : null)};
 `
 
 const ButtonsContainer = styled.div`
@@ -45,13 +46,12 @@ const ButtonsContainer = styled.div`
 `
 
 const ThemeSwitcherIcon = styled(motion.img)`
-    height:  ${({ isPhone }) => (isPhone ? "1.2rem" : "1.5rem")};
-    width: ${({ isPhone }) => (isPhone ? "1.2rem" : "1.5rem")};
+    height: 1.5rem;
     margin-right: 1rem;
 `
 
 const Button = styled(motion.div)`
-    padding: ${({ isPhone }) => (isPhone ? "0rem 0.8rem" : "0rem 1.5rem")};
+    padding: ${({ isPhone }) => (isPhone ? "0rem 0.6rem" : "0rem 1.5rem")};
     height: 100%;
     a {
         height: 100%;
@@ -151,15 +151,15 @@ export default function Navbar() {
 
     // Text anim and variants for menu button texts
     const { textEmphasisAnimation, textEmphasisVariants } = useThemeChangeAnim()
-    const { globalState: { origin } } = useGlobalContext()
+    const { globalState: { origin, themeName } } = useGlobalContext()
 
     return (
         <NavbarWrapper onMouseOver={() => { navbarAnimation.start('show') }} onMouseOut={() => { navbarAnimation.start('hide') }}>
             <NavbarOuterContainer className="navbar-outer-container" isPhone={isPhone} variants={{ ...textAndBgColorVariants, ...navbarVariantsShowHide }} animate={navbarAnimation} initial="initial">
                 <NavbarInnerContainer className="navbar-inner-container" isPhone={isPhone}>
-                    <TitleContainer className="navbar-title-container" isPhone={isPhone}>
-                        <Link href={origin}><a>Sohail Saha</a></Link>
-                    </TitleContainer>
+                    <Link href={`${origin}/`}><a>
+                        <SiteLogo src={themeName === 'LIGHT_THEME' ? '/logos/site_logo.svg' : '/logos/site_logo-night.svg'} alt='Site logo' isPhone={isPhone} className="site-logo" />
+                    </a></Link>
                     <ButtonsContainer className="navbar-buttons-container" isPhone={isPhone}>
                         <ThemeSwitcherIcon isPhone={isPhone} src={globalState.themeName === "DARK_THEME" ? moonIconPath : sunIconPath} onClick={handleThemeSwtichClick} animate={switchThemeAnim} variants={switchThemeButtonVariants} initial="initial" onHoverStart={() => { switchThemeAnim.start("onHoverStart") }} onHoverEnd={() => { switchThemeAnim.start("onHoverEnd") }} />
                         {[
