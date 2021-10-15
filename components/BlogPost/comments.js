@@ -1,6 +1,23 @@
 import { useEffect, useRef } from "react"
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { useThemeChangeAnim } from "../../lib/motion"
 import { useGlobalContext } from "../../providers/ContextProvider"
+import { motion } from "framer-motion"
+import MarginWrapper from "../Containers/MarginWrapper"
+
+const CommentsContainer = styled(motion.div)`
+    margin-top: 1rem;
+    box-shadow: ${({ theme: { shadow } }) => `0px 0px 4px ${shadow}`};
+    border-radius: 6px;
+`
+
+const CommentsHeading = styled(motion.div)`
+    font-size: 2.2rem;
+    font-weight: 500;
+    ${({ theme: { isPhone } }) => (isPhone && css`
+        font-size: 1.5rem;
+    `)}
+`
 
 const CommentsWrapper = styled.div`
     width: 100%;
@@ -80,8 +97,16 @@ const CommentsDark = () => {
 
 export default function Comments() {
     const { globalState: { themeName } } = useGlobalContext()
+    const { textEmphasisAnimation, textEmphasisVariants, backgroundElevatedColorAnimation, backgroundElevatedColorVariants } = useThemeChangeAnim()
 
     return (
-        themeName === "LIGHT_THEME" ? <CommentsLight/> : <CommentsDark/>
+        <CommentsContainer animate={backgroundElevatedColorAnimation} variants={backgroundElevatedColorVariants}>
+            <MarginWrapper>
+                <CommentsHeading variants={textEmphasisVariants} animate={textEmphasisAnimation}>
+                    Comments
+                </CommentsHeading>
+                {themeName === "LIGHT_THEME" ? <CommentsLight /> : <CommentsDark />}
+            </MarginWrapper>
+        </CommentsContainer>
     )
 }
