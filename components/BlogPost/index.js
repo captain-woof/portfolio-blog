@@ -6,6 +6,7 @@ import PostHeader from './postHeader'
 import { useGlobalContext } from '../../providers/ContextProvider'
 import Suggestion from './suggestion'
 import Author from './author'
+import Comments from './comments'
 
 export default function BlogPost({ blogPostData, suggestedPosts }) {
     const { globalState: { isPhone } } = useGlobalContext()
@@ -24,6 +25,7 @@ export default function BlogPost({ blogPostData, suggestedPosts }) {
                     <FirstColumn>
                         <PostContent blogPostData={blogPostData} />
                         <Author />
+                        <Comments />
                     </FirstColumn>
                     <SecondColumn>
                         <Suggestion suggestedPosts={suggestedPosts} />
