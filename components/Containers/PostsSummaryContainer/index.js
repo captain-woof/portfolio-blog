@@ -15,16 +15,8 @@ export default function PostsSummaryContainer({ firstPostsSummary, tag }) {
     useEffect(() => {
         if (inView) {
             loadOneMorePage()
-            setLoadMorePageInterval(setInterval(loadOneMorePage, 1000))
-        } else {
-            clearInterval(loadMorePageInterval)
         }
     }, [inView])
-    useEffect(() => {
-        if (noMoreData) {
-            clearInterval(loadMorePageInterval)
-        }
-    }, [noMoreData])
 
     return (
         <>
