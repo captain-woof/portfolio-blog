@@ -9,11 +9,22 @@ const FeaturedPostContainer = styled(motion.div)`
     height: 100%;
     width: 100%;
     position: absolute;
-    background-image: ${({ color, theme }) => `linear-gradient(to bottom, ${color} 60%, ${theme.backgroundColor})`};
     top: 0;
     font-family: 'Poppins';
     color: ${({ theme }) => theme.colors.white};
     overflow: hidden;
+
+    ${({ color, theme, day }) => {
+        if (day) {
+            return css`
+                background-image: linear-gradient(to bottom, ${color} 60%, ${theme.backgroundColor});
+            `
+        } else {
+            return css`
+                background-image: linear-gradient(to bottom, ${theme.backgroundColorElevated} 60%, ${theme.backgroundColor});
+            `
+        }
+    }}
 `
 
 const FeaturedPostContentPadding = styled.div`
@@ -102,10 +113,10 @@ const variants = {
 }
 
 export default function FeaturedPost({ featuredPost }) {
-    const { globalState: { isPhone } } = useGlobalContext()
+    const { globalState: { isPhone, themeName } } = useGlobalContext()
 
     return (
-        <FeaturedPostContainer color={featuredPost.tags[0].color} animate='animate' initial='initial' exit='exit' variants={variants}>
+        <FeaturedPostContainer color={featuredPost.tags[0].color} animate='animate' initial='initial' exit='exit' variants={variants} day={themeName === 'LIGHT_THEME'}>
             <FeaturedPostContentPadding>
                 <FeaturedPostContentContainer>
                     <FeaturedPostHeading>Featured post</FeaturedPostHeading>
