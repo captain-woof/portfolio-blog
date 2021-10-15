@@ -11,7 +11,7 @@ import FeaturedPosts from '../../components/Containers/Blog/featuredPosts'
 import { SlideshowProvider } from '../../components/Containers/Blog/featuredPosts/context'
 
 export const getStaticProps = async () => {
-    const firstPostsSummaryPromise = fetchPostsSummary(0)
+    const firstPostsSummaryPromise = fetchPostsSummary({pageNo: 0})
     const tagsPromise = fetchAllTags()
     const featuredPostsPromise = fetchFeaturedPosts()
     const [firstPostsSummary, tags, featuredPosts] = await Promise.all([firstPostsSummaryPromise, tagsPromise, featuredPostsPromise])

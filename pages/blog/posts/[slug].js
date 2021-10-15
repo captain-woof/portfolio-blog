@@ -17,14 +17,14 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params: { slug } }) => {
     const blogPostData = await fetchBlogPost(slug)
-    const suggestedPosts = await fetchPostsSummary(0, blogPostData.tags[0].slug, 4, slug)
+    const suggestedPosts = await fetchPostsSummary({ pageNo: 0, tagSlug: blogPostData.tags[0].slug, maxPostsPerPage: 4, skipSlug: slug })
     return {
-        props: {blogPostData, suggestedPosts},
+        props: { blogPostData, suggestedPosts },
         revalidate: 10
     }
 }
 
-export default function BlogPostPage({blogPostData, suggestedPosts}) {
+export default function BlogPostPage({ blogPostData, suggestedPosts }) {
     const { title, description, heroImage, keywords, slug, postRichText } = blogPostData
 
     // Fallback
@@ -51,7 +51,7 @@ export default function BlogPostPage({blogPostData, suggestedPosts}) {
     return (
         <>
             <SeoBlogPost title={title} description={description} image={heroImage.src} imageAlt={heroImage.alt} keywords={keywords.join(', ')} slug={slug} />
-            <BlogPost blogPostData={blogPostData} suggestedPosts={suggestedPosts}/>
+            <BlogPost blogPostData={blogPostData} suggestedPosts={suggestedPosts} />
         </>
     )
 }
