@@ -63,8 +63,8 @@ export default function Error() {
         const redirect = () => {
             route.back()
         }
-        //let handle = setTimeout(redirect, 5000)
-        //return () => { clearTimeout(handle) }
+        let handle = setTimeout(redirect, 5000)
+        return () => { clearTimeout(handle) }
     }, [])
 
     return (
