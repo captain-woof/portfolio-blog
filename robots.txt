@@ -1,0 +1,11 @@
+User-Agent: *
+Allow: /
+Allow: /blog
+Allow: /blog/categories/
+Allow: /blog/posts/
+Disallow: /404
+Disallow: /api/
+Disallow: /blog/search
+
+Sitemap: https://sohail-saha.in/sitemap.xml
+
