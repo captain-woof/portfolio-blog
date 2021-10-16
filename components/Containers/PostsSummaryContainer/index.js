@@ -13,8 +13,8 @@ const Watcher = styled(motion.div)`
     margin-top: 1rem;
 `
 
-export default function PostsSummaryContainer({ firstPostsSummary, tag }) {
-    const { postSummaries, loadOneMorePage, noMoreData } = useInfinitePostSummaries(firstPostsSummary, tag)
+export default function PostsSummaryContainer({ firstPostsSummary, q, tag }) {
+    const { postSummaries, loadOneMorePage, noMoreData } = useInfinitePostSummaries(firstPostsSummary, tag, q)
     const { textSubtitlesVariants: watcherVariants, textSubtitlesAnimation: watcherAnimation } = useThemeChangeAnim({
         textSubtitlesVariants: {
             initial: {
