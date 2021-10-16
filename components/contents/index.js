@@ -1,4 +1,4 @@
-import { useState } from 'react/cjs/react.development'
+import { useState } from 'react'
 import Button from './button'
 import ContentsPage from './contentsPage'
 
