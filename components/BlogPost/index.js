@@ -7,9 +7,17 @@ import { useGlobalContext } from '../../providers/ContextProvider'
 import Suggestion from './suggestion'
 import Author from './author'
 import Comments from './comments'
+import { useRouter } from 'next/router'
+import Fallback from './fallback'
 
 export default function BlogPost({ blogPostData, suggestedPosts }) {
     const { globalState: { isPhone } } = useGlobalContext()
+
+    // Fallback
+    const router = useRouter()
+    if (router.isFallback) {
+        return <Fallback />
+    }
 
     return (
         <MinFullscreenContainer>

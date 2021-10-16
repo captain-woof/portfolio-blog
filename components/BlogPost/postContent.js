@@ -11,6 +11,8 @@ import OrderedList from './customRichtextComps/orderedList';
 import Blockquote from './customRichtextComps/blockquote';
 import Image from './customRichtextComps/image';
 import Audio from './customRichtextComps/audio';
+import { useRouter } from 'next/router';
+import Fallback from './fallback';
 
 const TopMargin = styled.div`
     margin-top: 2rem;
@@ -78,6 +80,12 @@ const richTextRendererOptions = {
 }
 
 export default function PostContent({ blogPostData: { postRichText, heroImage, heroImageBlur } }) {
+    // Fallback
+    const router = useRouter()
+    if (router.isFallback) {
+        return <Fallback />
+    }
+
     return (
         <TopMargin>
             <Image src={heroImage.src} layout='responsive' height={heroImage.height} width={heroImage.width} placeholder='blur' blurDataURL={heroImageBlur.src} alt={heroImage.alt}/>

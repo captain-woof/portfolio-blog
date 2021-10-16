@@ -25,13 +25,13 @@ export const getStaticProps = async ({ params: { slug } }) => {
 }
 
 export default function BlogPostPage({ blogPostData, suggestedPosts }) {
-    const { title, description, heroImage, keywords, slug, postRichText } = blogPostData
-
     // Fallback
     const router = useRouter()
     if (router.isFallback) {
         return <Fallback />
     }
+
+    const { title, description, heroImage, keywords, slug, postRichText } = blogPostData
 
     // Setting page markers
     const { globalDispatch, globalState: { origin } } = useGlobalContext()
