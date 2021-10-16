@@ -37,6 +37,11 @@ const reducer = (state, action) => {
                 ...state,
                 markers: action.payload.markers
             })
+        case "SET_SHARE":
+            return ({
+                ...state,
+                share: action.payload.share
+            })
     }
 }
 
@@ -50,7 +55,8 @@ const initialState = {
     isPhone: false,
     scrollDirection: 'up',
     markers: [],
-    origin: `${process.env.NEXT_PUBLIC_PROTOCOL || 'https'}://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+    origin: `${process.env.NEXT_PUBLIC_PROTOCOL || 'https'}://${process.env.NEXT_PUBLIC_VERCEL_URL}`,
+    share: { title: "Sohail Saha's website", description: "Sohail Saha's website", url: `${process.env.NEXT_PUBLIC_PROTOCOL || 'https'}://${process.env.NEXT_PUBLIC_VERCEL_URL}`, image: '/images/my-card.png' }
 }
 
 export const ContextProvider = ({ children }) => {

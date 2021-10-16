@@ -34,7 +34,7 @@ export default function BlogPostPage({ blogPostData, suggestedPosts }) {
     }
 
     // Setting page markers
-    const { globalDispatch } = useGlobalContext()
+    const { globalDispatch, globalState: { origin } } = useGlobalContext()
     useEffect(() => {
         (async () => {
             let headingsData = await findHeadings(postRichText.content)
@@ -48,6 +48,21 @@ export default function BlogPostPage({ blogPostData, suggestedPosts }) {
             })
         })()
     }, [])
+
+    // Setting share data
+    useEffect(() => {
+        globalDispatch({
+            type: "SET_SHARE", payload: {
+                share: {
+                    title: title,
+                    description: description,
+                    url: `${origin}/blog/posts/${slug}`,
+                    image: heroImage.src
+                }
+            }
+        })
+    }, [])
+
     return (
         <>
             <SeoBlogPost title={title} description={description} image={heroImage.src} imageAlt={heroImage.alt} keywords={keywords.join(', ')} slug={slug} />

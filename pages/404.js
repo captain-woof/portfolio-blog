@@ -57,6 +57,20 @@ export default function Error() {
         })
     }, [])
 
+    // Setting share data
+    useEffect(() => {
+        globalDispatch({
+            type: "SET_SHARE", payload: {
+                share: {
+                    title: "Error 404 - Page not found",
+                    description: "This page does not exist",
+                    url: document.location.href,
+                    image: ''
+                }
+            }
+        })
+    }, [])
+
     // For redirecting to previous page
     const route = useRouter()
     useEffect(() => {

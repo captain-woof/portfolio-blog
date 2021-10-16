@@ -23,7 +23,7 @@ export const getStaticProps = async () => {
 
 export default function Index({ skillsData, projectData, openSourceContribData }) {
   // Setting page markers
-  const { globalDispatch } = useGlobalContext()
+  const { globalDispatch, globalState: { origin } } = useGlobalContext()
   useEffect(() => {
     globalDispatch({
       type: "SET_MARKERS", payload: {
@@ -38,11 +38,25 @@ export default function Index({ skillsData, projectData, openSourceContribData }
     })
   }, [])
 
+  // Setting share data
+  useEffect(() => {
+    globalDispatch({
+      type: "SET_SHARE", payload: {
+        share: {
+          title: "Sohail Saha's Portfolio",
+          description: "This is Sohail Saha's portfolio website. He is a frontend developer.",
+          url: origin,
+          image: `${origin}/images/my-card.png`
+        }
+      }
+    })
+  }, [])
+
   return (
     <>
       <SeoPortfolio />
       <SectionOne />
-      <SectionTwo skillsData={skillsData}/>
+      <SectionTwo skillsData={skillsData} />
       <SectionThree projectData={projectData} />
       <SectionFour openSourceContribData={openSourceContribData} />
       <SectionFive />

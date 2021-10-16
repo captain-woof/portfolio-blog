@@ -40,7 +40,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
 
 export default function Index({ firstPostsSummary, tags, slugSearched, slugSearchedName }) {
     // Setting page markers
-    const { globalDispatch, globalState: { isPhone } } = useGlobalContext()
+    const { globalDispatch, globalState: { isPhone, origin } } = useGlobalContext()
     useEffect(() => {
         globalDispatch({
             type: "SET_MARKERS", payload: {
@@ -48,6 +48,20 @@ export default function Index({ firstPostsSummary, tags, slugSearched, slugSearc
                     { name: "Categories", link: "#categories" },
                     { name: `Posts under '${slugSearchedName}'`, link: "#categories-posts" }
                 ]
+            }
+        })
+    }, [])
+
+    // Setting share data
+    useEffect(() => {
+        globalDispatch({
+            type: "SET_SHARE", payload: {
+                share: {
+                    title: `Posts under '${slugSearchedName}'`,
+                    description: `Found these posts under the '${slugSearchedName}' category`,
+                    url: `${origin}/blog/categories/${slugSearched}`,
+                    image: ''
+                }
             }
         })
     }, [])
