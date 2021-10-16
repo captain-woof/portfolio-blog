@@ -29,7 +29,7 @@ const Tag = styled(motion.div)`
 
 const Heading = styled(motion.div)`
     font-size: 1.6rem;
-    margin-bottom: 0.6rem;
+    margin-bottom: -0.5rem;
     font-weight: 600;
 
     ${({ theme: { isPhone } }) => (isPhone && css`
