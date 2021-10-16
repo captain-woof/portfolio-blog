@@ -19,14 +19,14 @@ const TopMargin = styled.div`
 const richTextRendererOptions = {
     renderNode: {
         [BLOCKS.EMBEDDED_ASSET]: (node) => {
-            const { file: { contentType, url, details }, description, title } = node.data.target.fields
+            const { file: { contentType, url, details }, description } = node.data.target.fields
             if (contentType.indexOf('video') === 0) {
-                return <Video src={`https:${url}`} contentType={contentType} caption={description || title}/>
+                return <Video src={`https:${url}`} contentType={contentType} caption={description}/>
             } else if (contentType.indexOf('image') === 0) {
-                return <Image src={`https:${url}`} height={details.image.height} width={details.image.width} caption={description || title} />
+                return <Image src={`https:${url}`} height={details.image.height} width={details.image.width} caption={description} />
             }
             else if (contentType.indexOf('audio') === 0) {
-                return <Audio src={`https:${url}`} contentType={contentType} caption={description || title}/>
+                return <Audio src={`https:${url}`} contentType={contentType} caption={description}/>
             }
         },
         [BLOCKS.EMBEDDED_ENTRY]: (node) => {
