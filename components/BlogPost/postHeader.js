@@ -4,6 +4,8 @@ import { useThemeChangeAnim } from '../../lib/motion'
 import moment from 'moment'
 import { useGlobalContext } from '../../providers/ContextProvider'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import Fallback from './fallback'
 
 const PostHeaderWrapper = styled.div`
     width: 80%;
@@ -58,6 +60,12 @@ const Tag = styled(motion.div)`
 export default function PostHeader({ blogPostData: { title, tags, postedOn, updatedOn } }) {
     const { globalState: { themeName } } = useGlobalContext()
     const { textEmphasisAnimation, textEmphasisVariants, textSubtitlesVariants, textSubtitlesAnimation } = useThemeChangeAnim()
+
+    // Fallback
+    const router = useRouter()
+    if (router.isFallback) {
+        return <Fallback />
+    }
 
     return (
         <PostHeaderWrapper>

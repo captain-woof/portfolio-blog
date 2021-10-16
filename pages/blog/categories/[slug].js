@@ -12,7 +12,7 @@ export const getStaticPaths = async () => {
     const tags = await fetchAllTags()
     const paths = tags.map((tagData) => ({
         params: {
-            slug: tagData.slug,
+            slug: tagData.slug
         }
     }))
     return ({

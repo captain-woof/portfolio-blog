@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { useThemeChangeAnim } from '../../lib/motion'
 import { motion } from 'framer-motion'
 import MarginWrapper from '../Containers/MarginWrapper'
+import { useRouter } from 'next/router'
 
 const SuggestionContainer = styled(motion.div)`
     border-radius: 6px;
@@ -53,6 +54,12 @@ const SuggestionTitle = styled.div`
 
 export default function Suggestion({ suggestedPosts }) {
     const { backgroundElevatedColorAnimation, backgroundElevatedColorVariants, textEmphasisAnimation, textEmphasisVariants } = useThemeChangeAnim()
+
+    // Fallback
+    const router = useRouter()
+    if (router.isFallback) {
+        return <></>
+    }
 
     return (
         <SuggestionContainer animate={backgroundElevatedColorAnimation} variants={backgroundElevatedColorVariants}>
