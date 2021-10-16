@@ -15,8 +15,8 @@ const ContentsPageContainer = styled(motion.div)`
     max-height: 40%;
     font-family: 'Alata';
     overflow-y: auto;
-    background-color: ${({theme}) => theme.backgroundColorElevated};
-    color: ${({theme}) => theme.textColorEmphasis};
+    background-color: ${({ theme }) => theme.backgroundColorElevated};
+    color: ${({ theme }) => theme.textColorEmphasis};
     z-index: 10;
 
     scrollbar-width: thin;
@@ -67,9 +67,9 @@ const variants = {
     }
 }
 
-export default function ContentsPage({ isOpen }) {
+export default function ContentsPage({ isOpen, setIsOpen }) {
     // Contents
-    const { globalState: { markers, themeName } } = useGlobalContext()
+    const { globalState: { markers, themeName, isPhone } } = useGlobalContext()
 
     return (
         <AnimatePresence>
@@ -87,7 +87,13 @@ export default function ContentsPage({ isOpen }) {
                             <MarkerList>
                                 {markers.map((markerData, index) => (
                                     <Link href={markerData.link} key={index}><a>
-                                        <Marker>{markerData.name}</Marker>
+                                        <Marker onClick={() => {
+                                            if (isPhone) {
+                                                setIsOpen(false)
+                                            }
+                                        }}>
+                                            {markerData.name}
+                                        </Marker>
                                     </a></Link>
                                 ))}
                             </MarkerList>

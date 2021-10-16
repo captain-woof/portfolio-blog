@@ -6,7 +6,7 @@ export default function Contents() {
     const [isOpen, setIsOpen] = useState(false)
     return (
         <>
-            <ContentsPage isOpen={isOpen} />
+            <ContentsPage isOpen={isOpen} setIsOpen={setIsOpen}/>
             <Button setIsOpen={setIsOpen} />
         </>
     )
