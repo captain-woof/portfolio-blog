@@ -17,7 +17,7 @@ const GrabbingHandImage = styled(motion.img)`
     right: 10vw;
     z-index: 99;
 
-    ${({isPhone}) => (isPhone && css`
+    ${({ isPhone }) => (isPhone && css`
         bottom: 28vh;
         right: 25vw;
     `)}
@@ -229,9 +229,9 @@ const zoomOutPageVariants = {
     }
 }
 
-export default function SectionTwo() {
+export default function SectionTwo({ skillsData }) {
     const { globalState } = useGlobalContext()
-const { isPhone } = globalState
+    const { isPhone } = globalState
 
     // Anims for components
     const redBoxAnimation = useAnimation()
@@ -270,7 +270,7 @@ const { isPhone } = globalState
     // State to maintain whether to show skills and backdrop
     const [showSkills, setShowSkills] = useState(false)
 
-    // Causes auto trigger anim for #skills
+    // Causes auto trigger anim for #skills and #about
     const router = useRouter()
     const [showGrabbingHand, setShowGrabbingHand] = useState(router?.asPath !== '/#skills' ? true : false)
     useEffect(() => {
@@ -279,6 +279,10 @@ const { isPhone } = globalState
                 await zoomOutAnim.start('trigger')
                 setShowSkills(true)
                 setShowGrabbingHand(false)
+            } else if (router.asPath === "/#about") {
+                zoomOutAnim.start('retract')
+                setShowSkills(false)
+                setShowGrabbingHand(true)
             }
         })()
     }, [router.asPath])
@@ -303,7 +307,7 @@ const { isPhone } = globalState
             {/* BELOW CONTAINER - DESK IMAGE AND SKILLS*/}
             <FullscreenContainer id='skills' style={{ position: 'absolute' }}>
                 <DeskImage src={globalState.themeName === 'LIGHT_THEME' ? "/images/desk.svg" : "/images/desk-night.svg"} alt="Desk image" initial='initial' variants={zoomOutDeskImageVariants} animate={zoomOutAnim} />
-                <Skills show={showSkills} />
+                <Skills show={showSkills} skillsData={skillsData} />
                 <GreenBoxLeftSkills initial='initial' isPhone={isPhone} variants={leftToRightVariants} animate={zoomOutAnim} />
                 <TitleSkills isPhone={isPhone} variants={leftToRightVariants} initial='initial' animate={zoomOutAnim}>
                     My skills

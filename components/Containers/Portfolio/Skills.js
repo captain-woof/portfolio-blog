@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 const SkillsContainer = styled(motion.div)`
     border-radius: 12px;
     right: 4vw;
-    z-index: 51;
+    z-index: 9;
     position: absolute;
     width: 40%;
     max-width: 500px;
@@ -67,9 +67,15 @@ const logoVariants = {
     }
 }
 
-export default function Skills({ show }) {
+const logoMotionProps = {
+    whileHover: {
+        scale: 1.1
+    }
+}
+
+export default function Skills({ show, skillsData }) {
     const { globalState } = useGlobalContext()
-const { isPhone } = globalState
+    const { isPhone } = globalState
 
     const { backgroundColorVariants: skillsVariants, backgroundColorAnimation: skillsAnim } = useThemeChangeAnim({
         backgroundColorVariants: {
@@ -102,46 +108,14 @@ const { isPhone } = globalState
         }
     }, [show])
 
-    // Array of skill logos
-    const logos = [
-        { imgPath: "/logos/html_logo.svg", shadow: false },
-        { imgPath: "/logos/css_logo.svg", shadow: false },
-        { imgPath: "/logos/javascript_logo.svg", shadow: false },
-        { imgPath: "/logos/react_logo.svg", shadow: false },
-        { imgPath: "/logos/framer_motion_logo.svg", shadow: false },
-        { imgPath: "/logos/styled-components.svg", shadow: true },
-        { imgPath: "/logos/nextjs_logo.svg", shadow: true },
-        { imgPath: "/logos/nodejs_logo.svg", shadow: true },
-        { imgPath: "/logos/express_logo.svg", shadow: true },
-        { imgPath: "/logos/mongodb_logo.svg", shadow: true },
-        { imgPath: "/logos/mysql_logo.svg", shadow: true },
-        { imgPath: "/logos/electron_logo.svg", shadow: false },
-        { imgPath: "/logos/premirepro_logo.svg", shadow: false },
-        { imgPath: "/logos/photoshop_logo.svg", shadow: false },
-        { imgPath: "/logos/inkscape_logo.svg", shadow: true },
-        { imgPath: "/logos/audacity_logo.svg", shadow: false },
-        { imgPath: "/logos/windows_logo.svg", shadow: false },
-        { imgPath: "/logos/linux_logo.svg", shadow: false },
-        { imgPath: "/logos/bash_logo.svg", shadow: false },
-        { imgPath: "/logos/python_logo.svg", shadow: false }
-    ]
-
-    const logoMotionProps = {
-        whileHover: {
-            scale: 1.1
-        }
-    }
-
     return (
         <>
             <Backdrop key='backdrop' animate={skillsAnim} />
             <SkillsContainer animate={skillsAnim} initial='initial' exit='exit' className='skills-container' variants={skillsVariants} isPhone={isPhone}>
                 <SkillsGrid className="skills-grid">
-                    {logos.map((imgDetail, index) => {
-                        let imgPathArr = imgDetail.imgPath.split("/")
-                        let slug = imgPathArr[imgPathArr.length - 1]
+                    {skillsData.map((skillData, index) => {
                         return (
-                            <Logo {...logoMotionProps} className="skill-logo" key={index} src={imgDetail.imgPath} alt={slug} variants={logoVariants} shadow={imgDetail.shadow} />
+                            <Logo {...logoMotionProps} className="skill-logo" key={index} src={skillData.logo} alt={skillData.name} variants={logoVariants} shadow={skillData.shadow} />
                         )
                     })}
                 </SkillsGrid>

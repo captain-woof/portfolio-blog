@@ -7,7 +7,7 @@ const BackdropContainer = styled(motion.div)`
     height: 100vh;
     width: 100vw;
     background-color: ${({ themeName, theme }) => (themeName === 'LIGHT_THEME' ? theme.colors.grey : theme.colors.black)};
-    z-index: 50;
+    z-index: 8;
     position: absolute;
     top: 0;
     left: 0;
