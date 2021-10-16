@@ -12,3 +12,4 @@ This is the source of my portfolio/blog. Feel free to learn from it and use anyt
 - **Code blocks**: *react-syntax-highlighter*
 - **Data fetching (and pagination)**: *SWR*
 - **Icons**: *Open source icons + Inkscape*
+- **Comments engine**: *Utterances*
