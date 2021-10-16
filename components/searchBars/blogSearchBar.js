@@ -33,7 +33,7 @@ export default function BlogSearchBar() {
     const { globalState: { isPhone } } = useGlobalContext()
 
     return (
-        <BlogSearchBarContainer animate={bgAnim} variants={bgVariants} id='searchbar'>
+        <BlogSearchBarContainer id='searchbar'>
             <motion.div animate={textAnim} variants={textVariants}>
                 {!isPhone &&
                     <Heading>Search</Heading>
