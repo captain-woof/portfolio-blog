@@ -30,8 +30,9 @@ const Title = styled(motion.div)`
     font-size: 4.5rem;
 
     ${({ isPhone }) => (isPhone && css`
-        top: 14vh;
-        font-size: 3rem;
+        top: 15vh;
+        left: 6vw;
+        font-size: 2.8rem;
     `)}
 `
 
@@ -55,6 +56,10 @@ const OpenSourceContribsGrid = styled(motion.div)`
     position: relative;
     margin-top: 33vh;
     gap: 1rem 1rem;
+
+    ${({ theme: { isPhone } }) => (isPhone && css`
+        gap: 2rem 0;
+    `)}
 `
 
 const blueBoxTransition = {

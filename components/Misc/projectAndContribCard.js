@@ -18,8 +18,8 @@ const ProjectCardContainer = styled(motion.div)`
     position: relative;
     overflow: hidden;
     ${({ isPhone }) => (isPhone && css`
-        width: 66vw;
-        height: 50vh;
+        width: 75vw;
+        height: 60vh;
     `)}
 `
 
