@@ -26,7 +26,9 @@ const ContentsPageContainer = styled(motion.div)`
 
     ${({ theme: { isPhone } }) => (isPhone && css`
         max-height: 80%;
-        width: 80%;
+        width: 90%;
+        bottom: 5.6rem;
+        right: 1rem;
     `)}
 `
 
