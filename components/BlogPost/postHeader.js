@@ -20,20 +20,25 @@ const PostTitle = styled(motion.div)`
     font-size: 3.5rem;
     font-weight: 600;
     ${({ theme: { isPhone } }) => (isPhone && css`
-        font-size: 2.8rem;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
     `)}
 `
 
 const Timestamp = styled(motion.div)`
     font-size: 1rem;
     ${({ theme: { isPhone } }) => (isPhone && css`
-        font-weight: 500;         
+        font-weight: 500;
+        font-size: 0.85rem;       
     `)}
 `
 
 const TimestampIcon = styled.img`
     height: 1.2rem;
     margin-right: 0.5rem;
+    ${({ theme: { isPhone } }) => (isPhone && css`
+        height: 1rem;
+    `)}
 `
 
 const TagsContainer = styled.div`
@@ -53,7 +58,7 @@ const Tag = styled(motion.div)`
     ${({ theme: { isPhone } }) => (isPhone && css`
         padding: 0.1rem 0.85rem;
         font-weight: 500;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     `)}
 `
 

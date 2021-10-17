@@ -4,7 +4,7 @@ import { useGlobalContext } from '../../providers/ContextProvider'
 import { easeInOutCustomBezier, useThemeChangeAnim } from '../../lib/motion'
 import { motion } from 'framer-motion'
 
-const TagsContainer = styled(motion.div)`
+const TagsContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
