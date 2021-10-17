@@ -19,7 +19,7 @@ export default function SeoPortfolio() {
             <meta property="og:title" content="Sohail Saha's Portfolio" />
             <meta property="og:description" content="Hi. I am Sohail Saha, a frontend developer. I work with React.js. This is my portfolio. Looking to hire a frontend developer? Contact me." />
             <meta property="og:image" content={`${origin}/images/my-card.png`} />
-            <meta property="og:url" content="https://sohail-saha.in" />
+            <meta property="og:url" content={origin} />
             <meta property="og:site_name" content="Sohail Saha's Portfolio & Blog" />
             <meta name="twitter:title" content="Sohail Saha's Portfolio" />
             <meta name="twitter:description" content="Hi. I am Sohail Saha, a frontend developer. I work with React.js. This is my portfolio. Looking to hire a frontend developer? Contact me." />

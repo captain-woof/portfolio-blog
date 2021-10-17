@@ -44,7 +44,7 @@ export default function Index({ skillsData, projectData, openSourceContribData }
       type: "SET_SHARE", payload: {
         share: {
           title: "Sohail Saha's Portfolio",
-          description: "This is Sohail Saha's portfolio website. He is a frontend developer.",
+          description: "Check out Sohail Saha's portfolio/blog. He is a Front-end developer.",
           url: origin,
           image: `${origin}/images/my-card.png`
         }

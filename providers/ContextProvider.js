@@ -55,8 +55,13 @@ const initialState = {
     isPhone: false,
     scrollDirection: 'up',
     markers: [],
-    origin: `${process.env.NEXT_PUBLIC_PROTOCOL || 'https'}://${process.env.NEXT_PUBLIC_VERCEL_URL}`,
-    share: { title: "Sohail Saha's website", description: "Sohail Saha's website", url: `${process.env.NEXT_PUBLIC_PROTOCOL || 'https'}://${process.env.NEXT_PUBLIC_VERCEL_URL}`, image: '/images/my-card.png' }
+    origin: process.env.NEXT_PUBLIC_APP_ORIGIN,
+    share: {
+        title: "Sohail Saha's portfolio/blog",
+        description: "Check out Sohail Saha's portfolio/blog.",
+        url: process.env.NEXT_PUBLIC_APP_ORIGIN,
+        image: '/images/my-card.png'
+    }
 }
 
 export const ContextProvider = ({ children }) => {
