@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import MarginWrapper from '../Containers/MarginWrapper'
 import { useGlobalContext } from '../../providers/ContextProvider'
 import Link from 'next/link'
+import BreadcrumbPath from './breadcrumb_path'
 
 const ContentsPageContainer = styled(motion.div)`
     position: fixed;
@@ -38,6 +39,7 @@ const Heading = styled.div`
 
 const MarkerList = styled.ul`
     font-size: 1rem;
+    margin: 0;
 `
 
 const Marker = styled.li`
@@ -85,7 +87,7 @@ export default function ContentsPage({ isOpen, setIsOpen }) {
                     }}>
                         <div>
                             <Heading>In this page</Heading>
-
+                            <BreadcrumbPath />
                             <MarkerList>
                                 {markers.map((markerData, index) => (
                                     <Link href={markerData.link} key={index}><a>
