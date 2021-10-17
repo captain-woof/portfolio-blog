@@ -13,7 +13,7 @@ const EmailContainer = styled(motion.div)`
     user-select: all;
     margin-bottom: 2rem;
     ${({ isPhone }) => (isPhone && css`
-        font-size: 2.8rem;
+        font-size: 2.4rem;
     `)}
 `
 
@@ -32,6 +32,7 @@ const EmailDomain = styled(motion.div)`
     
     ${({ isPhone }) => (isPhone && css`
         align-self: flex-end;
+        font-size: 1.2rem;
     `)}
 `
 
@@ -62,6 +63,7 @@ const SocialButtonsContainer = styled.div`
     ${({ isPhone }) => (isPhone && css`
         height: 2rem;
         margin-top: 1rem;
+        justify-content: center;
     `)}
 `
 
@@ -134,7 +136,7 @@ const WannaTalkText = styled(motion.div)`
     margin-bottom: 2rem;
     user-select: none;
     ${({ isPhone }) => (isPhone && css`
-        font-size: 2rem;
+        font-size: 1.6rem;
     `)}
 `
 

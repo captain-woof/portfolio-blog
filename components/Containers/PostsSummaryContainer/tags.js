@@ -4,7 +4,7 @@ import { useGlobalContext } from '../../../providers/ContextProvider'
 import { easeInOutCustomBezier } from '../../../lib/motion'
 import { motion } from 'framer-motion'
 
-const TagsContainer = styled(motion.div)`
+const TagsContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -17,7 +17,7 @@ const TagsContainer = styled(motion.div)`
     margin-top: 0.5rem;
 
     ${({ isPhone }) => (isPhone && css`
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     `)}
 `
 

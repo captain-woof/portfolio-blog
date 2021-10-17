@@ -58,7 +58,7 @@ export default function Index({ firstPostsSummary, tags, slugSearched, slugSearc
             type: "SET_SHARE", payload: {
                 share: {
                     title: `Posts under '${slugSearchedName}'`,
-                    description: `Found these posts under the '${slugSearchedName}' category`,
+                    description: `Found these posts under the '${slugSearchedName}' category.`,
                     url: `${origin}/blog/categories/${slugSearched}`,
                     image: ''
                 }

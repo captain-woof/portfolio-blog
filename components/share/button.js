@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
 import { easeOutQuintBezier, useThemeChangeAnim } from '../../lib/motion'
 import { useGlobalContext } from '../../providers/ContextProvider'
@@ -15,6 +15,12 @@ const ButtonContainer = styled(motion.div)`
     &:hover {
         cursor: pointer;
     }
+    ${({theme: {isPhone}}) => (isPhone && css`
+        bottom: 5.8rem;
+        right: 1.3rem;
+        height: 3rem;
+        width: 3rem;
+    `)};
     z-index: 10;
 `
 

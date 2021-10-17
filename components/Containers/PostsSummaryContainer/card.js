@@ -45,7 +45,6 @@ const CardTitle = styled(motion.div)`
     margin-bottom: 0.5rem;
 
     ${({ isPhone }) => (isPhone && css`
-        font-size: 1.5rem;
         margin-bottom: 1rem;
     `)}
 `
@@ -53,10 +52,6 @@ const CardTitle = styled(motion.div)`
 const Date = styled(motion.div)`
     font-size: 0.85rem;
     font-style: italic;
-
-    ${({ isPhone }) => (isPhone && css`
-        font-size: 1rem;
-    `)}
 `
 
 const DateIcon = styled.img`
@@ -75,7 +70,7 @@ const CardDescription = styled(motion.div)`
 
     ${({ isPhone }) => (isPhone && css`
         font-family: 'Poppins';
-        font-size: 1.2rem;
+        font-size: 1rem;
         margin-top: 0.2rem;
         font-weight: 400;
     `)}

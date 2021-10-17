@@ -287,13 +287,13 @@ export default function SectionTwo({ skillsData }) {
         })()
     }, [router.asPath])
 
-    // Handles pan
-    const handlePan = useCallback(async (event, info) => {
-        if (info.delta.x < -3) { // Left side pan (trigger)
+    // EXP
+    const handlePanEnd = useCallback(async (event, info) => {
+        if (info.velocity.x < -25) { // Left side pan (trigger)
             setShowGrabbingHand(false)
             await zoomOutAnim.start('trigger')
             setShowSkills(true)
-        } else if (info.delta.x > 3) { // Right side pan (retract)
+        } else if (info.velocity.x > 25) { // Right side pan (retract)
             zoomOutAnim.start('retract')
             setShowSkills(false)
             setShowGrabbingHand(true)
@@ -301,7 +301,7 @@ export default function SectionTwo({ skillsData }) {
     }, [zoomOutAnim])
 
     return (
-        <FullscreenContainer id='about' onPanStart={handlePan} style={{ cursor: 'grab' }} whileTap={{ cursor: 'grabbing' }}>
+        <FullscreenContainer id='about' onPanEnd={handlePanEnd} style={{ cursor: 'grab', userSelect: 'none' }} whileTap={{ cursor: 'grabbing' }}>
             <GrabbingHand show={showGrabbingHand} />
 
             {/* BELOW CONTAINER - DESK IMAGE AND SKILLS*/}

@@ -20,3 +20,22 @@ export const findHeadings = async (richTextContent) => {
         slug: slugify(headingData.content[0].value)
     }))
 }
+
+export const getPathBreadcrumbs = () => {
+    let base = location.pathname + (location.pathname[location.length - 1] !== '/' ? '/' : null)
+    let breadcrumbs = []
+
+    const slashIndices = []
+    for (let i = 0; i < base.length; i++) {
+        if (base[i] === '/') {
+            slashIndices.push(i)
+        }
+    }
+    for (let i = 0; i < slashIndices.length; i++) {
+        breadcrumbs.push({
+            url: base.slice(0, slashIndices[i] + 1),
+            text: (i === 0 ? 'home' : (base.slice(slashIndices[i - 1] + 1, slashIndices[i])))
+        })
+    }
+    return breadcrumbs
+}

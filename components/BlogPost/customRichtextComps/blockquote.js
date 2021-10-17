@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
 import { useThemeChangeAnim } from '../../../lib/motion'
 import { useGlobalContext } from '../../../providers/ContextProvider'
@@ -16,6 +16,12 @@ const ApostropheStart = styled.img`
     height: 2.5rem;
     left: -1.6rem;
     top: -1rem;
+
+    ${({ theme: { isPhone } }) => (isPhone && css`
+        height: 2rem;
+        left: 0rem;
+        top: 0rem;
+    `)}
 `
 
 const ApostropheEnd = styled.img`
@@ -24,6 +30,12 @@ const ApostropheEnd = styled.img`
     right: -1.3rem;
     bottom: -1rem;
     transform: rotateZ(180deg);
+
+    ${({ theme: { isPhone } }) => (isPhone && css`
+        height: 2rem;
+        right: 0rem;
+        bottom: 0rem;
+    `)}
 `
 
 export default function Blockquote({ children }) {

@@ -48,7 +48,7 @@ export default function Error() {
     const { textEmphasisVariants: variants, textEmphasisAnimation: animate } = useThemeChangeAnim()
 
     // Removing page markers
-    const { globalDispatch } = useGlobalContext()
+    const { globalDispatch, globalState: { origin } } = useGlobalContext()
     useEffect(() => {
         globalDispatch({
             type: "SET_MARKERS", payload: {
@@ -64,7 +64,7 @@ export default function Error() {
                 share: {
                     title: "Error 404 - Page not found",
                     description: "This page does not exist",
-                    url: document.location.href,
+                    url: document?.location?.href || origin,
                     image: ''
                 }
             }

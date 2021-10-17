@@ -31,7 +31,9 @@ const SharePageContainer = styled(motion.div)`
 
     ${({ theme: { isPhone } }) => (isPhone && css`
         max-height: 80%;
-        width: 80%;
+        width: 90%;
+        bottom: 10rem;
+        right: 1rem;
     `)}
 `
 

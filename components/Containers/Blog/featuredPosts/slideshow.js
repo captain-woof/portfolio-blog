@@ -26,6 +26,8 @@ export default function Slideshow() {
             dispatch({ type: "SET_SELECTED", payload: { selected: getNext(featuredPosts.length, selected) } })
         }, 6000)
         setTimeoutHandle((prevTimeoutHandle) => { clearTimeout(prevTimeoutHandle); return newTimeoutHandle })
+
+        return () => { setTimeoutHandle((prevTimeoutHandle) => { clearTimeout(prevTimeoutHandle); return null }) }
     }, [selected])
 
     return (

@@ -55,6 +55,10 @@ const ProjectsGrid = styled(motion.div)`
     position: relative;
     margin-top: 33vh;
     gap: 1rem 1rem;
+
+    ${({ theme: { isPhone } }) => (isPhone && css`
+        gap: 2rem 0;
+    `)}
 `
 
 const yellowBoxTransition = {
@@ -89,7 +93,7 @@ const projectsGridVariants = {
 
 export default function SectionThree({ projectData }) {
     const { globalState } = useGlobalContext()
-const { isPhone } = globalState
+    const { isPhone } = globalState
     const { textEmphasisAnimation: animate, textEmphasisVariants: titleVariants } = useThemeChangeAnim()
 
     // To start animation when in view
@@ -123,7 +127,7 @@ const { isPhone } = globalState
             <ProjectsGridWrapper className='projects-grid-wrapper'>
                 <ProjectsGrid ref={projectsGridRef} isPhone={isPhone} className='projects-grid' variants={projectsGridVariants} animate={projectsGridAnimate} exit='exit' initial='initial'>
                     {projectData.map((projectCardDetail, index) => (
-                        <ProjectAndContribCard color={theme.colors.yellow} key={index} keyVal={index} {...projectCardDetail}/>
+                        <ProjectAndContribCard color={theme.colors.yellow} key={index} keyVal={index} {...projectCardDetail} />
                     ))}
                 </ProjectsGrid>
             </ProjectsGridWrapper>
