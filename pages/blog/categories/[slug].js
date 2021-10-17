@@ -25,6 +25,14 @@ export const getStaticProps = async ({ params: { slug } }) => {
     const firstPostsSummaryPromise = fetchPostsSummary({ pageNo: 0, tagSlug: slug })
     const tagsPromise = fetchAllTags()
     const [firstPostsSummary, tags] = await Promise.all([firstPostsSummaryPromise, tagsPromise])
+
+    // Check for 404
+    if(!(tags.filter((tagData) => { return tagData.slug === slug }))[0]){
+        return {
+            notFound: true
+        }
+    }
+
     const slugSearchedName = (tags.filter((tagData) => { return tagData.slug === slug }))[0].name
 
     return {

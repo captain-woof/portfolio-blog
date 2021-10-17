@@ -17,6 +17,12 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params: { slug } }) => {
     const blogPostData = await fetchBlogPost(slug)
+    // Check for 404
+    if(!blogPostData.tags){
+        return {
+            notFound: true
+        }
+    }
     const suggestedPosts = await fetchPostsSummary({ pageNo: 0, tagSlug: blogPostData.tags[0].slug, maxPostsPerPage: 4, skipSlug: slug })
     return {
         props: { blogPostData, suggestedPosts },
