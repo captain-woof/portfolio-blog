@@ -60,7 +60,7 @@ const initialState = {
         title: "Sohail Saha's portfolio/blog",
         description: "Check out Sohail Saha's portfolio/blog.",
         url: process.env.NEXT_PUBLIC_APP_ORIGIN,
-        image: '/images/my-card.png'
+        image: `${process.env.NEXT_PUBLIC_APP_ORIGIN}/images/my-card.png`
     }
 }
 

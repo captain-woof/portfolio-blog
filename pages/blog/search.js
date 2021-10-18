@@ -31,7 +31,7 @@ export const getServerSideProps = async ({ query: { q } }) => {
 
 export default function Search({ q, firstPostsSummary, tags }) {
     // Setting page markers
-    const { globalDispatch, globalState: { isPhone } } = useGlobalContext()
+    const { globalDispatch, globalState: { isPhone, origin } } = useGlobalContext()
     useEffect(() => {
         globalDispatch({
             type: "SET_MARKERS", payload: {
@@ -39,6 +39,20 @@ export default function Search({ q, firstPostsSummary, tags }) {
                     { name: "Categories", link: "#categories" },
                     { name: `Search results for '${q}'`, link: "#search-results" }
                 ]
+            }
+        })
+    }, [])
+
+    // Setting share data
+    useEffect(() => {
+        globalDispatch({
+            type: "SET_SHARE", payload: {
+                share: {
+                    title: `Search results - '${q}'`,
+                    description: `Showing search results for '${q}'`,
+                    url: `${origin}/blog/search?q=${q}`,
+                    image: ''
+                }
             }
         })
     }, [])

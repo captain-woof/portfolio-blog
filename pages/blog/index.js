@@ -28,15 +28,29 @@ export const getStaticProps = async () => {
 
 export default function Index({ firstPostsSummary, tags, featuredPosts }) {
     // Setting page markers
-    const { globalDispatch, globalState: { isPhone } } = useGlobalContext()
+    const { globalDispatch, globalState: { isPhone, origin } } = useGlobalContext()
     useEffect(() => {
         globalDispatch({
             type: "SET_MARKERS", payload: {
                 markers: [
                     { name: "Featured Posts", link: "#featured-posts" },
                     { name: "Categories", link: "#categories" },
-                    { name: "Latest Posts", link: "#latest-posts" }
+                    { name: "Latest Posts", link: "#latest-posts"}
                 ]
+            }
+        }) 
+    }, [])
+
+    // Setting share data
+    useEffect(() => {
+        globalDispatch({
+            type: "SET_SHARE", payload: {
+                share: {
+                    title: `Sohail Saha's blog`,
+                    description: 'Read articles on web development, good practises, developer mindset, etc.',
+                    url: `${origin}/blog`,
+                    image: `${origin}/images/blog-image.png`
+                }
             }
         })
     }, [])

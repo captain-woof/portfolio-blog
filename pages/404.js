@@ -62,6 +62,20 @@ export default function Error() {
         globalDispatch({
             type: "SET_SHARE", payload: {
                 share: {
+                    title: `Error 404 - Page not found!`,
+                    description: 'This page does not exist. Click on the link to visit the homepage.',
+                    url: `${origin}`,
+                    image: ''
+                }
+            }
+        })
+    }, [])
+
+    // Setting share data
+    useEffect(() => {
+        globalDispatch({
+            type: "SET_SHARE", payload: {
+                share: {
                     title: "Error 404 - Page not found",
                     description: "This page does not exist",
                     url: document?.location?.href || origin,
