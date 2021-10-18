@@ -8,6 +8,7 @@ import {
     TelegramIcon,
     TelegramShareButton, TumblrIcon, TumblrShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton,
 } from 'react-share'
+import { useEffect } from 'react'
 
 const SharePageContainer = styled(motion.div)`
     position: fixed;
