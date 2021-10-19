@@ -19,7 +19,7 @@ const ButtonContainer = styled.div`
 const Button = styled(motion.div)`
     height: 1rem;
     width: 1rem;
-    background-color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.textColorEmphasis};
     cursor: pointer;
 `
 
