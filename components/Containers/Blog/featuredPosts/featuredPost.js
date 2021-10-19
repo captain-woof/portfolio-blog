@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
-import { easeOutQuintBezier } from '../../../../lib/motion'
+import { easeOutQuintBezier, useThemeChangeAnim } from '../../../../lib/motion'
 import moment from 'moment'
 import Link from 'next/link'
 import { useGlobalContext } from '../../../../providers/ContextProvider'
+import { getWordCount } from '../../../../utils/wordfu'
 
 const FeaturedPostContainer = styled(motion.div)`
     height: 100%;
@@ -11,20 +12,11 @@ const FeaturedPostContainer = styled(motion.div)`
     position: absolute;
     top: 0;
     font-family: 'Poppins';
-    color: ${({ theme }) => theme.colors.white};
     overflow: hidden;
 
-    ${({ color, theme, day }) => {
-        if (day) {
-            return css`
-                background-image: linear-gradient(to bottom, ${color} 60%, ${theme.backgroundColor});
-            `
-        } else {
-            return css`
-                background-image: linear-gradient(to bottom, ${theme.backgroundColorElevated} 60%, ${theme.backgroundColor});
-            `
-        }
-    }}
+    ${({ theme }) => (css`
+        background-image: linear-gradient(to bottom, ${theme.backgroundColorElevated} 60%, ${theme.backgroundColor});
+    `)}
 `
 
 const FeaturedPostContentPadding = styled.div`
@@ -38,12 +30,13 @@ const FeaturedPostContentPadding = styled.div`
     `)}
 `
 
-const FeaturedPostContentContainer = styled.div`
+const FeaturedPostContentContainer = styled(motion.div)`
     position: relative;
 `
 
 const FeaturedPostHeading = styled.div`
-    font-size: 1.8rem;    
+    font-size: 1.8rem;
+    font-weight: 500;
     ${({ theme: { isPhone } }) => (isPhone && css`
         font-size: 1.4rem;
     `)}
@@ -51,7 +44,7 @@ const FeaturedPostHeading = styled.div`
 
 const PostTitle = styled.div`
     font-size: 3rem;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 0.5rem;
     ${({ theme: { isPhone } }) => (isPhone && css`
         font-size: 2rem;
@@ -80,6 +73,7 @@ const Tag = styled.div`
     padding: 0.1rem 0.5rem;
     border-radius: 1rem;
     width: max-content;
+    box-shadow: ${({ theme }) => `0 0 6px ${theme.shadow}`};
 `
 
 const PostDescription = styled.div`
@@ -114,25 +108,28 @@ const variants = {
 
 export default function FeaturedPost({ featuredPost }) {
     const { globalState: { isPhone, themeName } } = useGlobalContext()
+    const { textEmphasisAnimation: animateText, textEmphasisVariants: variantsText } = useThemeChangeAnim()
 
     return (
-        <FeaturedPostContainer color={featuredPost.tags[0].color} animate='animate' initial='initial' exit='exit' variants={variants} day={themeName === 'LIGHT_THEME'}>
+        <FeaturedPostContainer animate='animate' initial='initial' exit='exit' variants={variants} day={themeName === 'LIGHT_THEME'}>
             <FeaturedPostContentPadding>
-                <FeaturedPostContentContainer>
+                <FeaturedPostContentContainer variants={variantsText} animate={animateText}>
                     <FeaturedPostHeading>Featured post</FeaturedPostHeading>
                     <Link href={`/blog/posts/${featuredPost.slug}`}><a>
-                        <PostTitle >{featuredPost.title}</PostTitle>
+                        <PostTitle style={{ color: featuredPost.tags[0].color }}>
+                            {featuredPost.title}
+                        </PostTitle>
                     </a></Link>
                     <PostTimestamp>
-                        <PostTimestampIcon src='/icons/calendar-night.svg' alt='posted on icon' />
+                        <PostTimestampIcon src={themeName === 'LIGHT_THEME' ? '/icons/calendar.svg' : '/icons/calendar-night.svg'} alt='posted on icon' />
                         {`Posted ${moment(featuredPost.postedOn).fromNow()}`}
                     </PostTimestamp>
                     <PostTimestamp>
-                        <PostTimestampIcon src='/icons/update-night.svg' alt='updated on icon' />
+                        <PostTimestampIcon src={themeName === 'LIGHT_THEME' ? '/icons/update.svg' : '/icons/update-night.svg'} alt='updated on icon' />
                         {`Last updated ${moment(featuredPost.updatedOn).fromNow()}`}
                     </PostTimestamp>
                     <Tag color={featuredPost.tags[0].color}>{featuredPost.tags[0].name}</Tag>
-                    {!isPhone &&
+                    {!isPhone && getWordCount(featuredPost.description) <= 30 &&
                         <PostDescription>
                             {featuredPost.description}
                         </PostDescription>
