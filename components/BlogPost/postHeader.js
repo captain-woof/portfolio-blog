@@ -85,7 +85,7 @@ export default function PostHeader({ blogPostData: { title, tags, postedOn, upda
             </Timestamp>
             <TagsContainer>
                 {tags.map((tag, index) => (
-                    <Link key={index} href={`/categories/${tag.slug}`}><a>
+                    <Link key={index} href={`/blog/categories/${tag.slug}`}><a>
                         <Tag color={tag.color} whileHover={{ opacity: 0.7 }}>{tag.name}</Tag>
                     </a></Link>
                 ))}
