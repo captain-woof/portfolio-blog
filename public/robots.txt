@@ -1,8 +1,8 @@
 User-Agent: *
-Allow: /
-Allow: /blog/
-Disallow: /api/
+Disallow: /api/*
 Disallow: /search
+Allow: /*
+Allow: /blog/*
 
 
 Sitemap: https://sohail-saha.in/sitemap.xml
