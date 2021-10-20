@@ -9,6 +9,7 @@ import MarginWrapper from '../../components/Containers/MarginWrapper'
 import RightColumn from '../../components/Containers/Blog/rightColumn'
 import FeaturedPosts from '../../components/Containers/Blog/featuredPosts'
 import { SlideshowProvider } from '../../components/Containers/Blog/featuredPosts/context'
+import SitelinksSearchbox from '../../components/SEO/SitelinksSearchbox'
 
 export const getStaticProps = async () => {
     const firstPostsSummaryPromise = fetchPostsSummary({pageNo: 0})
@@ -58,6 +59,7 @@ export default function Index({ firstPostsSummary, tags, featuredPosts }) {
     return (
         <MinFullscreenContainer>
             <SeoBlog />
+            <SitelinksSearchbox path='/blog' />
             <SlideshowProvider featuredPosts={featuredPosts}>
                 <FeaturedPosts />
             </SlideshowProvider>

@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import { findHeadings } from "../../../utils/wordfu"
 import { useRouter } from 'next/router'
 import Fallback from "../../../components/BlogPost/fallback"
+import SitelinksSearchbox from "../../../components/SEO/SitelinksSearchbox"
 
 export const getStaticPaths = async () => {
     const blogPostsSlugs = await fetchBlogPostsSlugs()
@@ -18,7 +19,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params: { slug } }) => {
     const blogPostData = await fetchBlogPost(slug)
     // Check for 404
-    if(!blogPostData.tags){
+    if (!blogPostData.tags) {
         return {
             notFound: true
         }
@@ -71,6 +72,7 @@ export default function BlogPostPage({ blogPostData, suggestedPosts }) {
 
     return (
         <>
+            <SitelinksSearchbox path={`/blog/posts/${slug}`} />
             <SeoBlogPost title={title} description={description} image={heroImage.src} imageAlt={heroImage.alt} keywords={keywords.join(', ')} slug={slug} />
             <BlogPost blogPostData={blogPostData} suggestedPosts={suggestedPosts} />
         </>

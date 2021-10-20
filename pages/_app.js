@@ -11,7 +11,6 @@ import { ScrollbarAnimated } from '../styles/scrollbar'
 import Footer from '../components/Footer'
 import Contents from '../components/contents'
 import GoogleAnalytics from '../components/SEO/GoogleAnalytics'
-import SitelinksSearchbox from '../components/SEO/SitelinksSearchbox'
 import Share from '../components/share'
 
 function MyApp({ Component, pageProps }) {
@@ -35,7 +34,6 @@ function MyApp({ Component, pageProps }) {
       <GlobalThemeProvider>
         <GlobalStyle />
         <GoogleAnalytics />
-        <SitelinksSearchbox />
         <ScrollbarAnimated />
         <Fonts />
         <Navbar />

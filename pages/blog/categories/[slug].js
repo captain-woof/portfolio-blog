@@ -7,6 +7,7 @@ import { TwoColumns, FirstColumn, SecondColumn } from '../../../components/Conta
 import MarginWrapper from '../../../components/Containers/MarginWrapper'
 import RightColumn from '../../../components/Containers/Blog/rightColumn'
 import CategoriesPosts from '../../../components/Containers/Blog/categoriesPosts'
+import SitelinksSearchbox from '../../../components/SEO/SitelinksSearchbox'
 
 export const getStaticPaths = async () => {
     const tags = await fetchAllTags()
@@ -77,6 +78,7 @@ export default function Index({ firstPostsSummary, tags, slugSearched, slugSearc
     return (
         <MinFullscreenContainer>
             <SeoBlog />
+            <SitelinksSearchbox path={`/blog/categories/${slugSearched}`} />
             <MarginWrapper style={{
                 justifyContent: (isPhone ? null : 'center'),
                 display: (isPhone ? null : 'flex'),

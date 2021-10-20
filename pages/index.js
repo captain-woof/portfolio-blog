@@ -7,6 +7,7 @@ import SectionFive from '../components/Containers/Portfolio/section-5'
 import SeoPortfolio from '../components/SEO/SeoPortfolio'
 import { useGlobalContext } from '../providers/ContextProvider'
 import { fetchSkills, fetchProjects, fetchOpenSourceContribs } from '../lib/contentful'
+import SitelinksSearchbox from '../components/SEO/SitelinksSearchbox'
 
 // Get static props at build time
 export const getStaticProps = async () => {
@@ -54,6 +55,7 @@ export default function Index({ skillsData, projectData, openSourceContribData }
 
   return (
     <>
+      <SitelinksSearchbox path='/' />
       <SeoPortfolio />
       <SectionOne />
       <SectionTwo skillsData={skillsData} />
