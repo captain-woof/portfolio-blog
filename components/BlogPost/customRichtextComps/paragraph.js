@@ -4,8 +4,13 @@ import styled, { css } from 'styled-components'
 
 const ParagraphWrapper = styled(motion.p)`
     ${({ theme }) => css`
-        line-height: 2.2;
-        letter-spacing: 0.015rem;
+        line-height: 2.1;
+        letter-spacing: 0.0125rem;
+
+        @media (max-width: 480px){
+            line-height: 2;
+            letter-spacing: 0.01rem;
+        }
 
         & a {
             text-decoration: underline;
