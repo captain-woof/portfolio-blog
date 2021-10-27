@@ -36,6 +36,16 @@ const AuthorImageWrapper = styled.div`
 
 const AuthorBio = styled(motion.div)`
     font-size: 1rem;
+    line-height: 1.8;
+
+    & > p {
+        margin: 0;
+        padding: 0;
+    }
+
+    & > * + p {
+        margin-top: 1rem;
+    }
 `
 
 export default function Author() {
@@ -61,9 +71,8 @@ export default function Author() {
                         About me
                     </AuthorHeading>
                     <AuthorBio animate={textEmphasisAnimation} variants={textEmphasisVariants}>
-                        Hey there! I am Sohail, and I am a Frontend web developer, specializing in the React.js ecosystem.
-                        <br />
-                        <i>Have something interesting to say? Hit me up!</i>
+                        <p>Hey there! I am Sohail, and I am a Frontend web developer, specializing in the React.js ecosystem. I love learning, and creating content to help the community.</p>
+                        <p><i>Have something interesting to say? Hit me up!</i></p>
                     </AuthorBio>
                     <Socials colored style={{
                         marginTop: '0.5rem',
