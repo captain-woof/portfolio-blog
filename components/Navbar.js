@@ -1,10 +1,10 @@
 import { useGlobalContext } from "../providers/ContextProvider"
-import styled, { useTheme } from 'styled-components'
+import styled, { useTheme, css } from 'styled-components'
 import Link from 'next/link'
 import { useCallback } from "react"
 import { easeInOutCubicBezier, easeInOutCustomBezier, useThemeChangeAnim } from "../lib/motion"
 import { motion, useAnimation } from "framer-motion"
-import { useEffect } from "react"
+import { useEffect, useState, useMemo } from "react"
 
 const NavbarWrapper = styled.div`
     height: ${({ isPhone }) => (isPhone ? "3.5rem" : "4rem")};
@@ -33,7 +33,7 @@ const NavbarInnerContainer = styled.div`
 
 const SiteLogo = styled.img`
     height: ${({ isPhone }) => (isPhone ? "2rem" : "2.4rem")};
-    margin-top: ${({isPhone}) => (isPhone ? '0.2rem' : null)};
+    margin-top: ${({ isPhone }) => (isPhone ? '0.2rem' : null)};
 `
 
 const ButtonsContainer = styled.div`
@@ -43,22 +43,96 @@ const ButtonsContainer = styled.div`
     height: 100%;
     align-items: center;
     cursor: pointer;
+
+    @media (max-width: 520px){
+        & > button {
+            display: none;
+        }
+    }
 `
 
 const ThemeSwitcherIcon = styled(motion.img)`
     height: 1.5rem;
     margin-right: 1rem;
+
+    @media (max-width: 520px){
+        margin-right: 2rem;
+    }
 `
 
-const Button = styled(motion.div)`
-    padding: ${({ isPhone }) => (isPhone ? "0rem 0.6rem" : "0rem 1.5rem")};
+const MenuIcon = styled.img`
+    height: 1.5rem;
+    margin-right: 1rem;
+    @media (min-width: 520px){
+        display: none;
+    }
+`
+
+const Menu = styled.div`
+    ${({ theme }) => css`
+        /* Menu drop down animation */
+        @keyframes drop-down {
+            0% {
+                transform: translateY(-3rem);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0rem);
+                opacity: 1;
+            }
+        }
+
+        animation: drop-down 0.6s ease-in-out both;
+        background-color: ${theme.backgroundColorElevated};
+        color: ${theme.textColorEmphasis};
+        box-shadow: 0 0 6px ${theme.shadow};
+        position: absolute;
+        top: 3.5rem;
+        right: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50vw;
+        max-width: 200px;
+        border-radius: 8px;
+
+        @media (min-width: 520px){
+            display: none;
+        }
+    `}
+`
+
+const Button = styled(motion.button)`
+    padding: 0rem 1.5rem;
     height: 100%;
-    a {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: inherit;
+    font-family: inherit;
+
+    & > a {
         height: 100%;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        color: ${({ theme }) => theme.textColorEmphasis};
+    }
+
+    @media (max-width: 520px){
+        & {
+            padding: 1.5rem 2rem;
+        }
+
+        & > a {
+            display: unset;
+            flex-direction: unset;
+            justify-content: unset;
+            align-items: unset;
+            font-size: 1rem;
+        }
     }
 `
 
@@ -113,13 +187,14 @@ const navbarVariantsShowHide = {
     }
 }
 
-export default function Navbar() {
-    const { globalState, globalDispatch } = useGlobalContext()
-    const { isPhone } = globalState
+// Icon paths for theme switch
+const moonIconPath = "/icons/moon.svg"
+const sunIconPath = "/icons/sun.svg"
+const menuIconPath = '/icons/menu.svg'
+const menuNightIconPath = '/icons/menu-night.svg'
 
-    // Icon paths for theme switch
-    const moonIconPath = "/icons/moon.svg"
-    const sunIconPath = "/icons/sun.svg"
+export default function Navbar() {
+    const { globalState: { origin, isPhone, themeName, scrollDirection }, globalDispatch } = useGlobalContext()
 
     // Animation for switch theme button
     const switchThemeAnim = useAnimation()
@@ -133,65 +208,93 @@ export default function Navbar() {
     // Changes colors according to the theme
     const { textAndBgColorVariants, textAndBgColorAnimation: navbarAnimation } = useThemeChangeAnim()
 
+    // State for menu (mobile)
+    const [menuOpen, setMenuOpen] = useState(false)
+
     // Animation for show/hide triggered on scroll type change
     useEffect(() => {
         navbarAnimation.stop()
-        switch (globalState.scrollDirection) {
+        switch (scrollDirection) {
             case 'up':
                 navbarAnimation.start('show')
                 break
             case 'down':
                 navbarAnimation.start('hide')
+                setMenuOpen(false)
                 break
         }
-    }, [globalState.scrollDirection])
+    }, [scrollDirection])
 
     // Theme from styled components
     const theme = useTheme()
 
     // Text anim and variants for menu button texts
     const { textEmphasisAnimation, textEmphasisVariants } = useThemeChangeAnim()
-    const { globalState: { origin, themeName } } = useGlobalContext()
+
+    // Menu items data
+    const menuItemsData = useMemo(() => ([
+        {
+            link: `${origin}/blog`,
+            text: 'Blog',
+            variants: {
+                ...textEmphasisVariants,
+                ...getButtonWhileHoverVariants(theme.colors.red)
+            }
+        },
+        {
+            link: "https://drive.google.com/file/d/1se1QKQBUf4yjxSTzRHSfc4OBpB-W4dK2/view?usp=sharing",
+            text: 'Resume',
+            variants: {
+                ...textEmphasisVariants,
+                ...getButtonWhileHoverVariants(theme.colors.yellow)
+            }
+        },
+        {
+            link: "https://tools.sohail-saha.in/",
+            text: 'Tools',
+            variants: {
+                ...textEmphasisVariants,
+                ...getButtonWhileHoverVariants(theme.colors.blue)
+            }
+        },
+        {
+            link: `${origin}/#contact`,
+            text: 'Contact',
+            variants: {
+                ...textEmphasisVariants,
+                ...getButtonWhileHoverVariants(theme.colors.green)
+            }
+        }
+    ]), [])
 
     return (
-        <NavbarWrapper onMouseOver={() => { navbarAnimation.start('show') }} onMouseOut={() => { navbarAnimation.start('hide') }}>
+        <NavbarWrapper onMouseLeave={() => { navbarAnimation.start('hide'); setMenuOpen(false) }} onMouseEnter={() => { navbarAnimation.start('show') }} >
             <NavbarOuterContainer className="navbar-outer-container" isPhone={isPhone} variants={{ ...textAndBgColorVariants, ...navbarVariantsShowHide }} animate={navbarAnimation} initial="initial">
                 <NavbarInnerContainer className="navbar-inner-container" isPhone={isPhone}>
                     <Link href={`${origin}/`}><a>
                         <SiteLogo src={themeName === 'LIGHT_THEME' ? '/logos/site_logo.svg' : '/logos/site_logo-night.svg'} alt='Site logo' isPhone={isPhone} className="site-logo" />
                     </a></Link>
                     <ButtonsContainer className="navbar-buttons-container" isPhone={isPhone}>
-                        <ThemeSwitcherIcon isPhone={isPhone} src={globalState.themeName === "DARK_THEME" ? moonIconPath : sunIconPath} onClick={handleThemeSwtichClick} animate={switchThemeAnim} variants={switchThemeButtonVariants} initial="initial" onHoverStart={() => { switchThemeAnim.start("onHoverStart") }} onHoverEnd={() => { switchThemeAnim.start("onHoverEnd") }} />
-                        {[
-                            {
-                                link: `${origin}/blog`,
-                                text: 'Blog',
-                                variants: {
-                                    ...textEmphasisVariants,
-                                    ...getButtonWhileHoverVariants(theme.colors.red)
-                                }
-                            },
-                            {
-                                link: "https://drive.google.com/file/d/1se1QKQBUf4yjxSTzRHSfc4OBpB-W4dK2/view?usp=sharing",
-                                text: 'Resume',
-                                variants: {
-                                    ...textEmphasisVariants,
-                                    ...getButtonWhileHoverVariants(theme.colors.yellow)
-                                }
-                            },
-                            {
-                                link: `${origin}/#contact`,
-                                text: 'Contact',
-                                variants: {
-                                    ...textEmphasisVariants,
-                                    ...getButtonWhileHoverVariants(theme.colors.green)
-                                }
-                            }
-                        ].map((buttonData, index) => (
-                            <Button isPhone={isPhone} animate={textEmphasisAnimation} key={index} variants={buttonData.variants} whileHover='whileHover' initial='initial'>
-                                <Link href={buttonData.link}>
+                        <ThemeSwitcherIcon isPhone={isPhone} src={themeName === "DARK_THEME" ? moonIconPath : sunIconPath} onClick={handleThemeSwtichClick} animate={switchThemeAnim} variants={switchThemeButtonVariants} initial="initial" onHoverStart={() => { switchThemeAnim.start("onHoverStart") }} onHoverEnd={() => { switchThemeAnim.start("onHoverEnd") }} />
+                        <MenuIcon isPhone={isPhone} src={themeName === "DARK_THEME" ? menuNightIconPath : menuIconPath} onClick={() => { setMenuOpen(prev => !prev) }} />
+                        {menuOpen &&
+                            <Menu>
+                                {menuItemsData.map((menuItemData, index) => (
+                                    <Button isPhone={isPhone} animate={textEmphasisAnimation} key={index} variants={menuItemData.variants} whileHover='whileHover' initial='initial'>
+                                        <Link href={menuItemData.link}>
+                                            <a >
+                                                {menuItemData.text}
+                                            </a>
+                                        </Link>
+                                    </Button>
+                                ))}
+                            </Menu>
+                        }
+                        {menuItemsData.map((menuItemData, index) => (
+                            <Button isPhone={isPhone} animate={textEmphasisAnimation} key={index} variants={menuItemData.variants} whileHover='whileHover' initial='initial'>
+                                <Link href={menuItemData.link}>
                                     <a >
-                                        {buttonData.text}
+                                        {menuItemData.text}
                                     </a>
                                 </Link>
                             </Button>
