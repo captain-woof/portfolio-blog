@@ -18,6 +18,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params: { slug } }) => {
     const blogPostData = await fetchBlogPost(slug)
+
     // Check for 404
     if (!blogPostData.tags) {
         return {
@@ -38,7 +39,7 @@ export default function BlogPostPage({ blogPostData, suggestedPosts }) {
         return <Fallback />
     }
 
-    const { title, description, heroImage, keywords, slug, postRichText } = blogPostData
+    const { title, description, heroImage, keywords, slug, postRichText, updatedOn, postedOn } = blogPostData
 
     // Setting page markers
     const { globalDispatch, globalState: { origin } } = useGlobalContext()
@@ -73,7 +74,7 @@ export default function BlogPostPage({ blogPostData, suggestedPosts }) {
     return (
         <>
             <SitelinksSearchbox path={`/blog/posts/${slug}`} />
-            <SeoBlogPost title={title} description={description} image={heroImage.src} imageAlt={heroImage.alt} keywords={keywords.join(', ')} slug={slug} />
+            <SeoBlogPost title={title} description={description} image={heroImage.src} imageAlt={heroImage.alt} keywords={keywords.join(', ')} slug={slug} updatedOn={updatedOn} postedOn={postedOn}/>
             <BlogPost blogPostData={blogPostData} suggestedPosts={suggestedPosts} />
         </>
     )
