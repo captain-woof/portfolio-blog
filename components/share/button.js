@@ -48,7 +48,7 @@ export default function Button({ setIsOpen }) {
     return (
         <ButtonContainer animate={bgAnimate} variants={bgVariants} onClick={() => { setIsOpen(prev => !prev) }}
             whileTap='whileTap'>
-            <Icon src={themeName === 'LIGHT_THEME' ? "/icons/share.svg" : "/icons/share-night.svg"}/>
+            <Icon alt='Share buttons' src={themeName === 'LIGHT_THEME' ? "/icons/share.svg" : "/icons/share-night.svg"}/>
         </ButtonContainer>
     )
 }

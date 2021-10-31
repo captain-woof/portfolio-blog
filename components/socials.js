@@ -69,7 +69,7 @@ export default function Socials({ colored = false, style }) {
             {socialsData.map((socialData, index) => (
                 <a href={socialData.link} target='_blank' key={index}>
                     <SocialIconWrapper color={socialData.color} colored={colored}>
-                        <SocialIcon src={socialData.icon} variants={iconVariants} whileHover='whileHover' />
+                        <SocialIcon alt={socialData.name} src={socialData.icon} variants={iconVariants} whileHover='whileHover' />
                     </SocialIconWrapper>
                 </a>
             ))}

@@ -48,7 +48,7 @@ export default function Button({ setIsOpen }) {
     return (
         <ButtonContainer animate={bgAnimate} variants={bgVariants} onClick={() => { setIsOpen(prev => !prev) }}
             whileTap='whileTap'>
-            <Icon src={themeName === 'LIGHT_THEME' ? "/icons/book.svg" : "/icons/book-night.svg"}/>
+            <Icon alt='View contents button' src={themeName === 'LIGHT_THEME' ? "/icons/book.svg" : "/icons/book-night.svg"}/>
         </ButtonContainer>
     )
 }

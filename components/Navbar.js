@@ -275,7 +275,7 @@ export default function Navbar() {
                         <SiteLogo src={themeName === 'LIGHT_THEME' ? '/logos/site_logo.svg' : '/logos/site_logo-night.svg'} alt='Site logo' isPhone={isPhone} className="site-logo" />
                     </a></Link>
                     <ButtonsContainer className="navbar-buttons-container" isPhone={isPhone}>
-                        <ThemeSwitcherIcon isPhone={isPhone} src={themeName === "DARK_THEME" ? moonIconPath : sunIconPath} onClick={handleThemeSwtichClick} animate={switchThemeAnim} variants={switchThemeButtonVariants} initial="initial" onHoverStart={() => { switchThemeAnim.start("onHoverStart") }} onHoverEnd={() => { switchThemeAnim.start("onHoverEnd") }} />
+                        <ThemeSwitcherIcon alt='Switch Theme button' isPhone={isPhone} src={themeName === "DARK_THEME" ? moonIconPath : sunIconPath} onClick={handleThemeSwtichClick} animate={switchThemeAnim} variants={switchThemeButtonVariants} initial="initial" onHoverStart={() => { switchThemeAnim.start("onHoverStart") }} onHoverEnd={() => { switchThemeAnim.start("onHoverEnd") }} />
                         <MenuIcon isPhone={isPhone} src={themeName === "DARK_THEME" ? menuNightIconPath : menuIconPath} onClick={() => { setMenuOpen(prev => !prev) }} />
                         {menuOpen &&
                             <Menu>
