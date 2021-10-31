@@ -272,7 +272,7 @@ export default function Navbar() {
             <NavbarOuterContainer className="navbar-outer-container" isPhone={isPhone} variants={{ ...textAndBgColorVariants, ...navbarVariantsShowHide }} animate={navbarAnimation} initial="initial">
                 <NavbarInnerContainer className="navbar-inner-container" isPhone={isPhone}>
                     <Link href={`${origin}/`}><a>
-                        <SiteLogo src={themeName === 'LIGHT_THEME' ? '/logos/site_logo.svg' : '/logos/site_logo-night.svg'} alt='Site logo' isPhone={isPhone} className="site-logo" />
+                        <SiteLogo src={themeName === 'LIGHT_THEME' ? '/logos/site_logo.svg' : '/logos/site_logo-night.svg'} alt='Homepage button' isPhone={isPhone} className="site-logo" />
                     </a></Link>
                     <ButtonsContainer className="navbar-buttons-container" isPhone={isPhone}>
                         <ThemeSwitcherIcon alt='Switch Theme button' isPhone={isPhone} src={themeName === "DARK_THEME" ? moonIconPath : sunIconPath} onClick={handleThemeSwtichClick} animate={switchThemeAnim} variants={switchThemeButtonVariants} initial="initial" onHoverStart={() => { switchThemeAnim.start("onHoverStart") }} onHoverEnd={() => { switchThemeAnim.start("onHoverEnd") }} />
