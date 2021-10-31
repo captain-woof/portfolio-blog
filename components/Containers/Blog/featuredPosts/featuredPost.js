@@ -129,11 +129,6 @@ export default function FeaturedPost({ featuredPost }) {
                         {`Last updated ${moment(featuredPost.updatedOn).fromNow()}`}
                     </PostTimestamp>
                     <Tag color={featuredPost.tags[0].color}>{featuredPost.tags[0].name}</Tag>
-                    {!isPhone && getWordCount(featuredPost.description) <= 30 &&
-                        <PostDescription>
-                            {featuredPost.description}
-                        </PostDescription>
-                    }
                 </FeaturedPostContentContainer>
             </FeaturedPostContentPadding>
         </FeaturedPostContainer>
