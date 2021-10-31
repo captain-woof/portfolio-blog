@@ -6,8 +6,8 @@ export const getServerSideProps = async ({ res }) => {
 
     // Initializing pages with static pages
     const pages = [
-        `${origin}/`,
-        `${origin}/blog/`
+        `${origin}`,
+        `${origin}/blog`
     ]
 
     // Getting dynamic pages
