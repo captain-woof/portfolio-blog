@@ -172,7 +172,7 @@ const { isPhone } = globalState
                 <TextContainer isPhone={isPhone}>
                     <SubtitleContainer isPhone={isPhone}>
                         <motion.div animate={subtitleAnimation} variants={subtitlesVariants} initial='initial'>
-                            {isPhone ? "Front-end developer" : "Front-end developer."}
+                            Web3 Developer
                         </motion.div>
                     </SubtitleContainer>
                     <NameContainer isPhone={isPhone} animate={nameAnimation} variants={{ ...nameVariants, initial: { y: 0 } }} initial='initial'>

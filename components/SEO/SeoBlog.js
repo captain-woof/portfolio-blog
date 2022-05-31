@@ -14,18 +14,18 @@ export default function SeoBlog() {
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <meta name="title" content="Sohail Saha's Blog" />
-                <meta name="description" content="Sohail Saha's blog. Read articles on Web development, technologies, do's and don'ts, advices, and so on." />
+                <meta name="description" content="Sohail Saha's blog. Read articles on Web development, blockchain, development in general, do's and don'ts, and so on." />
                 <meta name="keywords" content="blog, tech blog, frontend developer, frontend blog, reactjs, html, css, nextjs, styled-components, sohail saha, captain-woof" />
                 <meta name="author" content="Sohail Saha (captain-woof)" />
                 <meta name="robots" content="index, follow" />
                 <meta property="og:type" content="blog" />
                 <meta property="og:title" content="Sohail Saha's Blog" />
-                <meta property="og:description" content="Sohail Saha's blog. Read articles on Web development, technologies, do's and don'ts, advices, and so on." />
+                <meta property="og:description" content="Sohail Saha's blog. Read articles on Web development, blockchain, development in general, do's and don'ts, and so on." />
                 <meta property="og:image" content={`${origin}/images/blog-image.png`} />
                 <meta property="og:url" content={`${origin}/blog`} />
                 <meta property="og:site_name" content="Sohail Saha's Portfolio & Blog" />
                 <meta name="twitter:title" content="Sohail Saha's Blog" />
-                <meta name="twitter:description" content="Sohail Saha's blog. Read articles on Web development, technologies, do's and don'ts, advices, and so on." />
+                <meta name="twitter:description" content="Sohail Saha's blog. Read articles on Web development, blockchain, development in general, do's and don'ts, and so on." />
                 <meta name="twitter:image" content={`${origin}/images/blog-image.png`} />
                 <meta name="twitter:image:alt" content="Sohail Saha - sohail.saha.666@gmail.com" />
                 <meta name="twitter:site" content="@realCaptainWoof" />
@@ -39,7 +39,7 @@ export default function SeoBlog() {
                         "@type": "WebPage",
                         "name": "Sohail's Blog",
                         "alternateName": "Captain Woof's Blog",
-                        "description": "Sohail Saha's blog. Read articles on Web development, technologies, do's and don'ts, advices, and so on.",
+                        "description": "Sohail Saha's blog. Read articles on Web development, blockchain, development in general, do's and don'ts, and so on.",
                         "image": "${origin}/images/blog-image.png"
                       }
                 `

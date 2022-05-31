@@ -333,10 +333,10 @@ export default function SectionTwo({ skillsData }) {
                     <AboutHeyText isPhone={isPhone}>hey,</AboutHeyText>
                     <AboutDescriptionTextContainer isPhone={isPhone}>
                         <AboutDescriptionText>
-                            I am Sohail Saha, {getAge()}, and I’m a frontend developer.
+                            I am Sohail Saha, {getAge()}, and I’m a Web3 developer.
                         </AboutDescriptionText>
                         <AboutDescriptionText>
-                            I use React.js framework for my work, along with several other libraries to add to the aesthetics.
+                            I mostly work on the frontend and on the blockchain side of things.
                         </AboutDescriptionText>
                         <AboutDescriptionText>
                             I like perfection and simplicity in whatever I do.
