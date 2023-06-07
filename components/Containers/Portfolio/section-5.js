@@ -44,7 +44,7 @@ const { isPhone } = globalState
     return (
         <EmailContainer isPhone={isPhone} ref={ref}>
             <EmailText isPhone={isPhone}>
-                <motion.div variants={textEmphasisVariants} animate={textEmphasisAnimation}>sohail.saha.666</motion.div>
+                <motion.div variants={textEmphasisVariants} animate={textEmphasisAnimation}>captainwoof.official</motion.div>
                 <EmailDomain isPhone={isPhone} variants={textSubtitlesVariants} animate={textSubtitlesAnimation}>@gmail.com</EmailDomain>
             </EmailText>
         </EmailContainer>
