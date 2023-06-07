@@ -27,7 +27,7 @@ export default function SeoBlog() {
                 <meta name="twitter:title" content="Sohail Saha's Blog" />
                 <meta name="twitter:description" content="Sohail Saha's blog. Read articles on Web development, blockchain, development in general, do's and don'ts, and so on." />
                 <meta name="twitter:image" content={`${origin}/images/blog-image.png`} />
-                <meta name="twitter:image:alt" content="Sohail Saha - sohail.saha.666@gmail.com" />
+                <meta name="twitter:image:alt" content="Sohail Saha - captainwoof.official@gmail.com" />
                 <meta name="twitter:site" content="@realCaptainWoof" />
                 <meta name="twitter:creator" content="@realCaptainWoof" />
                 <meta name="theme-color" content={theme.backgroundColor} />

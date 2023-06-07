@@ -26,7 +26,7 @@ export default function SeoPortfolio() {
                 <meta name="twitter:title" content="Sohail Saha's Portfolio" />
                 <meta name="twitter:description" content="I am Sohail, a Web3 developer. I work on the frontend and on the blockchain." />
                 <meta name="twitter:image" content={`${origin}/images/my-card.png`} />
-                <meta name="twitter:image:alt" content="Sohail Saha - sohail.saha.666@gmail.com" />
+                <meta name="twitter:image:alt" content="Sohail Saha - captainwoof.official@gmail.com" />
                 <meta name="twitter:site" content="@realCaptainWoof" />
                 <meta name="twitter:creator" content="@realCaptainWoof" />
                 <meta name="theme-color" content={theme.backgroundColor} />
@@ -41,7 +41,7 @@ export default function SeoPortfolio() {
                         "nationality": "Indian",
                         "jobTitle": "Frontend Developer",
                         "description": "I am Sohail, a Web3 developer. I work on the frontend and on the blockchain.",
-                        "email": "sohail.saha.666@gmail.com",
+                        "email": "captainwoof.official@gmail.com",
                         "image": "https://drive.google.com/uc?export=download&id=1uFQgCX6HP7ftV0BR8cgJUIm3xZFSI2pe",
                         "birthDate": "1999-10-05",
                         "gender": "male",                        
