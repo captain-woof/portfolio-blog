@@ -242,7 +242,7 @@ export default function Navbar() {
             }
         },
         {
-            link: "https://drive.google.com/file/d/1se1QKQBUf4yjxSTzRHSfc4OBpB-W4dK2/view?usp=sharing",
+            link: "https://docs.google.com/document/d/1Ajxoq1DgqpZRshp4L92D_vx2Q6LT8yQm/edit?usp=sharing&ouid=103721458811510265380&rtpof=true&sd=true",
             text: 'Resume',
             variants: {
                 ...textEmphasisVariants,
